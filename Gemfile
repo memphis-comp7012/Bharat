@@ -36,6 +36,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Bootstrap SASS gem
 gem 'bootstrap-sass'
+gem 'font-awesome-rails'
+
 group :development do
   # Gem to generate files for an application layout, navigation links, and flash messages styled with Bootstrap CSS classes and layout.
   gem 'rails_layout'
