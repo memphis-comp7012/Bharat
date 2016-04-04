@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bharat</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= content_for?(:title) ? yield(:title) : "iHunt" %></title>
+  <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "iHunt" %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-
-<%= yield %>
-
+<body class="action-<%= controller.action_name%>">
+<header>
+  <%= render 'layouts/navigation' %>
+</header>
+<main role="main" class="container">
+  <%= render 'layouts/container' %>
+</main>
 </body>
 </html>
