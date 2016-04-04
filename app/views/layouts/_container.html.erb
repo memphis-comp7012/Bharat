@@ -1,0 +1,28 @@
+<div class="row">
+  <% if user_signed_in? && controller.controller_name != 'static_pages' %>
+      <div id="wrapper">
+        <%= render 'layouts/sidebar' %>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-lg-12">
+                <%= render 'layouts/messages' %>
+                <%= yield %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+      </div>
+      <!-- /#wrapper -->
+      <%= render 'layouts/footer' %>
+<% else %>
+      <div class="col-lg-12">
+        <%= render 'layouts/messages' %>
+        <%= yield %>
+      </div>
+      <%= render 'layouts/footer' %>
+<% end %>
+</div>
+</div>

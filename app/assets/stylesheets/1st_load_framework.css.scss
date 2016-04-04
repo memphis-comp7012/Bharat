@@ -37,7 +37,7 @@ main {
   @extend .container;
   padding-bottom: 80px;
   width: 100%;
-  margin-top: 60px; // accommodate the navbar
+  margin-top: 51px; // accommodate the navbar
   min-height: 550px;
   }
 footer {
@@ -63,6 +63,10 @@ section {
   background-attachment: fixed;
   background-size: cover;
   background-color:#464646;
+
+  & footer{
+    left: 0;
+  }
 }
 
 // Responsive tweaks
@@ -81,4 +85,16 @@ section {
     }
   }
 }
-
+footer.toggled{
+  left: 0;
+}
+// Utility Classes
+.m-t-0 {
+  margin-top: 0 !important;
+}
+.m-t-15 {
+  margin-top: 15px !important;
+}
+.m-t-25 {
+  margin-top: 25px !important;
+}
