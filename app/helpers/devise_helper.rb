@@ -9,7 +9,7 @@ module DeviseHelper
                       resource: resource.class.model_name.human.downcase)
 
     html = <<-HTML
-    <div class="alert alert-danger">
+    <div class="alert alert-danger m-t-15">
       <button type="button" class="close" data-dismiss="alert">x</button>
       <h4><span class="glyphicon glyphicon-exclamation-sign"></span> #{sentence}</h4>
       #{messages}
