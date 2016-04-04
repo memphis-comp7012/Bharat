@@ -8,7 +8,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
-<body class="action-<%= controller.action_name%>">
+<body class="controller-<%= controller.controller_name %> action-<%= controller.action_name %> signedin-<%= user_signed_in? %>">
 <header>
   <%= render 'layouts/navigation' %>
 </header>
