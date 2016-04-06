@@ -12,6 +12,7 @@
 #  skills              :text
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  department_id       :integer
 #
 
 class Profile < ActiveRecord::Base
@@ -21,4 +22,6 @@ class Profile < ActiveRecord::Base
 	validates :phone_number, length: {is: 10}
 
 	has_one :user
+	has_many :profile_research_fields
+	belongs_to :department
 end
