@@ -10,3 +10,13 @@ chandra = User.create! :email => 'cchllpll@memphis.edu', :password => 'topsecret
 lasya = User.create! :email => 'svllbhnn@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
 megha = User.create! :email => 'mvshisht@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
 jobin = User.create! :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
+
+#jobin_profile = Profile.create!(first_name: "Jobin", last_name: "Sunny", bio: "blah blah", education_level: 1, phone_number: 8165016767, summary_of_projects: "blah blah blah", skills: "bla")
+#jobin_profile.user = jobin
+
+cs = Department.create!(name: "Computer Science")
+math = Department.create!(name: "Math")
+psychology = Department.create!(name: "Psychology")
+physics = Department.create!(name: "Physics")
+chemistry = Department.create!(name: "Chemistry")
+biology = Department.create!(name: "Biology")

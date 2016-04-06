@@ -12,25 +12,36 @@ class ProfilesController < ApplicationController
   # GET /profiles/1
   # GET /profiles/1.json
   def show
+    if current_user.profile != @profile
+      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
   end
 
   # GET /profiles/new
   def new
+    if !current_user.profile.blank?
+      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
     @profile = Profile.new
+
   end
 
   # GET /profiles/1/edit
   def edit
+    if current_user.profile != @profile
+      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
   end
 
   # POST /profiles
   # POST /profiles.json
   def create
+    @user = current_user
     @profile = Profile.new(profile_params)
+    @profile.user = @user
 
     respond_to do |format|
       if @profile.save
-        current_user.profile_id = @profile.id
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else

@@ -20,5 +20,5 @@ class Profile < ActiveRecord::Base
 	validates :education_level, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2 }
 	validates :phone_number, length: {is: 10}
 
-	belongs_to :user
+	has_one :user
 end
