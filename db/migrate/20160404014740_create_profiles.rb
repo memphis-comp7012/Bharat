@@ -5,7 +5,7 @@ class CreateProfiles < ActiveRecord::Migration
       t.string :last_name
       t.text :bio
       t.integer :education_level
-      t.integer :phone_number
+      t.integer :phone_number, limit: 8
       t.text :summary_of_projects
       t.text :skills
 

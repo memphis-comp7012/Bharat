@@ -1,8 +1,8 @@
 <%= form_for(@profile) do |f| %>
   <% if @profile.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
-
+    <div class= "alert alert-danger m-t-15">
+      <button type="button" class="close" data-dismiss="alert">x</button>
+      <h4><span class="glyphicon glyphicon-exclamation-sign"></span> <%= pluralize(@profile.errors.count, "error") %> prohibited this profile from being saved:</h4>
       <ul>
       <% @profile.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -12,34 +12,44 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :first_name %><br>
+    <%= f.label :first_name, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
     <%= f.text_field :first_name %>
+    </div>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.label :last_name, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.text_field :last_name %></div>
   </div>
   <div class="field">
-    <%= f.label :bio %><br>
-    <%= f.text_area :bio %>
+    <%= f.label :bio, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.text_area :bio %></div>
   </div>
   <div class="field">
-    <%= f.label :education_level %><br>
-    <%= f.number_field :education_level %>
+    <%= f.label :education_level, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.number_field :education_level %></div>
   </div>
   <div class="field">
-    <%= f.label :phone_number %><br>
-    <%= f.number_field :phone_number %>
+    <%= f.label :phone_number, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.number_field :phone_number %></div>
   </div>
   <div class="field">
-    <%= f.label :summary_of_projects %><br>
-    <%= f.text_area :summary_of_projects %>
+    <%= f.label :summary_of_projects, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.text_area :summary_of_projects %></div>
   </div>
   <div class="field">
-    <%= f.label :skills %><br>
-    <%= f.text_field :skills %>
+    <%= f.label :skills, :class => 'col-lg-3 control-label'  %><br>
+          <div class="col-lg-4">
+    <%= f.text_field :skills %></div>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div class="form-group">
+      <div class="col-sm-offset-3 col-sm-2">
+        <%= f.submit 'Create button', :class => 'btn btn-lg btn-primary btn-block' %>
+      </div>
+    </div>
 <% end %>

@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+
+  before_filter :authenticate_user!
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -28,6 +30,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.save
+        current_user.profile_id = @profile.id
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
       else
@@ -58,6 +61,17 @@ class ProfilesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to profiles_url, notice: 'Profile was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  protected
+  def authenticate_user!
+    if user_signed_in?
+      super
+    else
+      ## redirect_to login_path, :notice => 'if you want to add a notice'
+      ## if you want render 404 page
+      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
     end
   end
 
