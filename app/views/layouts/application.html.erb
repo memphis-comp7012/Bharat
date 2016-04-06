@@ -5,9 +5,8 @@
   <title><%= content_for?(:title) ? yield(:title) : "iHunt" %></title>
   <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "iHunt" %>">
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 
-  <%= javascript_include_tag 'maskedinput' %>
+  <!--<%= javascript_include_tag 'maskedinput' %>-->
   <%= csrf_meta_tags %>
 </head>
 <body class="controller-<%= controller.controller_name %> action-<%= controller.action_name %> signedin-<%= user_signed_in? %>">
@@ -18,5 +17,6 @@
   <%= render 'layouts/container' %>
 </main>
 <%= render 'layouts/footer' %>
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
 </body>
 </html>
