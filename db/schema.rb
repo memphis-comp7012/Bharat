@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160406232408) do
+ActiveRecord::Schema.define(version: 20160406233552) do
+
+  create_table "departments", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "profile_research_fields", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "profile_id"
+    t.integer "research_field_id"
+  end
+
+  add_index "profile_research_fields", ["profile_id"], name: "index_profile_research_fields_on_profile_id"
+  add_index "profile_research_fields", ["research_field_id"], name: "index_profile_research_fields_on_research_field_id"
 
   create_table "profiles", force: :cascade do |t|
     t.string   "first_name"
@@ -23,7 +39,10 @@ ActiveRecord::Schema.define(version: 20160406232408) do
     t.text     "skills"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.integer "department_id"
   end
+
+  add_index "profiles", ["department_id"], name: "index_profiles_on_department_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +55,15 @@ ActiveRecord::Schema.define(version: 20160406232408) do
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
   end
+
+  create_table "research_fields", force: :cascade do |t|
+    t.string "category"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "department_id"
+  end
+
+  add_index "research_fields", ["department_id"], name: "index_research_fields_on_department_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
