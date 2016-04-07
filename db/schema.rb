@@ -14,16 +14,16 @@
 ActiveRecord::Schema.define(version: 20160406233552) do
 
   create_table "departments", force: :cascade do |t|
-    t.string "name"
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "profile_research_fields", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "profile_id"
-    t.integer "research_field_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "profile_id"
+    t.integer  "research_field_id"
   end
 
   add_index "profile_research_fields", ["profile_id"], name: "index_profile_research_fields_on_profile_id"
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(version: 20160406233552) do
     t.text     "skills"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
-    t.integer "department_id"
+    t.integer  "department_id"
   end
 
   add_index "profiles", ["department_id"], name: "index_profiles_on_department_id"
@@ -57,10 +57,10 @@ ActiveRecord::Schema.define(version: 20160406233552) do
   end
 
   create_table "research_fields", force: :cascade do |t|
-    t.string "category"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "department_id"
+    t.string   "category"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "department_id"
   end
 
   add_index "research_fields", ["department_id"], name: "index_research_fields_on_department_id"
