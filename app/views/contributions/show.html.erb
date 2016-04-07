@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Score:</strong>
+  <%= @contribution.score %>
+</p>
+
+<p>
+  <strong>Money received:</strong>
+  <%= @contribution.money_received %>
+</p>
+
+<%= link_to 'Edit', edit_contribution_path(@contribution) %> |
+<%= link_to 'Back', contributions_path %>
