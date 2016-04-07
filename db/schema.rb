@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407014550) do
+ActiveRecord::Schema.define(version: 20160407063530) do
 
   create_table "contributions", force: :cascade do |t|
-    t.integer "score"
-    t.integer "money_received"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "score"
+    t.integer  "money_received"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "departments", force: :cascade do |t|
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 20160407014550) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "profile_id"
+    t.integer  "role",                   default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
