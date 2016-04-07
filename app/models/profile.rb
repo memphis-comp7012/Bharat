@@ -12,6 +12,7 @@
 #  skills              :text
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
+#  department_id       :integer
 #
 
 class Profile < ActiveRecord::Base
@@ -20,5 +21,7 @@ class Profile < ActiveRecord::Base
 	validates :education_level, numericality: { greater_than_or_equal_to: 0, less_than_or_equal_to: 2 }
 	validates :phone_number, length: {is: 10}
 
-	belongs_to :user
+	has_one :user
+	has_many :profile_research_fields
+	belongs_to :department
 end
