@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :teams
+  resources :contributions
   resources :projects
   resources :profile_research_fields
   resources :profiles
