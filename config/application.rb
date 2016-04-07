@@ -23,5 +23,9 @@ module Bharat
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    # Since we are using Bootstrap, we don't want rails to generate JS and CSS during scaffold.
+    config.generators.stylesheets = false
+    config.generators.javascripts = false
   end
 end
