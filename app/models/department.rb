@@ -9,6 +9,6 @@
 #
 
 class Department < ActiveRecord::Base
-	has_many :profiles
-	has_many :research_fields
+  has_many :profiles
+  has_many :research_fields
 end

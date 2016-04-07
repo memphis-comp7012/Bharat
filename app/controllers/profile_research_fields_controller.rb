@@ -62,13 +62,13 @@ class ProfileResearchFieldsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_profile_research_field
-      @profile_research_field = ProfileResearchField.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_profile_research_field
+    @profile_research_field = ProfileResearchField.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def profile_research_field_params
-      params.fetch(:profile_research_field, {})
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_research_field_params
+    params.fetch(:profile_research_field, {})
+  end
 end

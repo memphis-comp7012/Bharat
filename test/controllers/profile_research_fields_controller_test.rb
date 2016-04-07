@@ -18,7 +18,7 @@ class ProfileResearchFieldsControllerTest < ActionController::TestCase
 
   test "should create profile_research_field" do
     assert_difference('ProfileResearchField.count') do
-      post :create, profile_research_field: {  }
+      post :create, profile_research_field: {}
     end
 
     assert_redirected_to profile_research_field_path(assigns(:profile_research_field))
@@ -35,7 +35,7 @@ class ProfileResearchFieldsControllerTest < ActionController::TestCase
   end
 
   test "should update profile_research_field" do
-    patch :update, id: @profile_research_field, profile_research_field: {  }
+    patch :update, id: @profile_research_field, profile_research_field: {}
     assert_redirected_to profile_research_field_path(assigns(:profile_research_field))
   end
 

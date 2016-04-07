@@ -1,0 +1,35 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  id               :integer          not null, primary key
+#  name             :string
+#  status           :integer
+#  description      :string
+#  start_date       :date
+#  end_date         :date
+#  funding          :decimal(, )
+#  difficulty_level :integer
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  status: 1
+  description: MyString
+  start_date: 2016-04-06
+  end_date: 2016-04-06
+  funding: 9.99
+  difficulty_level: 1
+
+two:
+  name: MyString
+  status: 1
+  description: MyString
+  start_date: 2016-04-06
+  end_date: 2016-04-06
+  funding: 9.99
+  difficulty_level: 1
