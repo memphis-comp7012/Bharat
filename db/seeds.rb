@@ -16,7 +16,7 @@ jobin = User.create! :email => 'jjsunny@memphis.edu', :password => 'topsecret', 
 
 cs = Department.create!(name: "Computer Science")
 math = Department.create!(name: "Math")
-psychology = Department.create!(name: "Psychology")
 physics = Department.create!(name: "Physics")
-chemistry = Department.create!(name: "Chemistry")
 biology = Department.create!(name: "Biology")
+
+nlp = ResearchField.create!
