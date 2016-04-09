@@ -15,6 +15,7 @@
 #  department_id       :integer
 #
 
+
 require 'test_helper'
 
 class ProfileTest < ActiveSupport::TestCase
