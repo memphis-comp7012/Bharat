@@ -9,9 +9,18 @@
 #  department_id :integer
 #
 
+<<<<<<< HEAD
 
 class ResearchField < ActiveRecord::Base
 
   has_many :profile_research_fields
   belongs_to :department
 end
+=======
+
+class ResearchField < ActiveRecord::Base
+
+  has_many :profile_research_fields
+  belongs_to :department
+end
+>>>>>>> remotes/origin/master

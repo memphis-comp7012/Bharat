@@ -4,10 +4,14 @@
       <li><a href="#menu-toggle" id="menu-toggle"><i class="fa fa-angle-double-left"></i> Toggle Menu</a></li>
     <% end %>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dr. Chandra <span class="caret"></span></a>
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dr. Chandra<span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li class="<%= 'active' if current_page?(edit_user_registration_path) %>"><%= link_to 'Modify Account', edit_user_registration_path %></li>
-        <li><a href="#">My Profile</a></li>
+        <% if current_user.profile.blank? %>
+          <li><a href="<%= new_profile_path %>">Complete Profile</a></li>
+        <% else %>
+          <li><a href="<%= profile_path(current_user.profile) %>">My Profile</a></li>
+        <% end %>
         <li role="separator" class="divider"></li>
         <li><%= link_to 'Logout', destroy_user_session_path, :method=>'delete' %></li>
       </ul>

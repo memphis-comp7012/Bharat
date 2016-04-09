@@ -6,17 +6,31 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-chandra = User.create! :email => 'cchllpll@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
-lasya = User.create! :email => 'svllbhnn@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
-megha = User.create! :email => 'mvshisht@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
-jobin = User.create! :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret'
+chandra = User.create! :email => 'cchllpll@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
+lasya = User.create! :email => 'svllbhnn@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
+megha = User.create! :email => 'mvshisht@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
+jobin = User.create! :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
+scott = User.create! :email => 'Scott.Fleming@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'faculty'
 
 #jobin_profile = Profile.create!(first_name: "Jobin", last_name: "Sunny", bio: "blah blah", education_level: 1, phone_number: 8165016767, summary_of_projects: "blah blah blah", skills: "bla")
 #jobin_profile.user = jobin
 
 cs = Department.create!(name: "Computer Science")
 math = Department.create!(name: "Math")
-psychology = Department.create!(name: "Psychology")
-physics = Department.create!(name: "Physics")
-chemistry = Department.create!(name: "Chemistry")
 biology = Department.create!(name: "Biology")
+
+nlp = ResearchField.create!(category: "Natural Language Processing")
+ml = ResearchField.create!(category: "Machine Learning")
+hci = ResearchField.create!(category: "Human Computer Interaction")
+
+mark = ResearchField.create!(category: "Markov Logic Gates")
+nt = ResearchField.create!(category: "Number Theory")
+comb = ResearchField.create!(category: "Combinatorics")
+
+mcell = ResearchField.create!(category: "Molecular Cell Biology")
+protein = ResearchField.create!(category: "Protein Dynamics")
+neuro = ResearchField.create!(category: "NeuroBiology")
+
+cs.research_fields << nlp << ml << hci
+math.research_fields << mark << nt << comb
+biology.research_fields << mcell << protein << neuro

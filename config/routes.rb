@@ -1,10 +1,18 @@
 Rails.application.routes.draw do
-  resources :teams
-  resources :contributions
-  resources :projects
-  resources :profile_research_fields
-  resources :profiles
-  devise_for :users
+
+  # This is centralized place for all routes that need auth check
+  # This allows us no longer need any code in controller to handle this logic
+  authenticate :user do
+    resources :teams
+    resources :contributions
+    resources :projects
+    resources :profile_research_fields
+    resources :profiles
+    resources :project_research_fields
+  end
+
+  devise_for :users, controllers: { registrations: "registrations" }
+
   #resources :users
   root 'static_pages#home'
 
