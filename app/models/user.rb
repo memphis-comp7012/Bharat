@@ -77,4 +77,7 @@ enum role: [:student, :faculty, :admin]
 
   # Model Associations
   belongs_to :profile
+
+  has_many: teams
+  has_many: contributions
 end
