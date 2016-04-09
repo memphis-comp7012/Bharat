@@ -27,14 +27,12 @@
       <div class="form-group">
         <%= f.label 'Who are you?', :class => 'col-lg-3 control-label' %>
         <div class="col-lg-4">
-          <label class="radio-inline">
-            <%= f.radio_button :role, '0' %>
-            <%= label :role_0, "Student", :class => 'text-normal' %>
-          </label>
-          <label class="radio-inline">
-            <%= f.radio_button :role, '1' %>
-            <%= f.label :role_1, "Faculty", :class => 'text-normal' %>
-          </label>
+        <% User.roles.keys[0..-1-1].map do |role| %>
+            <div class="radio-inline">
+            <%= f.radio_button :role, role %>
+            <%= label :role, role.titleize, :class => 'text-normal' %>
+            </div>
+        <% end %>
         </div>
       </div>
 
