@@ -12,7 +12,10 @@
 #  difficulty_level :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  department_id    :integer
+#  user_id          :integer
 #
+
 
 
 class Project < ActiveRecord::Base
@@ -37,4 +40,8 @@ class Project < ActiveRecord::Base
   validates :difficulty_level,
             numericality: { only_interger: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2},
             presence: true
+
+  belongs_to :department
+  belongs_to :user
+  has_many :project_research_fields
 end

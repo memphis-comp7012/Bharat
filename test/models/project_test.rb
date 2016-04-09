@@ -12,6 +12,8 @@
 #  difficulty_level :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  department_id    :integer
+#  user_id          :integer
 #
 
 

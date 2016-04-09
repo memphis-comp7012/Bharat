@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160407063530) do
+ActiveRecord::Schema.define(version: 20160409214140) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer  "score"
@@ -51,6 +51,16 @@ ActiveRecord::Schema.define(version: 20160407063530) do
 
   add_index "profiles", ["department_id"], name: "index_profiles_on_department_id"
 
+  create_table "project_research_fields", force: :cascade do |t|
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.integer  "project_id"
+    t.integer  "research_field_id"
+  end
+
+  add_index "project_research_fields", ["project_id"], name: "index_project_research_fields_on_project_id"
+  add_index "project_research_fields", ["research_field_id"], name: "index_project_research_fields_on_research_field_id"
+
   create_table "projects", force: :cascade do |t|
     t.string   "name"
     t.integer  "status"
@@ -61,7 +71,12 @@ ActiveRecord::Schema.define(version: 20160407063530) do
     t.integer  "difficulty_level"
     t.datetime "created_at",                                null: false
     t.datetime "updated_at",                                null: false
+    t.integer  "department_id"
+    t.integer  "user_id"
   end
+
+  add_index "projects", ["department_id"], name: "index_projects_on_department_id"
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
 
   create_table "research_fields", force: :cascade do |t|
     t.string   "category"
