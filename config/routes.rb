@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  
+
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :projects
     resources :profile_research_fields
     resources :profiles
+    resources :project_research_fields
   end
 
   devise_for :users, controllers: { registrations: "registrations" }
