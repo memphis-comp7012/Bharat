@@ -8,6 +8,7 @@
 #  updated_at :datetime         not null
 #
 
+
 require 'test_helper'
 
 class DepartmentTest < ActiveSupport::TestCase
