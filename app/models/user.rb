@@ -16,7 +16,9 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  profile_id             :integer
+#  role                   :integer          default("0")
 #
+
 
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:

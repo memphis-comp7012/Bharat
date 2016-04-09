@@ -9,6 +9,7 @@
 #  department_id :integer
 #
 
+
 require 'test_helper'
 
 class ResearchFieldTest < ActiveSupport::TestCase

@@ -9,6 +9,7 @@
 #  department_id :integer
 #
 
+
 class ResearchField < ActiveRecord::Base
 
   has_many :profile_research_fields

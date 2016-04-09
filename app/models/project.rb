@@ -8,11 +8,12 @@
 #  description      :string
 #  start_date       :date
 #  end_date         :date
-#  funding          :decimal(, )
+#  funding          :decimal(10, 2)
 #  difficulty_level :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
 #
+
 
 class Project < ActiveRecord::Base
   validates :name,
