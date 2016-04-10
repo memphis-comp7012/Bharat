@@ -5,9 +5,9 @@
   <%= link_to 'Create New Project', new_project_path, class: 'btn btn-success btn-lg' %>
 </div>
 <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="#">All</a></li>
+  <li role="presentation" class="active"><a href="?">All</a></li>
   <% Project.statuses.keys.map do |status| %>
-      <li role="presentation"><a href="#"><%= status.titleize %></a></li>
+      <li role="presentation"><a href="?status=<%= Project.statuses[status] %>"><%= status.titleize %></a></li>
   <% end %>
 </ul>
 
@@ -50,6 +50,6 @@
         </div>
       </div>
 
-
     </div>
 <% end %>
+<%= will_paginate @projects, renderer: BootstrapPagination::Rails %>
