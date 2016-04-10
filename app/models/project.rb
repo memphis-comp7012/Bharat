@@ -56,5 +56,5 @@ class Project < ActiveRecord::Base
   belongs_to :user
   has_many :project_research_fields
   has_one :contribution
-  has_many :team
+  has_many :teams
 end
