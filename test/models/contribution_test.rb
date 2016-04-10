@@ -11,6 +11,7 @@
 #  project_id     :integer
 #
 
+
 require 'test_helper'
 
 class ContributionTest < ActiveSupport::TestCase

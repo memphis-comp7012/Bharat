@@ -19,6 +19,7 @@
 
 
 
+
 class Project < ActiveRecord::Base
   include Filterable
 
