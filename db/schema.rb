@@ -11,27 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20160409210841) do
-=======
 ActiveRecord::Schema.define(version: 20160409214140) do
->>>>>>> remotes/origin/master
 
   create_table "contributions", force: :cascade do |t|
     t.integer  "score"
     t.integer  "money_received"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
-<<<<<<< HEAD
     t.integer  "user_id"
     t.integer  "project_id"
   end
 
   add_index "contributions", ["project_id"], name: "index_contributions_on_project_id"
   add_index "contributions", ["user_id"], name: "index_contributions_on_user_id"
-=======
-  end
->>>>>>> remotes/origin/master
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
@@ -96,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160409214140) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "department_id"
-<<<<<<< HEAD
   end
 
   add_index "research_fields", ["department_id"], name: "index_research_fields_on_department_id"
@@ -106,17 +97,10 @@ ActiveRecord::Schema.define(version: 20160409214140) do
     t.datetime "updated_at", null: false
     t.integer  "project_id"
     t.integer  "user_id"
-=======
->>>>>>> remotes/origin/master
   end
 
   add_index "teams", ["project_id"], name: "index_teams_on_project_id"
   add_index "teams", ["user_id"], name: "index_teams_on_user_id"
-
-  create_table "teams", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -9,6 +9,7 @@
 #  research_field_id :integer
 #
 
+
 class ProjectResearchField < ActiveRecord::Base
 	belongs_to :research_field
 	belongs_to :project

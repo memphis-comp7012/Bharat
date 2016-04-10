@@ -12,16 +12,10 @@
 #  difficulty_level :integer
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
-<<<<<<< HEAD
-#
-
-=======
 #  department_id    :integer
 #  user_id          :integer
 #
 
-
->>>>>>> remotes/origin/master
 
 class Project < ActiveRecord::Base
   validates :name,
@@ -49,4 +43,6 @@ class Project < ActiveRecord::Base
   belongs_to :department
   belongs_to :user
   has_many :project_research_fields
+  has_one :contribution
+  has_many :team
 end
