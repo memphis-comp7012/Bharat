@@ -18,28 +18,39 @@
 
 
 
+
 class Project < ActiveRecord::Base
+  enum status: [:not_started, :in_progress, :on_hold, :complete]
+  enum difficulty_level: [:easy, :medium, :hard]
+  
   validates :name,
             length: { maximum: 225 },
             presence: true
   validates :status,
-            numericality: { only_interger: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 4},
-            presence: true
+            presence: true,
+            inclusion: {
+              in: statuses.keys,
+              message: "must be either " + statuses.keys.join(" or ")
+            }
   validates :description,
             presence: true,
             length: { maximum: 3000 }
   validates :start_date,
-            date: { after: Proc.new {Time.now}, before: Proc.new {Time.now}},
+            date: { after_or_equal_to: Proc.new { Time.now - 1.day}},
             presence: true
   validates :end_date,
-            date: { after: :start_date, before: Proc.new {Time.now}},
+            date: { after: :start_date},
             presence: true
   validates :funding,
             numericality: { greater_than_or_equal_to: 0},
             presence: true
   validates :difficulty_level,
-            numericality: { only_interger: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2},
-            presence: true
+            presence: true,
+            inclusion: {
+              in: difficulty_levels.keys,
+              message: "must be either " + difficulty_levels.keys.join(" or ")
+            }
+
 
   belongs_to :department
   belongs_to :user

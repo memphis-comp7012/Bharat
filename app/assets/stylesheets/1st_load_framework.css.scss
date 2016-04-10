@@ -176,3 +176,13 @@ section {
 .text-normal{
   font-weight: normal;
 }
+
+.bg-grey{
+  background-color: #eee;
+}
+.box{
+  margin-bottom: 15px;
+  padding: 15px !important;
+  border-radius: 0 !important;
+  border: 1px solid grey;
+}
