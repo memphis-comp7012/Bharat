@@ -20,11 +20,10 @@
 #
 
 
-
 class User < ActiveRecord::Base
   # BE CAREFUL: Don't change the existing order, add before admin if you add new roles
   # last role must be admin always
-enum role: [:student, :faculty, :admin]
+  enum role: [:student, :faculty, :admin]
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -33,19 +32,24 @@ enum role: [:student, :faculty, :admin]
          :recoverable,
          :rememberable,
          :trackable
-         #, :validatable  -> Commented out this default to allow custom validations
+  #, :validatable  -> Commented out this default to allow custom validations
 
 
   # Model validations
   validates :email,
             presence: true,
             uniqueness: true,
-            format: { with: Devise.email_regexp }
+            format: {with: Devise.email_regexp},
+            if: :email_changed?
 
   validates :password,
             presence: true,
-            confirmation: true,
-            length: { in: Devise.password_length }
+            length: {in: Devise.password_length},
+            if: :password_required?
+
+  validates :password_confirmation,
+            presence: true,
+            if: :password_required?
 
   validates :role,
             presence: true,
@@ -58,4 +62,19 @@ enum role: [:student, :faculty, :admin]
   belongs_to :profile
   has_many :teams
   has_many :contributions
+
+  protected
+
+  # Checks whether a password is needed or not. For validations only.
+  # Passwords are always required if it's a new record, or if the password
+  # or confirmation are being set somewhere.
+  def password_required?
+    !persisted? || !password.nil? || !password_confirmation.nil?
+  end
+
+  def email_required?
+    true
+  end
+
 end
+
