@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    @projects = Project.paginate(:page => params[:page], :per_page => 5).filter(params.slice(:status))
   end
 
   # GET /projects/1
@@ -70,5 +70,10 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:name, :status, :description, :start_date, :end_date, :funding, :difficulty_level)
+    end
+
+    # A list of the param names that can be used for filtering the Product list
+    def filtering_params(params)
+      params.slice(:status)
     end
 end
