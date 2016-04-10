@@ -40,10 +40,10 @@ enum role: [:student, :faculty, :admin]
             uniqueness: true,
             format: { with: Devise.email_regexp }
 
-  validates :password,
-            presence: true,
-            confirmation: true,
-            length: { in: Devise.password_length }
+  # validates :password,
+  #           presence: true,
+  #           confirmation: true,
+  #           length: { in: Devise.password_length }
 
   validates :role,
             presence: true,
