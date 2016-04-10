@@ -19,6 +19,7 @@
 
 
 
+
 class Project < ActiveRecord::Base
   enum status: [:not_started, :in_progress, :on_hold, :complete]
   enum difficulty_level: [:easy, :medium, :hard]

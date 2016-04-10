@@ -49,7 +49,7 @@ jar = Project.create!(
 	)
 
 se = Project.create!(name: "Information Foraging in Software Engineering",
-	status: 'complete',
+	status: 'in_progress',
 	description: "This is a project on Information Foraging ",
 	start_date: "2016-05-10",
 	end_date: "2017-06-20",
