@@ -18,7 +18,12 @@ ActiveRecord::Schema.define(version: 20160409214140) do
     t.integer  "money_received"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+    t.integer  "project_id"
   end
+
+  add_index "contributions", ["project_id"], name: "index_contributions_on_project_id"
+  add_index "contributions", ["user_id"], name: "index_contributions_on_user_id"
 
   create_table "departments", force: :cascade do |t|
     t.string   "name"
@@ -90,7 +95,12 @@ ActiveRecord::Schema.define(version: 20160409214140) do
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "project_id"
+    t.integer  "user_id"
   end
+
+  add_index "teams", ["project_id"], name: "index_teams_on_project_id"
+  add_index "teams", ["user_id"], name: "index_teams_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

@@ -19,7 +19,6 @@
 
 
 
-
 class Project < ActiveRecord::Base
   enum status: [:not_started, :in_progress, :on_hold, :complete]
   enum difficulty_level: [:easy, :medium, :hard]
@@ -56,4 +55,6 @@ class Project < ActiveRecord::Base
   belongs_to :department
   belongs_to :user
   has_many :project_research_fields
+  has_one :contribution
+  has_many :team
 end
