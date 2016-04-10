@@ -20,6 +20,10 @@
 
 
 class Project < ActiveRecord::Base
+  include Filterable
+
+  scope :status, -> (status) { where status: status }
+
   enum status: [:not_started, :in_progress, :on_hold, :complete]
   enum difficulty_level: [:easy, :medium, :hard]
   
