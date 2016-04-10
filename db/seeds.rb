@@ -17,8 +17,6 @@ team5 = Team.create!()
 contribution1 = Contribution.new :score => 50, money_received: 5000
 contribution2 = Contribution.new :score => 100, money_received: 10000
 contribution3 = Contribution.new :score => -100, money_received: 0
-contribution4 = Contribution.new :score => 0, money_received: 0
-contribution5 = Contribution.new :score => 0, money_received: 0
 
 
 # Project and Team association seeds
@@ -62,6 +60,7 @@ smoke = Project.new(name: "Smoke Abstinence",
 										funding: 5000,
 										difficulty_level: 'easy')
 smoke.teams << team1
+smoke.contribution = contribution3
 smoke.save!
 
 authen = Project.new(name: "Authentication Framework",
@@ -71,6 +70,8 @@ authen = Project.new(name: "Authentication Framework",
 										 end_date: "2017-11-20",
 										 funding: 6200,
 										 difficulty_level: 'hard')
+authen.contribution = contribution2
+authen.save!
 
 genetic = Project.new(name: "Tsp problem",
 											status: 'complete',
@@ -79,7 +80,7 @@ genetic = Project.new(name: "Tsp problem",
 											end_date: "2017-09-20",
 											funding: 6200,
 											difficulty_level: 'hard')
-genetic.teams << team4 << team2
+genetic.teams << team4	 << team2
 genetic.contribution = contribution1
 genetic.save!
 
