@@ -34,3 +34,48 @@ neuro = ResearchField.create!(category: "NeuroBiology")
 cs.research_fields << nlp << ml << hci
 math.research_fields << mark << nt << comb
 biology.research_fields << mcell << protein << neuro
+
+#megha_project = Project.crate!(name: , status: , description: , start_date: , end_date : , funding: , difficulty_level: )
+#data seed for Projects table below
+
+jar = Project.create!(
+	name: "J.A.R.V.I.S",
+	status: 'in_progress',
+	description: "This has not started",
+	start_date: "2016-04-10",
+	end_date: "2016-04-20",
+	funding: 2000,
+	difficulty_level: 'easy'
+	)
+
+se = Project.create!(name: "Information Foraging in Software Engineering",
+	status: 'in_progress',
+	description: "This is a project on Information Foraging ",
+	start_date: "2016-05-10",
+	end_date: "2017-06-20",
+	funding: 10000,
+	difficulty_level: 'medium')
+
+track = Project.create!(name: "Conference Tracking System",
+	status: 'not_started',
+	description: "Project on Conference tracking System",
+	start_date: "2016-06-10",
+	end_date: "2017-07-20",
+	funding: 6000,
+	difficulty_level: 'hard')
+
+smoke = Project.create!(name: "Smoke Abstinence",
+	status: 'on_hold',
+	description: "A project on Smoke Abstinence",
+	start_date: "2016-08-10",
+	end_date: "2017-09-20",
+	funding: 5000,
+	difficulty_level: 'easy')
+
+authen = Project.create!(name: "Authentication Framework",
+	status: 'complete',
+	description: "This is a project on Authentication Framework",
+	start_date: "2016-10-10",
+	end_date: "2017-11-20",
+	funding: 6200,
+	difficulty_level: 'hard')

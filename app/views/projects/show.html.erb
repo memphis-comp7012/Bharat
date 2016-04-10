@@ -7,7 +7,7 @@
 
 <p>
   <strong>Status:</strong>
-  <%= @project.status %>
+  <%= @project.status.titleize %>
 </p>
 
 <p>
@@ -32,7 +32,7 @@
 
 <p>
   <strong>Difficulty level:</strong>
-  <%= @project.difficulty_level %>
+  <%= @project.difficulty_level.titleize %>
 </p>
 
 <%= link_to 'Edit', edit_project_path(@project) %> |

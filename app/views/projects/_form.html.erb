@@ -1,4 +1,5 @@
-<%= form_for(@project) do |f| %>
+<div class="authform">
+  <%= form_for(@project) do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -11,35 +12,38 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <fieldset>
+  <div class="form-group">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :status %><br>
-    <%= f.number_field :status %>
+    <%= f.select :status, Project.statuses.keys.map {|status| [status.titleize, status] }, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :description %><br>
-    <%= f.text_field :description %>
+    <%= f.text_field :description, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :start_date %><br>
-    <%= f.date_select :start_date %>
+    <%= f.date_select :start_date, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :end_date %><br>
-    <%= f.date_select :end_date %>
+    <%= f.date_select :end_date, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :funding %><br>
-    <%= f.text_field :funding %>
+    <%= f.text_field :funding, class: 'form-control' %>
   </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :difficulty_level %><br>
-    <%= f.number_field :difficulty_level %>
+    <%= f.select :difficulty_level, 
+    Project.difficulty_levels.keys.map {|level| [level.titleize, level] }, class: 'form-control' %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <%= f.submit 'Submit', :class => 'btn btn-lg btn-primary' %>
+  </fieldset>
+
 <% end %>
+</div>

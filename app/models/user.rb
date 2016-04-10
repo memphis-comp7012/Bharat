@@ -19,6 +19,8 @@
 #  role                   :integer
 #
 
+
+
 class User < ActiveRecord::Base
   # BE CAREFUL: Don't change the existing order, add before admin if you add new roles
   # last role must be admin always
@@ -54,4 +56,6 @@ enum role: [:student, :faculty, :admin]
 
   # Model Associations
   belongs_to :profile
+  has_many :teams
+  has_many :contributions
 end
