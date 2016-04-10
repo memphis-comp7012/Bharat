@@ -12,8 +12,57 @@ megha = User.create! :email => 'mvshisht@memphis.edu', :password => 'topsecret',
 jobin = User.create! :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
 scott = User.create! :email => 'Scott.Fleming@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'faculty'
 
-#jobin_profile = Profile.create!(first_name: "Jobin", last_name: "Sunny", bio: "blah blah", education_level: 1, phone_number: 8165016767, summary_of_projects: "blah blah blah", skills: "bla")
-#jobin_profile.user = jobin
+chandra_profile = Profile.create!(first_name: "Chandra",
+	last_name: "Challapalla", 
+	bio: "love your work and you wont work for your love", 
+	education_level: 1, 
+	phone_number: 1234567890, 
+	summary_of_projects: "web dev guru", 
+	skills: "rails, php, laravel, composer, git")
+
+chandra_profile.user = chandra
+
+lasya_profile = Profile.create!(first_name: "Lasya", 
+	last_name: "Vallabhaneneneni", 
+	bio: "ruchi's roommate", 
+	education_level: 1, 
+	phone_number: 0987654321, 
+	summary_of_projects: "IIS", 
+	skills: "making other people happy")
+
+lasya_profile.user = lasya
+
+jobin_profile = Profile.create!(first_name: "Jobin", 
+	last_name: "Sunny", 
+	bio: "Iron man in real life", 
+	education_level: 1, 
+	phone_number: 8165016767, 
+	summary_of_projects: "beating rakshit in CS", 
+	skills: "going from my house to that other house in 5 seconds")
+
+jobin_profile.user = jobin
+
+megha_profile = Profile.create!(first_name: "Megaji", 
+	last_name: "Vashisht", 
+	bio: "A girl that wears a grey long sleeve jacket", 
+	education_level: 1, 
+	phone_number: 1234509876, 
+	summary_of_projects: "database pr0", 
+	skills: "avoiding stalkers, being short tempered, seeing red instead of few people")
+
+megha_profile.user = megha
+
+scott_profile = Profile.create!(first_name: "Scott", 
+	last_name: "Fleming", 
+	bio: "", 
+	education_level: 2, 
+	phone_number: 1029384756, 
+	summary_of_projects: "", 
+	skills: "bla")
+
+scott_profile.user = scott
+
+
 
 cs = Department.create!(name: "Computer Science")
 math = Department.create!(name: "Math")
@@ -34,6 +83,18 @@ neuro = ResearchField.create!(category: "NeuroBiology")
 cs.research_fields << nlp << ml << hci
 math.research_fields << mark << nt << comb
 biology.research_fields << mcell << protein << neuro
+
+chandra_profile.profile_research_fields << mcell << protein
+
+megha_profile.profile_research_fields << mark << nt
+
+jobin_profile.profile_research_fields << nlp << ml
+
+lasya_profile.profile_research_fields << comb << neuro
+
+scott_profile.profile_research_fields << hci << mark
+
+
 
 #megha_project = Project.crate!(name: , status: , description: , start_date: , end_date : , funding: , difficulty_level: )
 #data seed for Projects table below
@@ -79,3 +140,4 @@ authen = Project.create!(name: "Authentication Framework",
 	end_date: "2017-11-20",
 	funding: 6200,
 	difficulty_level: 'hard')
+
