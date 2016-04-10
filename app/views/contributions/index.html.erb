@@ -1,29 +1,53 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Contributions</h1>
+<h1>My Contributions</h1>
+<ul class="nav nav-pills">
+  <li role="presentation" class="<%= 'active' if params[:show] == 'all' %>"><a href="?show=all">All</a></li>
+  <li role="presentation" class="<%= 'active' if params[:show] == 'earned' %>"><a href="?show=earned">Points earned and Money received</a></li>
+  <li role="presentation" class="<%= 'active' if params[:show] == 'lost' %>"><a href="?show=lost">Points Lost</a></li>
+</ul>
 
-<table>
-  <thead>
-    <tr>
-      <th>Score</th>
-      <th>Money received</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @contributions.each do |contribution| %>
-      <tr>
-        <td><%= contribution.score %></td>
-        <td><%= contribution.money_received %></td>
-        <td><%= link_to 'Show', contribution %></td>
-        <td><%= link_to 'Edit', edit_contribution_path(contribution) %></td>
-        <td><%= link_to 'Destroy', contribution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @contributions.each do |contribution| %>
+    <div class="jumbotron box m-t-15">
+      <div class="row">
+        <div class="col-lg-3">
+          Project Name
+        </div>
+        <div class="col-lg-6">
+          :
+        </div>
+        <div class="col-lg-3">
+          <%= contribution.project.name %>
+        </div>
+      </div>
 
-<br>
+      <div class="row">
+        <div class="col-lg-3">
+          Points Earned
+        </div>
+        <div class="col-lg-6">
+          :
+        </div>
+        <div class="col-lg-3">
+          <%= contribution.score %>
+        </div>
+      </div>
 
-<%= link_to 'New Contribution', new_contribution_path %>
+      <% if contribution.money_received != 0 %>
+      <div class="row">
+        <div class="col-lg-3">
+          Money received
+        </div>
+        <div class="col-lg-6">
+          :
+        </div>
+        <div class="col-lg-3">
+          $ <%= contribution.money_received %>
+        </div>
+      </div>
+      <% end %>
+
+    </div>
+<% end %>
+

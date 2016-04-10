@@ -5,9 +5,18 @@ class ContributionsController < ApplicationController
   # GET /contributions.json
   def index
     @contributions = Contribution.all
+
+    if params[:show].present?
+      if params[:show] == 'earned'
+        @contributions = Contribution.where("score > ? and user_id==?", 0, current_user.id)
+      end
+      if params[:show] == 'lost'
+        @contributions = Contribution.where("score < ?", 0)
+      end
+    end
   end
 
-  # GET /contributions/1
+  # GET /contributions/1x`1`
   # GET /contributions/1.json
   def show
   end
@@ -62,13 +71,13 @@ class ContributionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_contribution
-      @contribution = Contribution.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_contribution
+    @contribution = Contribution.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def contribution_params
-      params.require(:contribution).permit(:score, :money_received)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def contribution_params
+    params.require(:contribution).permit(:score, :money_received)
+  end
 end
