@@ -121,7 +121,7 @@ lasya_profile = Profile.create!(first_name: "Lasya",
 	last_name: "Vallabhaneneneni", 
 	bio: "ruchi's roommate", 
 	education_level: 1, 
-	phone_number: 0987654321, 
+	phone_number: 9987654321, 
 	summary_of_projects: "IIS", 
 	skills: "making other people happy")
 
@@ -147,7 +147,7 @@ megha_profile = Profile.create!(first_name: "Megaji",
 
 megha_profile.user = megha
 
-scott_profile = Profile.create!(first_name: "Scott", 
+scott_profile = Profile.create!(first_name: "Dr. Scott", 
 	last_name: "Fleming", 
 	bio: "", 
 	education_level: 2, 
@@ -173,20 +173,29 @@ mcell = ResearchField.create!(category: "Molecular Cell Biology")
 protein = ResearchField.create!(category: "Protein Dynamics")
 neuro = ResearchField.create!(category: "NeuroBiology")
 
+chandra_profile_research_fields1 = ProfileResearchField.create!()
+chandra_profile_research_fields2 = ProfileResearchField.create!()
+chandra_profile.profile_research_fields << chandra_profile_research_fields1
+chandra_profile.profile_research_fields << chandra_profile_research_fields2
+nlp.profile_research_fields << chandra_profile_research_fields1
+hci.profile_research_fields << chandra_profile_research_fields2
+
+var = chandra.profile.first_name
+
+# chandra_profile_research_fields.profile = chandra_profile
+# chandra_profile_research_fields.research_fields 
+
 cs.research_fields << nlp << ml << hci
 math.research_fields << mark << nt << comb
 biology.research_fields << mcell << protein << neuro
 
-chandra_profile.profile_research_fields << mcell << protein
+# chandra_profile.profile_research_fields << mcell << protein
+# megha_profile.profile_research_fields << mark << nt
+# jobin_profile.profile_research_fields << nlp << ml
+# lasya_profile.profile_research_fields << comb << neuro
+# scott_profile.profile_research_fields << hci << mark
 
-megha_profile.profile_research_fields << mark << nt
-
-jobin_profile.profile_research_fields << nlp << ml
-
-lasya_profile.profile_research_fields << comb << neuro
-
-scott_profile.profile_research_fields << hci << mark
-
+# mcell.profiles << chandra_profile << megha_profile
 
 
 #megha_project = Project.crate!(name: , status: , description: , start_date: , end_date : , funding: , difficulty_level: )
