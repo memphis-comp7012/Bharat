@@ -91,6 +91,7 @@ chandra.save!
 lasya = User.new :email => 'svllbhnn@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
 lasya.teams << team1
 lasya.teams << team2
+lasya.contributions << contribution1
 lasya.save!
 
 megha = User.new :email => 'mvshisht@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
@@ -99,12 +100,12 @@ megha.save!
 
 jobin = User.new :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
 jobin.contributions << contribution1
-jobin.teams << team1
+jobin.teams << team1 << team5
 jobin.save!
 
 scott = User.new :email => 'Scott.Fleming@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'faculty'
 scott.teams << team4 << team1 << team2
-scott.contributions << contribution2
+scott.contributions << contribution2 << contribution1 
 scott.save!
 
 
