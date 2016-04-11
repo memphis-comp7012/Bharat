@@ -12,6 +12,7 @@
 #
 
 
+
 class Contribution < ActiveRecord::Base
   validates :score,
             presence: true,

@@ -4,7 +4,12 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.paginate(:page => params[:page], :per_page => 5).filter(params.slice(:status))
+    @projects = Project
+                    .find_by_sql ['select * from projects AS p
+                                     INNER JOIN users AS u ON p.user_id=u.id
+                                     INNER JOIN teams AS t ON p.id=t.project_id
+                                     where t.user_id=:user_id OR p.user_id=:user_id order by status;',
+                                  {:user_id => current_user.id}]
   end
 
   # GET /projects/1
@@ -62,18 +67,18 @@ class ProjectsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = Project.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name, :status, :description, :start_date, :end_date, :funding, :difficulty_level)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name, :status, :description, :start_date, :end_date, :funding, :difficulty_level)
+  end
 
-    # A list of the param names that can be used for filtering the Product list
-    def filtering_params(params)
-      params.slice(:status)
-    end
+  # A list of the param names that can be used for filtering the Product list
+  def filtering_params(params)
+    params.slice(:status)
+  end
 end
