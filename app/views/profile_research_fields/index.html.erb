@@ -5,6 +5,7 @@
 <table>
   <thead>
   <tr>
+    <th>Research Field</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -12,9 +13,12 @@
   <tbody>
   <% @profile_research_fields.each do |profile_research_field| %>
       <tr>
-        <td><%= link_to 'Show', profile_research_field %></td>
-        <td><%= link_to 'Edit', edit_profile_research_field_path(profile_research_field) %></td>
-        <td><%= link_to 'Destroy', profile_research_field, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <td><%= profile_research_field.research_field.category %>
+        <% if profile_research_field.profile != current_user.profile %>
+          <td><%= link_to 'Add Research Field', new_profile_research_field_path %></td>
+        <% else %>
+          <td><%= link_to 'Remove Research Field', profile_research_field, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+        <% end %>
       </tr>
   <% end %>
   </tbody>

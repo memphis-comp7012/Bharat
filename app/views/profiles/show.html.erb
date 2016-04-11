@@ -1,11 +1,3 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 <p>
   <strong>First name:</strong>
   <%= @profile.first_name %>
@@ -23,13 +15,15 @@
 
 <p>
   <strong>Education level:</strong>
-  <%= @profile.education_level %>
+  <%= @profile.education_level.titleize %>
 </p>
 
-<p>
-  <strong>Phone number:</strong>
-  <%= @profile.phone_number %>
-</p>
+<% if current_user.faculty? or @profile == current_user.profile %>
+  <p>
+    <strong>Phone number:</strong>
+    <%= @profile.phone_number %>
+  </p>
+<% end %>
 
 <p>
   <strong>Summary of projects:</strong>
@@ -41,5 +35,16 @@
   <%= @profile.skills %>
 </p>
 
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<p>
+  <strong>Research Fields:<br></strong>
+  <% @profile.profile_research_fields.each do |profile_research_field| %>
+    <% if profile_research_field.profile == current_user.profile %>
+      <%= profile_research_field.research_field.category %><br>
+    <% end %>
+  <% end %>
+</p>
+
+<% if @profile == current_user.profile %>
+  <%= link_to 'Edit', edit_profile_path(@profile) %> | 
+<% end %>
 <%= link_to 'Back', profiles_path %>

@@ -1,21 +1,22 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Listing Project Research Fields</h1>
 
 <table>
   <thead>
     <tr>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @project_research_fields.each do |project_research_field| %>
-      <tr>
-        <td><%= link_to 'Show', project_research_field %></td>
-        <td><%= link_to 'Edit', edit_project_research_field_path(project_research_field) %></td>
-        <td><%= link_to 'Destroy', project_research_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <% if project_research_field.profile == current_user.profile do %>
+        <tr>
+          <td><%= project_research_field.research_field.category %></td>
+          <td><%= link_to 'Show', project_research_field %></td>
+          <td><%= link_to 'Edit', edit_project_research_field_path(project_research_field) %></td>
+          <td><%= link_to 'Destroy', project_research_field, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

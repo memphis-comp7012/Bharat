@@ -110,7 +110,7 @@ scott.save!
 chandra_profile = Profile.create!(first_name: "Chandra",
 	last_name: "Challapalla", 
 	bio: "love your work and you wont work for your love", 
-	education_level: 1, 
+	education_level: 'graduate', 
 	phone_number: 1234567890, 
 	summary_of_projects: "web dev guru", 
 	skills: "rails, php, laravel, composer, git")
@@ -120,7 +120,7 @@ chandra_profile.user = chandra
 lasya_profile = Profile.create!(first_name: "Lasya", 
 	last_name: "Vallabhaneneneni", 
 	bio: "ruchi's roommate", 
-	education_level: 1, 
+	education_level: 'undergraduate', 
 	phone_number: 9987654321, 
 	summary_of_projects: "IIS", 
 	skills: "making other people happy")
@@ -130,17 +130,17 @@ lasya_profile.user = lasya
 jobin_profile = Profile.create!(first_name: "Jobin", 
 	last_name: "Sunny", 
 	bio: "Iron man in real life", 
-	education_level: 1, 
+	education_level: 'undergraduate', 
 	phone_number: 8165016767, 
 	summary_of_projects: "beating rakshit in CS", 
 	skills: "going from my house to that other house in 5 seconds")
 
 jobin_profile.user = jobin
 
-megha_profile = Profile.create!(first_name: "Megaji", 
+megha_profile = Profile.create!(first_name: "Dr. Megaji", 
 	last_name: "Vashisht", 
 	bio: "A girl that wears a grey long sleeve jacket", 
-	education_level: 1, 
+	education_level: 'phd', 
 	phone_number: 1234509876, 
 	summary_of_projects: "database pr0", 
 	skills: "avoiding stalkers, being short tempered, seeing red instead of few people")
@@ -150,7 +150,7 @@ megha_profile.user = megha
 scott_profile = Profile.create!(first_name: "Dr. Scott", 
 	last_name: "Fleming", 
 	bio: "", 
-	education_level: 2, 
+	education_level: 'phd', 
 	phone_number: 1029384756, 
 	summary_of_projects: "", 
 	skills: "bla")
@@ -180,27 +180,6 @@ chandra_profile.profile_research_fields << chandra_profile_research_fields2
 nlp.profile_research_fields << chandra_profile_research_fields1
 hci.profile_research_fields << chandra_profile_research_fields2
 
-var = chandra.profile.first_name
-
-# chandra_profile_research_fields.profile = chandra_profile
-# chandra_profile_research_fields.research_fields 
-
 cs.research_fields << nlp << ml << hci
 math.research_fields << mark << nt << comb
 biology.research_fields << mcell << protein << neuro
-
-# chandra_profile.profile_research_fields << mcell << protein
-# megha_profile.profile_research_fields << mark << nt
-# jobin_profile.profile_research_fields << nlp << ml
-# lasya_profile.profile_research_fields << comb << neuro
-# scott_profile.profile_research_fields << hci << mark
-
-# mcell.profiles << chandra_profile << megha_profile
-
-
-#megha_project = Project.crate!(name: , status: , description: , start_date: , end_date : , funding: , difficulty_level: )
-#data seed for Projects table below
-
-# Contribution.user << lasya << megha
-# Contribution.project << genetic
-# Contribution.save!
