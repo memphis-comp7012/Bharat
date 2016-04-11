@@ -17,6 +17,35 @@ class ContributionsController < ApplicationController
     end
   end
 
+  def complete
+    @contributions = Contribution.find(params[:project_id])
+    @project = Project.find(params[:project_id])
+    @teams = Team.where('project_id == ?', params[:project_id])
+  end
+
+  def add
+    @contribution = Contribution.new
+    @project = Project.find(params[:project_id])
+    @team_member = User.find(params[:user_id])
+  end
+
+  def save
+    @contribution = Contribution.new(contribution_params)
+    @contribution.user_id = params[:user_id]
+    @contribution.project_id = params[:project_id]
+    @project = Project.find(params[:project_id])
+
+    respond_to do |format|
+      if @contribution.save
+        format.html { redirect_to project_contributions_path(@project), notice: 'Contribution was successfully created.' }
+        format.json { render :show, status: :created, location: @contribution }
+      else
+        format.html { render :new }
+        format.json { render json: @contribution.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # GET /contributions/1x`1`
   # GET /contributions/1.json
   def show
@@ -79,6 +108,6 @@ class ContributionsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def contribution_params
-    params.require(:contribution).permit(:score, :money_received)
+    params.require(:contribution).permit(:score, :money_received )
   end
 end

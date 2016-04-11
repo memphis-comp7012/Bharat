@@ -1,0 +1,69 @@
+<%= form_for (@contributions) do |f| %>
+    <% if @contributions.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@contributions.errors.count, "error") %> prohibited this project from being saved:</h2>
+
+          <ul>
+            <% @contributions.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="row">
+      <h1>Mark Project As Complete</h1>
+      <div class="jumbotron box m-t-15">
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Project Name:</strong>
+          </div>
+          <div class="col-lg-6">
+            <%= @project.name %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Department:</strong>
+          </div>
+          <div class="col-lg-6">
+            <%= @project.department.name %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-3">
+            <strong>Research Fields:</strong>
+          </div>
+          <div class="col-lg-6">
+            <% @project.project_research_fields.each_with_index do |project_research_field, index| %>
+                    <%= project_research_field.research_field.category %><% if (index != @project.project_research_fields.length - 1)%>, <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <h2>Award Points and Money</h2>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Points</th>
+          <th>Money</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @teams.each_with_index do |team, index| %>
+            <tr>
+              <th scope="row"><%= index + 1 %></th>
+              <td><%= team.user.profile.first_name %></td>
+              <td><%= team.user.profile.last_name %></td>
+              <td><%= link_to 'Award points and Contribution', add_contribution_to_project_path(@project, :user_id => team.user.id), class: 'btn btn-default btn-xs' %></td>
+              <td>$3000</td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+    </div>
+<% end %>

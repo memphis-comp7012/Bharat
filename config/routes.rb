@@ -3,13 +3,18 @@ Rails.application.routes.draw do
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
+
+    get 'dashboard' => 'dashboard#index'
+    get 'contributions/:project_id' => 'contributions#complete', as: 'project_contributions'
+    get 'contributions/add/project/:project_id/user/:user_id' => 'contributions#add', as: 'add_contribution_to_project'
+    post 'contributions/add/project/:project_id/user/:user_id' => 'contributions#save', as: 'save_contribution_to_project'
+
     resources :teams
     resources :contributions
     resources :projects
     resources :profile_research_fields
     resources :profiles
     resources :project_research_fields
-    get 'dashboard' => 'dashboard#index'
   end
 
   devise_for :users, controllers: { registrations: "registrations" }
