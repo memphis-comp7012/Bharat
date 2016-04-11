@@ -160,11 +160,37 @@ section {
   }
 }
 
+// Dashboard styles
+.controller-dashboard .jumbotron{
+  p{
+    font-size: 14px;
+  }
+  strong{
+    font-size: 16px;
+  }
+  h3{
+    margin:  0;
+    margin-bottom: 10px;
+  }
+  hr{
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  i{
+    padding-right: 5px;
+  }
+}
+
 // Utility Classes
 .m-t-0 {
   margin-top: 0 !important;
 }
-
+.m-t-5{
+  margin-top: 5px !important;
+}
+.m-t-10 {
+  margin-top: 10px !important;
+}
 .m-t-15 {
   margin-top: 15px !important;
 }
@@ -173,6 +199,9 @@ section {
   margin-top: 25px !important;
 }
 
+.m-r-15{
+  margin-right: 15px !important;
+}
 .text-normal{
   font-weight: normal;
 }
