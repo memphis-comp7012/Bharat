@@ -1,65 +1,138 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<h1 class="col-lg-10">View Project
+  <% if @profile == current_user.profile %>
+      <%= link_to 'Edit my profile', edit_profile_path(@profile), class: 'btn btn-primary btn-sm pull-right' %>
+  <% end %>
+</h1>
+<div class="jumbotron box m-t-10 col-lg-9">
 
-<p>
-  <strong>Status:</strong>
-  <%= @project.status.titleize %>
-</p>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.name %>
+    </div>
+  </div>
+  <% if @project.department %>
+      <div class="row m-t-10">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Department</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= @project.department.name %>
+        </div>
+      </div>
+  <% end %>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Status</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <div class="label label-<%= get_css_class_by_status(Project.statuses[@project.status]) %>"><%= @project.status.titleize %></div>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Description</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.description %>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Founding Member</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.user.profile.first_name + ' ' + @project.user.profile.last_name %>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Start Date</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.start_date.to_formatted_s(:long_ordinal) %>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>End Date</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.end_date.to_formatted_s(:long_ordinal) %>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Funding</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= number_to_currency(@project.funding, precision: 0) %>
+    </div>
+  </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Difficulty level:</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @project.difficulty_level.titleize %>
+    </div>
+  </div>
+  <% if @project.teams %>
+      <div class="row m-t-10">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Current Team:</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <% @project.teams.each_with_index do |team_member, index| %>
+              <% if team_member.user.profile && team_member.user.profile != current_user.profile %>
+                  <%= link_to team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name, profile_path(team_member.user.profile) %>
+                  <% if index != @project.teams.length - 1 %>,
+                  <% end %>
+              <% end %>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @project.end_date %>
-</p>
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
-
-<p>
-  <strong>Status:</strong>
-  <%= @project.status.titleize %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-
-<p>
-  <strong>Start date:</strong>
-  <%= @project.start_date %>
-</p>
-
-<p>
-  <strong>End date:</strong>
-  <%= @project.end_date %>
-</p>
-
-<p>
-  <strong>Funding:</strong>
-  <%= @project.funding %>
-</p>
-
-<p>
-  <strong>Difficulty level:</strong>
-  <%= @project.difficulty_level.titleize %>
-</p>
-
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<div class="clearfix"></div>
+<nav class="col-lg-9">
+  <ul class="pager">
+    <li><%= link_to 'Back', projects_path %></li>
+  </ul>
+</nav>
+</div>
