@@ -1,54 +1,86 @@
 <p id="notice"><%= notice %></p>
 
 <h1>My Projects</h1>
-<div class="pull-right">
-  <%= link_to 'Create New Project', new_project_path, class: 'btn btn-success btn-lg' %>
+
+
+<div class="m-t-25">
+  <div class="pull-right">
+    <%= link_to 'Create New Project', new_project_path, class: 'btn btn-success btn-lg' %>
+  </div>
+
+  <ul class="nav nav-pills">
+    <li role="presentation" class="<%= (params[:status] == nil) ? '' : 'active' %>active"><a href="?">All</a></li>
+    <% Project.statuses.keys.map do |status| %>
+        <li role="presentation" class="<%= (params[:status] == status) ? 'active' : '' %>">
+          <a href="?status=<%= status %>"><%= status.titleize %></a></li>
+    <% end %>
+  </ul>
 </div>
-<ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="?">All</a></li>
-  <% Project.statuses.keys.map do |status| %>
-      <li role="presentation"><a href="?status=<%= Project.statuses[status] %>"><%= status.titleize %></a></li>
-  <% end %>
-</ul>
+
+
+<h3><%= @total_projects_count != 0 ? ('Showing ' + pluralize(@total_projects_count, 'project') + ' found:') : 'No Projects found!' %> </h3>
 
 <% @projects.each do |project| %>
     <div class="jumbotron box m-t-15">
       <div class="row">
         <div class="col-lg-3">
-          Project Name:
+          <strong>Project Name:</strong>
         </div>
         <div class="col-lg-6">
           <%= project.name %>
         </div>
-        <div class="col-lg-3">
-          <%= project.status.titleize %>
+        <div class="col-lg-3 text-right">
+          <div class="label label-<%= get_css_class_by_status(Project.statuses[project.status]) %>"><%= project.status.titleize %></div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-lg-3">
-          Research Category:
-        </div>
-        <div class="col-lg-6">
-          Articial Intelligence
-        </div>
-        <div class="col-lg-3">
-        </div>
-      </div>
+      <% if project.department %>
+          <div class="row">
+            <div class="col-lg-3">
+              <strong>Research Category:</strong>
+            </div>
+            <div class="col-lg-6">
+              <%= project.department.name %>
+            </div>
+            <div class="col-lg-3">
+            </div>
+          </div>
+      <% else %>
+          <div class="row">
+            <div class="col-lg-3">
+              &nbsp;
+            </div>
+            <div class="col-lg-6">
+              &nbsp;
+            </div>
+            <div class="col-lg-3">
+              &nbsp;
+            </div>
+          </div>
+      <% end %>
 
       <div class="row">
-        <div class="col-lg-3">
-          Founding Member
-        </div>
-        <div class="col-lg-6">
-          Dr. John
-        </div>
-        <div class="col-lg-3">
-          <%= link_to 'View', project, class: 'btn btn-default btn-xs' %>
-          <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-default btn-xs' %>
-          <%= link_to 'Delete', project, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+
+        <% if project.user.profile %>
+            <div class="col-lg-3">
+              <strong>Founding Member:</strong>
+            </div>
+            <div class="col-lg-6">
+              <%= project.user.profile.first_name + ' ' + project.user.profile.last_name %>
+            </div>
+        <% end %>
+
+        <div class="col-lg-3 text-right">
+          <% if project.user.id == current_user.id %>
+              <%= link_to 'View', project, class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit', edit_project_path(project), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Delete', project, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+          <% else %>
+              <%= link_to 'View', project, class: 'btn btn-default btn-xs' %>
+          <% end %>
         </div>
       </div>
 
     </div>
 <% end %>
+<%= will_paginate @projects, renderer: BootstrapPagination::Rails %>

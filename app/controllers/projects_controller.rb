@@ -1,15 +1,25 @@
 class ProjectsController < ApplicationController
+  include Filterable
+
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project
-                    .find_by_sql ['select * from projects AS p
-                                     INNER JOIN users AS u ON p.user_id=u.id
-                                     INNER JOIN teams AS t ON p.id=t.project_id
-                                     where t.user_id=:user_id OR p.user_id=:user_id order by status;',
-                                  {:user_id => current_user.id}]
+    @projects_created = Project.where('user_id == ?', current_user.id)
+    @projects_created = @projects_created.status(Project.statuses[params[:status]]) if params[:status].present?
+
+    @projects_collaborated = Team.where('user_id == ?', current_user.id).pluck(:project_id)
+    @projects_collaborated = Project.where(:id => @projects_collaborated)
+
+    @projects_collaborated = @projects_collaborated.status(Project.statuses[params[:status]]) if params[:status].present?
+
+    @projects = (@projects_created + @projects_collaborated).sort_by(&:created_at).reverse!
+
+    @total_projects_count = @projects.length
+
+    @projects = @projects.paginate(:page => params[:page], :per_page => 5)
+    @departments = Department.all
   end
 
   # GET /projects/1
@@ -20,16 +30,23 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @departments = Department.all
   end
 
   # GET /projects/1/edit
   def edit
+    authorize
+
+    @departments = Department.all
   end
 
   # POST /projects
   # POST /projects.json
   def create
+
     @project = Project.new(project_params)
+    @project.user_id =  current_user.id
+    @departments = Department.all
 
     respond_to do |format|
       if @project.save
@@ -45,6 +62,10 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    authorize
+
+    @project.user_id =  current_user.id
+
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -59,6 +80,8 @@ class ProjectsController < ApplicationController
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
+    authorize
+
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
@@ -74,11 +97,12 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    params.require(:project).permit(:name, :status, :description, :start_date, :end_date, :funding, :difficulty_level)
+    params.require(:project).permit(:name, :status, :description, :start_date, :end_date, :funding, :difficulty_level, :user_id, :department_id)
   end
 
-  # A list of the param names that can be used for filtering the Product list
-  def filtering_params(params)
-    params.slice(:status)
+  def authorize
+    if current_user != @project.user
+      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+    end
   end
 end

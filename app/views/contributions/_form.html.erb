@@ -1,17 +1,7 @@
 <%= form_for(@contribution) do |f| %>
-  <% if @contribution.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@contribution.errors.count, "error") %> prohibited this contribution from being saved:</h2>
+    <%= display_error_messages(@project) %>
 
-      <ul>
-      <% @contribution.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
+    <div class="field">
     <%= f.label :score %><br>
     <%= f.number_field :score %>
   </div>
