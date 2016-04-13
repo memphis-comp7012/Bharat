@@ -1,50 +1,103 @@
-<p>
-  <strong>First name:</strong>
-  <%= @profile.first_name %>
-</p>
-
-<p>
-  <strong>Last name:</strong>
-  <%= @profile.last_name %>
-</p>
-
-<p>
-  <strong>Bio:</strong>
-  <%= @profile.bio %>
-</p>
-
-<p>
-  <strong>Education level:</strong>
-  <%= @profile.education_level.titleize %>
-</p>
-
-<% if current_user.faculty? or @profile == current_user.profile %>
-  <p>
-    <strong>Phone number:</strong>
-    <%= @profile.phone_number %>
-  </p>
-<% end %>
-
-<p>
-  <strong>Summary of projects:</strong>
-  <%= @profile.summary_of_projects %>
-</p>
-
-<p>
-  <strong>Skills:</strong>
-  <%= @profile.skills %>
-</p>
-
-<p>
-  <strong>Research Fields:<br></strong>
-  <% @profile.profile_research_fields.each do |profile_research_field| %>
-    <% if profile_research_field.profile == current_user.profile %>
-      <%= profile_research_field.research_field.category %><br>
-    <% end %>
+<h1 class="col-lg-9">My Profile
+  <% if @profile == current_user.profile %>
+      <%= link_to 'Edit my profile', edit_profile_path(@profile), class: 'btn btn-primary btn-sm pull-right' %>
   <% end %>
-</p>
+</h1>
+<div class="jumbotron box m-t-10 col-lg-9">
 
-<% if @profile == current_user.profile %>
-  <%= link_to 'Edit my profile', edit_profile_path(@profile) %> | 
-<% end %>
-<%= link_to 'Back to my profile', profile_path(current_user.profile) %>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>First Name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.first_name %>
+    </div>
+  </div>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Last name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.last_name %>
+    </div>
+  </div>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Bio</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.bio %>
+    </div>
+  </div>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Education Level</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.education_level.titleize %>
+    </div>
+  </div>
+  <% if current_user.faculty? or @profile == current_user.profile %>
+     <div class="row m-t-10">
+        <div class="col-lg-4 col-sm-12 col-xs-12"> 
+          <strong>Phone number</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= @profile.phone_number %>
+        </div>
+      </div>
+  <% end %>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Summary of projects</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.summary_of_projects %>
+    </div>
+  </div>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Skills</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @profile.skills %>
+    </div>
+  </div>
+ <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12"> 
+      <strong>Research Fields</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <% @profile.profile_research_fields.each do |profile_research_field| %>
+          <% if profile_research_field.profile == current_user.profile %>
+              <%= profile_research_field.research_field.category %><br>
+          <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+</div>

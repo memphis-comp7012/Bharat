@@ -1,4 +1,4 @@
-<div class="authform">
+<div class="authform col-lg-8">
   <%= form_for(@profile) do |f| %>
       <%= display_error_messages(@profile) %>
       <fieldset>
@@ -17,7 +17,7 @@
         <div class="form-group">
           <%= f.label :education_level %><br>
           <%= f.select :education_level,
-                       Profile.education_levels.keys.map { |level| [level.titleize, level] }, class: 'form-control' %>
+                       Profile.education_levels.keys.map { |level| [level.titleize, level] }, {}, class: 'form-control custom' %>
         </div>
         <div class="form-group">
           <%= f.label :phone_number %>
@@ -33,10 +33,11 @@
         </div>
         <div class="form-group">
           <strong>Research Fields:<br></strong>
-          <% @profile.profile_research_fields.each do |profile_research_field| %>
-              <%= profile_research_field.research_field.category %><br>
+          <%= link_to 'Edit Research Fields', profile_research_fields_path, class: 'pull-right btn btn-default btn-xs' %>
+          <% @profile.profile_research_fields.each_with_index do |profile_research_field, index| %>
+              <%= profile_research_field.research_field.category %>
+              <% if index != @profile.profile_research_fields.length-1%>, <% end %>
           <% end %>
-          <%= link_to 'Edit Research Fields', profile_research_fields_path %>
         </div>
       </fieldset>
 

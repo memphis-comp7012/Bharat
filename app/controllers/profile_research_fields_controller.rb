@@ -60,7 +60,7 @@ class ProfileResearchFieldsController < ApplicationController
   def update
     respond_to do |format|
       if @profile_research_field.update(profile_research_field_params)
-        format.html { redirect_to @profile_research_field, notice: 'Profile research field was successfully updated.' }
+        format.html { redirect_to @profile_research_field, notice: 'Research field(s) for your profile were successfully updated.' }
         format.json { render :show, status: :ok, location: @profile_research_field }
       else
         format.html { render :edit }
@@ -74,7 +74,7 @@ class ProfileResearchFieldsController < ApplicationController
   def destroy
     @profile_research_field.destroy
     respond_to do |format|
-      format.html { redirect_to profile_research_fields_url, notice: 'Profile research field was successfully destroyed.' }
+      format.html { redirect_to profile_research_fields_url, notice: 'Research field was successfully destroyed from your profile.' }
       format.json { head :no_content }
     end
   end
