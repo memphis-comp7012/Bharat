@@ -1,22 +1,27 @@
-<p id="notice"><%= notice %></p>
+<h1>My Current Research Fields</h1>
 
-<h1>Listing Profile Research Fields</h1>
+
+<% @user_research_fields = Array.new %>
+<% @profile_research_fields.each do |profile_research_field| %>
+  <% if profile_research_field.profile == current_user.profile %>
+    <% @user_research_fields << profile_research_field.research_field.category %>
+  <% end %>
+<% end %>
 
 <table>
+  <caption>Remove Research Fields</caption>
   <thead>
   <tr>
     <th>Research Field</th>
-    <th colspan="3"></th>
+    <th colspan="1"></th>
   </tr>
   </thead>
 
   <tbody>
   <% @profile_research_fields.each do |profile_research_field| %>
       <tr>
-        <td><%= profile_research_field.research_field.category %>
-        <% if profile_research_field.profile != current_user.profile %>
-          <td><%= link_to 'Add Research Field', new_profile_research_field_path %></td>
-        <% else %>
+        <% if profile_research_field.profile == current_user.profile %>
+          <td><%= profile_research_field.research_field.category %>
           <td><%= link_to 'Remove Research Field', profile_research_field, method: :delete, data: {confirm: 'Are you sure?'} %></td>
         <% end %>
       </tr>
@@ -24,6 +29,27 @@
   </tbody>
 </table>
 
-<br>
 
-<%= link_to 'New Profile research field', new_profile_research_field_path %>
+<table>
+  <caption>Add Research Fields</caption>
+  <thead>
+  <tr>
+    <th>Research Field</th>
+    <th colspan="1"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @research_fields.each do |research_field| %>
+      <tr>
+        <% if !@user_research_fields.include? research_field.category %>
+          <td><%= research_field.category %>
+          <td><%= link_to 'Add Research Field', profile_research_fields_add_path(research_field) %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<%= link_to 'Back to Edit Profile', edit_profile_path(current_user.profile) %>

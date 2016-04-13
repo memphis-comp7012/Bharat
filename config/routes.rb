@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
+    post '/profile_research_fields/add/:research_field', to: 'profile_research_fields#add', as: 'profile_research_fields_add'
     resources :teams
     resources :contributions
     resources :projects

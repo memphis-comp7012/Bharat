@@ -5,6 +5,7 @@ class ProfileResearchFieldsController < ApplicationController
   # GET /profile_research_fields.json
   def index
     @profile_research_fields = ProfileResearchField.all
+    @research_fields = ResearchField.all
   end
 
   # GET /profile_research_fields/1
@@ -33,6 +34,23 @@ class ProfileResearchFieldsController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @profile_research_field.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add
+    @profile_research_field = ProfileResearchField.new()
+    @profile_research_field.profile = current_user.profile
+    res_field = params[:research_field]
+    @profile_research_field.research_field = res_field
+
+    respond_to do |format|
+      if @profile_research_field.save
+        format.html { redirect_to @profile_research_fields, notice: 'Profile research field was successfully created.' }
+        format.json { render :show, status: :created, location: @profile_research_fields }
+      else
+        format.html { render :new }
+        format.json { render json: @profile_research_fields.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,5 +88,10 @@ class ProfileResearchFieldsController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
   def profile_research_field_params
     params.fetch(:profile_research_field, {})
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def profile_research_field_params_with_assoc
+    params.fetch(:profile_research_field, {}).permit(:research_field)
   end
 end
