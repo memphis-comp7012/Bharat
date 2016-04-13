@@ -68,51 +68,51 @@ biology.research_fields << mcell << protein << neuro
 
 chandra_profile = Profile.create!(first_name: "Chandra",
                                   last_name: "Challapalla",
-                                  bio: "love your work and you wont work for your love",
+                                  bio: "Love what you do and you will never work again in your life.",
                                   education_level: 1,
                                   phone_number: 1234567890,
-                                  summary_of_projects: "web dev guru",
-                                  skills: "rails, php, laravel, composer, git")
+                                  summary_of_projects: "Worked throughout the front-end stack on a SaaS product for property managers that has been in business for more than ten years and has over 10,000 customers.",
+                                  skills: "PHP Frameworks: Laravel, Zend Framework, CodeIgniter, CakePHP.")
 
 chandra_profile.user = chandra
 
 lasya_profile = Profile.create!(first_name: "Lasya",
-                                last_name: "Vallabhaneneneni",
-                                bio: "ruchi's roommate",
+                                last_name: "Vallabhaneni",
+                                bio: "I enjoy learning and becoming a bit better every day!",
                                 education_level: 1,
                                 phone_number: 9987654321,
-                                summary_of_projects: "IIS",
-                                skills: "making other people happy")
+                                summary_of_projects: "Student worker at IIS, worked on many web development projects.",
+                                skills: "C++, PHP, Ruby on Rails, Javascript")
 
 lasya_profile.user = lasya
 
 jobin_profile = Profile.create!(first_name: "Jobin",
                                 last_name: "Sunny",
-                                bio: "Iron man in real life",
+                                bio: "A graduate student in the University of Memphis, eager to learn and apply my skills to real world projects.",
                                 education_level: 1,
                                 phone_number: 8165016767,
-                                summary_of_projects: "beating rakshit in CS",
-                                skills: "going from my house to that other house in 5 seconds")
+                                summary_of_projects: "Created Room8, a chore and bill management android app",
+                                skills: "Java, Python, C, C++, Ruby")
 
 jobin_profile.user = jobin
 
-megha_profile = Profile.create!(first_name: "Megaji",
+megha_profile = Profile.create!(first_name: "Megha",
                                 last_name: "Vashisht",
-                                bio: "A girl that wears a grey long sleeve jacket",
+                                bio: "",
                                 education_level: 1,
                                 phone_number: 1234509876,
-                                summary_of_projects: "database pr0",
-                                skills: "avoiding stalkers, being short tempered, seeing red instead of few people")
+                                summary_of_projects: "Worked at HCL on backend technologies.",
+                                skills: "PHP, Python, Javascript, SQL. Databases used: Oracle, Apache Tomcat")
 
 megha_profile.user = megha
 
 scott_profile = Profile.create!(first_name: "Dr. Scott",
                                 last_name: "Fleming",
-                                bio: "",
+                                bio: "I take a human-centric approach, empirically studying developers to inspire and evaluate tools. I am interested in a variety of different programming populations, including experienced professionals, new computer science graduates, and end-user programmers.",
                                 education_level: 2,
                                 phone_number: 1029384756,
-                                summary_of_projects: "",
-                                skills: "bla")
+                                summary_of_projects: "Information Foraging in Software Engineering, Gender-HCI, Copse Project",
+                                skills: "Java, Ruby, Rails")
 
 scott_profile.user = scott
 
