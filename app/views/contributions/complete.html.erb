@@ -10,7 +10,6 @@
           </ul>
         </div>
     <% end %>
-
     <div class="row">
       <h1>Mark Project As Complete</h1>
       <div class="jumbotron box m-t-15">
@@ -36,7 +35,9 @@
           </div>
           <div class="col-lg-6">
             <% @project.project_research_fields.each_with_index do |project_research_field, index| %>
-                    <%= project_research_field.research_field.category %><% if (index != @project.project_research_fields.length - 1)%>, <% end %>
+                <%= project_research_field.research_field.category %>
+                <% if (index != @project.project_research_fields.length - 1) %>,
+                <% end %>
             <% end %>
           </div>
         </div>
@@ -59,8 +60,12 @@
               <th scope="row"><%= index + 1 %></th>
               <td><%= team.user.profile.first_name %></td>
               <td><%= team.user.profile.last_name %></td>
-              <td><%= link_to 'Award points and Contribution', add_contribution_to_project_path(@project, :user_id => team.user.id), class: 'btn btn-default btn-xs' %></td>
-              <td>$3000</td>
+              <% if contribution = get_positive_contribution(params[:project_id], team.user_id) %>
+                  <td><%= contribution.score %></td>
+                  <td><%= contribution.money_received %></td>
+              <% else %>
+                  <td colspan="2" class="text-center"><%= link_to 'Award points and Contribution', add_contribution_to_project_path(@project, :user_id => team.user.id), class: 'btn btn-default btn-xs' %></td>
+              <% end %>
             </tr>
         <% end %>
         </tbody>

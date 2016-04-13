@@ -5,14 +5,14 @@ class ContributionsController < ApplicationController
   # GET /contributions.json
   def index
     @contributions = Contribution.all
-    @contributions = Contribution.where("user_id == ?",current_user.id)
+    @contributions = Contribution.where("user_id == ?", current_user.id)
 
-    if params[:show].present?
+    if params[:show]
       if params[:show] == 'earned'
-        @contributions = Contribution.where("score > ? and user_id == ?", 0, current_user.id)
+        @contributions = Contribution.where("score > ? AND money_received > ? AND user_id == ?", 0, 0, current_user.id)
       end
       if params[:show] == 'lost'
-        @contributions = Contribution.where("score < ? and user_id == ?", 0, current_user.id)
+        @contributions = Contribution.where("score < ? AND user_id == ?", 0, current_user.id)
       end
     end
   end
