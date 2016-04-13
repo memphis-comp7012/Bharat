@@ -1,0 +1,79 @@
+
+
+
+
+<%= form_tag(search_interesting_projects_path, :method => "post", id: "search-form", class: 'form-inline') do %>
+    <div class="form-group">
+      <label class="sr-only" for="exampleInputEmail3">Email address</label>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Project...", class: 'form-control' %>
+    </div>
+    <div class="form-group">
+      <%= collection_select(:department, :id, Department.all, :id, :name, {}, class: 'form-control custom') %>
+    </div>
+    <div class="form-group">
+    <%= submit_tag "Search", :name => nil, class: "btn btn-default" %>
+    </div>
+    </form>
+<% end %>
+
+<% if @projects %>
+    <h3><%= @total_projects_count != 0 ? ('Showing ' + pluralize(@total_projects_count, 'project') + ' found:') : 'No Projects found!' %> </h3>
+
+    <% @projects.each do |project| %>
+        <div class="jumbotron box m-t-15">
+          <div class="row">
+            <div class="col-lg-3">
+              <strong>Project Name:</strong>
+            </div>
+            <div class="col-lg-6">
+              <%= project.name %>
+            </div>
+            <div class="col-lg-3 text-right">
+              <div class="label label-<%= get_css_class_by_status(Project.statuses[project.status]) %>"><%= project.status.titleize %></div>
+            </div>
+          </div>
+
+          <% if project.department %>
+              <div class="row">
+                <div class="col-lg-3">
+                  <strong>Research Category:</strong>
+                </div>
+                <div class="col-lg-6">
+                  <%= project.department.name %>
+                </div>
+                <div class="col-lg-3">
+                </div>
+              </div>
+          <% else %>
+              <div class="row">
+                <div class="col-lg-3">
+                  &nbsp;
+                </div>
+                <div class="col-lg-6">
+                  &nbsp;
+                </div>
+                <div class="col-lg-3">
+                  &nbsp;
+                </div>
+              </div>
+          <% end %>
+
+          <div class="row">
+
+            <% if project.user.profile %>
+                <div class="col-lg-3">
+                  <strong>Founding Member:</strong>
+                </div>
+                <div class="col-lg-6">
+                  <%= project.user.profile.first_name + ' ' + project.user.profile.last_name %>
+                </div>
+            <% end %>
+
+            <div class="col-lg-3 text-right">
+              <%= link_to 'View', project, class: 'btn btn-default btn-xs' %>
+            </div>
+          </div>
+
+        </div>
+    <% end %>
+<% end %>

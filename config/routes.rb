@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     post 'contributions/add/project/:project_id/user/:user_id' => 'contributions#save', as: 'save_contribution_to_project'
     post '/profile_research_fields/add/:research_field', to: 'profile_research_fields#add', as: 'profile_research_fields_add'
 
+    get 'search/projects/' => 'projects#search'
+    post 'search/projects/' => 'projects#search', as: 'search_interesting_projects'
     resources :teams
     resources :contributions
     resources :projects

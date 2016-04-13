@@ -89,6 +89,24 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def search
+    @departments = Department.all
+    if params[:search] && params[:department][:id]
+      @projects_not_created = Project.where('department_id = ? and user_id != ?', params[:department][:id], current_user.id).distinct
+      @projects_not_created = @projects_not_created.where('name like ? or description like ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search] != ''
+
+      @projects_not_collaborated_ids = Team.where('user_id != ?', current_user.id).distinct.pluck(:project_id)
+
+      @projects_not_collaborated = Project.where(:id => @projects_not_collaborated_ids).where('department_id = ? and user_id != ?', params[:department][:id], current_user.id).distinct
+      @projects_not_collaborated = @projects_not_collaborated.where('name like ? or description like ?', "%#{params[:search]}%", "%#{params[:search]}%") if params[:search] != ''
+
+      @projects = (@projects_not_created + @projects_not_collaborated).sort_by(&:created_at).uniq.reverse!
+      @total_projects_count = @projects.length
+    else
+      @projects = nil
+    end
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_project
