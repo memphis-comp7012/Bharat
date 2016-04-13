@@ -39,14 +39,14 @@ class ProfileResearchFieldsController < ApplicationController
   end
 
   def add
-    @profile_research_field = ProfileResearchField.new()
+    @profile_research_field = ProfileResearchField.new(profile_research_field_params)
     @profile_research_field.profile = current_user.profile
     res_field = params[:research_field]
-    @profile_research_field.research_field = res_field
+    @profile_research_field.research_field_id = res_field
 
     respond_to do |format|
       if @profile_research_field.save
-        format.html { redirect_to @profile_research_fields, notice: 'Profile research field was successfully created.' }
+        format.html { redirect_to profile_research_fields_path, notice: 'Research field was successfully added to your profile.' }
         format.json { render :show, status: :created, location: @profile_research_fields }
       else
         format.html { render :new }

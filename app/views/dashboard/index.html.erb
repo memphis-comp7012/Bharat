@@ -1,0 +1,111 @@
+<div class="row">
+  <h1>Dashboard</h1>
+</div>
+<div class="row m-t-25">
+
+  <!-- My Project widget -->
+  <div class="col-lg-5 jumbotron box">
+    <h3><i class="fa fa-briefcase"></i> My Projects</h3>
+    <hr>
+    <% Project.statuses.keys.map do |status| %>
+        <div class="row">
+          <div class="col-lg-2 m-t-10 col-xs-2">
+            <strong><%= get_counts_of_projects(status) %></strong>
+          </div>
+          <div class="col-lg-10 m-t-10 col-xs-10"><%= status.titleize %></div>
+        </div>
+    <% end %>
+  </div>
+  <!-- \My Project widget -->
+
+  <!-- Spacer -->
+  <div class="col-lg-1"></div>
+  <!-- \Spacer -->
+
+  <!-- My Tasks widget -->
+  <div class="col-lg-5 jumbotron box">
+    <h3><i class="fa fa-tasks"></i> My Tasks</h3>
+    <hr>
+    <div class="row">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>4</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Not Started</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2  m-t-10 col-xs-2">
+        <strong>10</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">In Progress</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>2</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">On Hold</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>2</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Completed</div>
+    </div>
+  </div>
+  <!-- \My Tasks widget -->
+</div>
+<div class="row">
+
+  <!-- My Requests widget -->
+  <div class="col-lg-5 jumbotron box">
+    <h3><i class="fa fa-bullseye"></i> My Requests</h3>
+    <hr>
+    <div class="row">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>4</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Accepted</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2  m-t-10 col-xs-2">
+        <strong>10</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Rejected</div>
+    </div>
+    <div class="row">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>2</strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Pending Approval</div>
+    </div>
+  </div>
+  <!-- \ContributionsMy Requests widget -->
+
+  <!-- Spacer -->
+  <div class="col-lg-1"></div>
+  <!-- \Spacer widget -->
+
+  <!-- My Contributions widget -->
+  <div class="col-lg-5 jumbotron box">
+    <h3><i class="fa fa-money"></i> My Contributions</h3>
+    <hr>
+    <div class="row text-success">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong><%= @points_earned %></strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10 ">Points Earned</div>
+    </div>
+    <div class="row text-warning">
+      <div class="col-lg-2  m-t-10 col-xs-2">
+        <strong><%= @points_lost.to_s.gsub('-','') %></strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Points Lost</div>
+    </div>
+    <div class="row text-danger">
+      <div class="col-lg-2 m-t-10 col-xs-2">
+        <strong>$<%= @money_received %></strong>
+      </div>
+      <div class="col-lg-10 m-t-10 col-xs-10">Contribution Received</div>
+    </div>
+  </div>
+  <!-- \My Contributions widget -->
+</div>

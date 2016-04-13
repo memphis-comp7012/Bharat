@@ -35,12 +35,10 @@
 
 #page-content-wrapper {
   width: 100%;
-  position: absolute;
   padding: 15px;
 }
 
 #wrapper.toggled #page-content-wrapper {
-  position: absolute;
   margin-right: -250px;
 }
 
@@ -70,7 +68,7 @@
   padding-right: 10px;
 }
 
-.sidebar-nav li a:hover {
+.sidebar-nav li a:hover, .sidebar-nav li a.active {
   text-decoration: none;
   color: #fff;
   background: rgba(255,255,255,0.2);

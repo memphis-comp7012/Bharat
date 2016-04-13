@@ -1,14 +1,14 @@
 <!-- Sidebar -->
 <div id="sidebar-wrapper">
   <ul class="sidebar-nav">
-    <li>
-      <a href="#"><span class="fa fa-tachometer"></span> Dashboard</a>
+    <li class="active">
+      <%= link_to raw('<span class="fa fa-tachometer"></span> Dashboard'), dashboard_path, :class => current_class?(dashboard_path) %>
     </li>
     <li>
       <a href="#"><span class="fa fa-search"></span> Search Projects</a>
     </li>
     <li>
-      <%= link_to raw('<span class="fa fa-briefcase"></span> My Projects'), projects_path %>
+      <%= link_to raw('<span class="fa fa-briefcase"></span> My Projects'), projects_path, :class => current_class?(projects_path)  %>
     </li>
     <li>
       <a href="#"><span class="fa fa-tasks"></span> My Tasks</a>
@@ -17,7 +17,7 @@
       <a href="#"><span class="fa fa-bullseye"></span> My Requests</a>
     </li>
     <li>
-      <%= link_to raw('<span class="fa fa-money"></span> My Contributions'), contributions_path %>
+      <%= link_to raw('<span class="fa fa-money"></span> My Contributions'), contributions_path, :class => current_class?(contributions_path) %>
     </li>
   </ul>
 </div>

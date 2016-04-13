@@ -2,7 +2,7 @@
 
 <h1>My Contributions</h1>
 <ul class="nav nav-pills">
-  <li role="presentation" class="<%= 'active' if params[:show] == 'all' %>"><a href="?show=all">All</a></li>
+  <li role="presentation" class="<%= 'active' if !params[:show] || params[:show] == 'all' %>"><a href="?show=all">All</a></li>
   <li role="presentation" class="<%= 'active' if params[:show] == 'earned' %>"><a href="?show=earned">Points earned and Money received</a></li>
   <li role="presentation" class="<%= 'active' if params[:show] == 'lost' %>"><a href="?show=lost">Points Lost</a></li>
 </ul>
@@ -18,7 +18,7 @@
           :
         </div>
         <div class="col-lg-3">
-          <%= contribution.project.name %>
+          <%= contribution.project ? contribution.project.name : '' %>
         </div>
       </div>
 

@@ -1,55 +1,44 @@
-<h1>My Current Research Fields</h1>
+<div class="row">
+  <div class="col-lg-8">
 
-
-<% @user_research_fields = Array.new %>
-<% @profile_research_fields.each do |profile_research_field| %>
-  <% if profile_research_field.profile == current_user.profile %>
-    <% @user_research_fields << profile_research_field.research_field.category %>
-  <% end %>
-<% end %>
-
-<table>
-  <caption>Remove Research Fields</caption>
-  <thead>
-  <tr>
-    <th>Research Field</th>
-    <th colspan="1"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @profile_research_fields.each do |profile_research_field| %>
-      <tr>
+    <h1>My Current Research Fields</h1>
+    <% @user_research_fields = Array.new %>
+    <% @profile_research_fields.each do |profile_research_field| %>
         <% if profile_research_field.profile == current_user.profile %>
-          <td><%= profile_research_field.research_field.category %>
-          <td><%= link_to 'Remove Research Field', profile_research_field, method: :delete, data: {confirm: 'Are you sure?'} %></td>
+            <% @user_research_fields << profile_research_field.research_field.category %>
         <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <% end %>
 
 
-<table>
-  <caption>Add Research Fields</caption>
-  <thead>
-  <tr>
-    <th>Research Field</th>
-    <th colspan="1"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @research_fields.each do |research_field| %>
-      <tr>
-        <% if !@user_research_fields.include? research_field.category %>
-          <td><%= research_field.category %>
-          <td><%= link_to 'Add Research Field', profile_research_fields_add_path(research_field) %></td>
-        <% end %>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
-<br>
-<%= link_to 'Back to Edit Profile', edit_profile_path(current_user.profile) %>
+    <table class="table table-striped">
+      <tbody>
+      <% @profile_research_fields.each do |profile_research_field| %>
+          <tr>
+            <% if profile_research_field.profile == current_user.profile %>
+                <td><%= profile_research_field.research_field.category %>
+                <td>
+                  <%= link_to raw('<i class="fa fa-trash"></i> &nbsp;&nbsp;Remove'), profile_research_field, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger btn-sm' %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+    <br>
+    <h3>Add New Research Fields</h3>
+    <table class="table table-striped">
+      <tbody>
+      <% @research_fields.each do |research_field| %>
+          <tr>
+            <% if !@user_research_fields.include? research_field.category %>
+                <td><%= research_field.category %>
+                <td>
+                  <%= link_to raw('<i class="fa fa-plus-circle"></i> &nbsp;&nbsp;Add'), profile_research_fields_add_path(research_field), :method => :post, class: 'btn btn-success btn-sm' %>
+                </td>
+            <% end %>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
