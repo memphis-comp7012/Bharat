@@ -190,8 +190,8 @@ jar = Project.new(
     name: "J.A.R.V.I.S",
     status: 'in_progress',
     description: "This has not started",
-    start_date: "2016-04-10",
-    end_date: "2016-04-20",
+    start_date: Time.now+1.day,
+    end_date: Time.now+90.day,
     funding: 2000,
     difficulty_level: 'easy'
 )
@@ -204,8 +204,8 @@ se = Project.new(
     name: "Information Foraging in Software Engineering",
     status: 'in_progress',
     description: "This is a project on Information Foraging ",
-    start_date: "2016-05-10",
-    end_date: "2017-06-20",
+    start_date: Time.now+5.day,
+    end_date: Time.now+90.day,
     funding: 10000,
     difficulty_level: 'medium')
 se.department = cs
@@ -217,8 +217,8 @@ track = Project.new(
     name: "Conference Tracking System",
     status: 'not_started',
     description: "Project on Conference tracking System",
-    start_date: "2016-06-10",
-    end_date: "2017-07-20",
+    start_date: Time.now+10.day,
+    end_date: Time.now+190.day,
     funding: 6000,
     difficulty_level: 'hard')
 track.department = math
@@ -230,8 +230,8 @@ smoke = Project.new(
     name: "Smoke Abstinence",
     status: 'on_hold',
     description: "A project on Smoke Abstinence",
-    start_date: "2016-08-10",
-    end_date: "2017-09-20",
+    start_date: Time.now+10.day,
+    end_date: Time.now+100.day,
     funding: 5000,
     difficulty_level: 'easy')
 smoke.department = math
@@ -243,8 +243,8 @@ authen = Project.new(
     name: "Authentication Framework",
     status: 'complete',
     description: "This is a project on Authentication Framework",
-    start_date: "2016-10-10",
-    end_date: "2017-11-20",
+    start_date: Time.now+4.day,
+    end_date: Time.now+80.day,
     funding: 6200,
     difficulty_level: 'hard')
 authen.department = biology
@@ -255,8 +255,8 @@ genetic = Project.new(
     name: "Tsp problem",
     status: 'complete',
     description: "This is a project on TSP using genetic",
-    start_date: "2016-11-10",
-    end_date: "2017-09-20",
+    start_date: Time.now+20.day,
+    end_date: Time.now+90.day,
     funding: 6200,
     difficulty_level: 'hard')
 genetic.teams << team4 << team2
