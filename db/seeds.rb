@@ -44,28 +44,52 @@ scott.teams << team4 << team1 << team2
 scott.contributions << contribution2
 scott.save!
 
-
+# Department seeds
 cs = Department.create!(name: "Computer Science")
 math = Department.create!(name: "Math")
 biology = Department.create!(name: "Biology")
+physics = Department.create!(name: "Physics")
+chemistry = Department.create!(name: "Chemistry")
 
+# Research Field seeds
 nlp = ResearchField.create!(category: "Natural Language Processing")
 ml = ResearchField.create!(category: "Machine Learning")
 hci = ResearchField.create!(category: "Human Computer Interaction")
+se = ResearchField.create!(category: "Software Engineering")
+db = ResearchField.create!(category: "Databases")
 
 mark = ResearchField.create!(category: "Markov Logic Gates")
 nt = ResearchField.create!(category: "Number Theory")
 comb = ResearchField.create!(category: "Combinatorics")
+game_theory = ResearchField.create!(category: "Game Theory")
+prob = ResearchField.create!(category: "Probability")
 
 mcell = ResearchField.create!(category: "Molecular Cell Biology")
 protein = ResearchField.create!(category: "Protein Dynamics")
 neuro = ResearchField.create!(category: "NeuroBiology")
+micro = ResearchField.create!(category: "MicroBiology")
+genetics = ResearchField.create!(category: "Genetics")
 
-cs.research_fields << nlp << ml << hci
-math.research_fields << mark << nt << comb
-biology.research_fields << mcell << protein << neuro
+beam = ResearchField.create!(category: "Beam Physics")
+genrel = ResearchField.create!(category: "General Relativity")
+nuclear = ResearchField.create!(category: "Nuclear Physics")
+part = ResearchField.create!(category: "Particle Physics")
+astro = ResearchField.create!(category: "Astro Physics")
+
+catalysis = ResearchField.create!(category: "Catalysis")
+solvents = ResearchField.create!(category: "Solvents")
+sustainable = ResearchField.create!(category: "Sustainable Chemistry")
+organic = ResearchField.create!(category: "Organic Chemistry")
+liquid = ResearchField.create!(category: "Liquid Crystals")
+
+cs.research_fields << nlp << ml << hci << se << db
+math.research_fields << mark << nt << comb << game_theory << prob
+biology.research_fields << mcell << protein << neuro << micro << genetics
+physics.research_fields << beam << genrel << nuclear << part << astro
+chemistry.research_fields << catalysis << solvents << sustainable << organic << liquid
 
 
+# Profile seeds
 chandra_profile = Profile.create!(first_name: "Chandra",
                                   last_name: "Challapalla",
                                   bio: "Love what you do and you will never work again in your life.",
@@ -116,12 +140,50 @@ scott_profile = Profile.create!(first_name: "Dr. Scott",
 
 scott_profile.user = scott
 
+# Chandra Profile Research Fields
 chandra_profile_research_fields1 = ProfileResearchField.create!()
 chandra_profile_research_fields2 = ProfileResearchField.create!()
-chandra_profile.profile_research_fields << chandra_profile_research_fields1
-chandra_profile.profile_research_fields << chandra_profile_research_fields2
+chandra_profile_research_fields3 = ProfileResearchField.create!()
+chandra_profile.profile_research_fields << chandra_profile_research_fields1 << chandra_profile_research_fields2 << chandra_profile_research_fields3
 nlp.profile_research_fields << chandra_profile_research_fields1
 hci.profile_research_fields << chandra_profile_research_fields2
+se.profile_research_fields << chandra_profile_research_fields3
+
+# Megha Profile Research Fields
+megha_profile_research_fields1 = ProfileResearchField.create!()
+megha_profile_research_fields2 = ProfileResearchField.create!()
+megha_profile_research_fields3 = ProfileResearchField.create!()
+megha_profile.profile_research_fields << megha_profile_research_fields1 << megha_profile_research_fields2 << megha_profile_research_fields3
+db.profile_research_fields << megha_profile_research_fields1
+nt.profile_research_fields << megha_profile_research_fields2
+comb.profile_research_fields << megha_profile_research_fields3
+
+# Lasya Profile Research Fields
+lasya_profile_research_fields1 = ProfileResearchField.create!()
+lasya_profile_research_fields2 = ProfileResearchField.create!()
+lasya_profile_research_fields3 = ProfileResearchField.create!()
+lasya_profile.profile_research_fields << lasya_profile_research_fields1 << lasya_profile_research_fields2 << lasya_profile_research_fields3
+mcell.profile_research_fields << lasya_profile_research_fields1
+protein.profile_research_fields << lasya_profile_research_fields2
+genetics.profile_research_fields << lasya_profile_research_fields3
+
+# Jobin Profile Research Fields
+jobin_profile_research_fields1 = ProfileResearchField.create!()
+jobin_profile_research_fields2 = ProfileResearchField.create!()
+jobin_profile_research_fields3 = ProfileResearchField.create!()
+jobin_profile.profile_research_fields << jobin_profile_research_fields1 << jobin_profile_research_fields2 << jobin_profile_research_fields3
+beam.profile_research_fields << jobin_profile_research_fields1
+genrel.profile_research_fields << jobin_profile_research_fields2
+astro.profile_research_fields << jobin_profile_research_fields3
+
+# Prof. Scott Profile Research Fields
+scott_profile_research_fields1 = ProfileResearchField.create!()
+scott_profile_research_fields2 = ProfileResearchField.create!()
+scott_profile_research_fields3 = ProfileResearchField.create!()
+scott_profile.profile_research_fields << scott_profile_research_fields1 << scott_profile_research_fields2 << scott_profile_research_fields3
+hci.profile_research_fields << scott_profile_research_fields1
+se.profile_research_fields << scott_profile_research_fields2
+prob.profile_research_fields << scott_profile_research_fields3
 
 # Project and Team association seeds
 jar = Project.new(

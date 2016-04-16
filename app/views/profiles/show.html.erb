@@ -58,7 +58,7 @@
           :
         </div>
         <div class="col-lg-7 col-sm-12 col-xs-12">
-          <%= @profile.phone_number %>
+          <%= number_to_phone(@profile.phone_number, area_code: true) %>
         </div>
       </div>
   <% end %>
