@@ -14,10 +14,6 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  score: 1
-  money_received: 1
-
-two:
-  score: 1
-  money_received: 1
+contribution_1:
+  score: 100
+  money_received: 10000
