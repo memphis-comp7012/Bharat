@@ -185,6 +185,11 @@ hci.profile_research_fields << scott_profile_research_fields1
 se.profile_research_fields << scott_profile_research_fields2
 prob.profile_research_fields << scott_profile_research_fields3
 
+cs.profiles << chandra_profile << scott_profile
+math.profiles << megha_profile
+biology.profiles << lasya_profile
+physics.profiles << jobin_profile
+
 # Project and Team association seeds
 jar = Project.new(
     name: "J.A.R.V.I.S",

@@ -32,6 +32,10 @@
           <%= f.text_field :skills, class: 'form-control' %>
         </div>
         <div class="form-group">
+          <%= f.label :department_id, :class => 'col-lg-6 control-label' %><br>
+          <%= f.collection_select(:department_id, Department.all, :id, :name, {}, {class: "form-control custom"}) %>
+        </div>
+        <div class="form-group">
           <strong>Research Fields:<br></strong>
           <%= link_to 'Edit Research Fields', profile_research_fields_path, class: 'pull-right btn btn-default btn-xs' %>
           <% @profile.profile_research_fields.each_with_index do |profile_research_field, index| %>

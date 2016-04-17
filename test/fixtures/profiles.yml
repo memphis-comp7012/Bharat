@@ -18,20 +18,22 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  bio: MyText
+rc:
+  id: 1
+  first_name: Rakshit
+  last_name: Chowdary
+  bio: Test Bio
   education_level: 1
-  phone_number: 1
-  summary_of_projects: MyText
-  skills: 
+  phone_number: 8165006869
+  summary_of_projects: Test Summary of Projects
+  skills: Test Skills
 
-two:
-  first_name: MyString
-  last_name: MyString
-  bio: MyText
-  education_level: 1
-  phone_number: 1
-  summary_of_projects: MyText
-  skills: 
+jobin:
+  id: 2
+  first_name: Jobin
+  last_name: Sunny
+  bio: Test Bio 2
+  education_level: 2
+  phone_number: 1234567890
+  summary_of_projects: Test Summary of Projects for Jobin
+  skills: Test Skills for Jobin
