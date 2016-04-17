@@ -28,26 +28,26 @@
 #
 chandra: {
   email: cchllpll@memphis.edu,
-  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12, #topsecret
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
 }
 lasya: {
   email: svllbhnn@memphis.edu,
-  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
 }
 megha: {
   email: mvshisht@memphis.edu,
-  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
 }
 jobin: {
   email: jjsunny@memphis.edu,
-  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
 }
 scott: {
   email: Scott.Fleming@memphis.edu,
-  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
-  role: student
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
+  role: faculty
 }
