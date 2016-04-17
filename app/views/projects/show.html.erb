@@ -108,7 +108,7 @@
       <%= @project.difficulty_level.titleize %>
     </div>
   </div>
-  <% if @project.teams %>
+  <% if @project.teams.count > 0 %>
       <div class="row m-t-10">
         <div class="col-lg-4 col-sm-12 col-xs-12">
           <strong>Current Team:</strong>
