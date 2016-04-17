@@ -26,8 +26,28 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+chandra: {
+  email: cchllpll@memphis.edu,
+  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12, #topsecret
+  role: student
+}
+lasya: {
+  email: svllbhnn@memphis.edu,
+  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  role: student
+}
+megha: {
+  email: mvshisht@memphis.edu,
+  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  role: student
+}
+jobin: {
+  email: jjsunny@memphis.edu,
+  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  role: student
+}
+scott: {
+  email: Scott.Fleming@memphis.edu,
+  encrypted_password: $2a$10$oRpQBGZya.MlWbnKmC8Ss.df5LfUyrvgWy/KLiQqD03lyy/vrwQ12,
+  role: student
+}
