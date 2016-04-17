@@ -20,20 +20,12 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  status: 1
-  description: MyString
-  start_date: 2016-04-06
-  end_date: 2016-04-06
-  funding: 9.99
+ megha:
+  name: Megha
+  status: 0
+  description: Test check 
+  start_date: <%= Time.now %>
+  end_date: <%= Time.now+30.day %>
+  funding: 99.90
   difficulty_level: 1
 
-two:
-  name: MyString
-  status: 1
-  description: MyString
-  start_date: 2016-04-06
-  end_date: 2016-04-06
-  funding: 9.99
-  difficulty_level: 1
