@@ -53,7 +53,7 @@
                     <% if team_member.user.profile.first_name %>
                         <td><%= team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name %>
                         <td>
-                          <%= link_to raw('<i class="fa fa-trash"></i> &nbsp;&nbsp;Remove'), remove_user_team_path(@project, :user_id => team_member.user.id), :method => :delete, class: 'btn btn-danger btn-sm' %>
+                          <%= link_to raw('<i class="fa fa-trash"></i> &nbsp;&nbsp;Remove'), remove_user_team_path(@project, :user_id => team_member.user.id), data: {confirm: 'Are you sure?'}, :method => :delete, class: 'btn btn-danger btn-sm' %>
                         </td>
                     <% end %>
                   </tr>
