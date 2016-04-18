@@ -13,35 +13,25 @@ team3 = Team.create!()
 team4 = Team.create!()
 team5 = Team.create!()
 
-# Contribution seeds
-contribution1 = Contribution.new :score => 50, money_received: 5000
-contribution2 = Contribution.new :score => 100, money_received: 10000
-contribution3 = Contribution.new :score => -100, money_received: 0
-contribution4 = Contribution.new :score => 0, money_received: 0
-contribution5 = Contribution.new :score => 0, money_received: 0
-
 chandra = User.new :email => 'cchllpll@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
-chandra.teams << team1
-chandra.contributions << contribution3
+#chandra.teams << team1 << team2 << team5
 chandra.save!
 
 lasya = User.new :email => 'svllbhnn@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
-lasya.teams << team1
-lasya.teams << team2
+#lasya.teams << team4 << team5 << team3
 lasya.save!
 
 megha = User.new :email => 'mvshisht@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
-megha.teams << team3
+#megha.teams << team3 << team4
 megha.save!
 
 jobin = User.new :email => 'jjsunny@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'student'
-jobin.contributions << contribution1
-jobin.teams << team1
+jobin.teams << team3
 jobin.save!
 
 scott = User.new :email => 'Scott.Fleming@memphis.edu', :password => 'topsecret', :password_confirmation => 'topsecret', :role => 'faculty'
-scott.teams << team4 << team1 << team2
-scott.contributions << contribution2
+scott.teams << team1 << team2 << team4 << team5
+#scott.contributions << contribution3 << contribution5
 scott.save!
 
 # Department seeds
@@ -193,79 +183,110 @@ physics.profiles << jobin_profile
 # Project and Team association seeds
 jar = Project.new(
     name: "J.A.R.V.I.S",
-    status: 'in_progress',
+    status: 'not_started',
     description: "This has not started",
-    start_date: "2016-04-10",
-    end_date: "2016-04-20",
+    start_date: Time.now+1.day,
+    end_date: Time.now+90.day,
     funding: 2000,
     difficulty_level: 'easy'
 )
 jar.department = cs
 jar.user = chandra
-jar.teams << team1 << team2
+jar.teams << team2
 jar.save!
 
 se = Project.new(
     name: "Information Foraging in Software Engineering",
     status: 'in_progress',
     description: "This is a project on Information Foraging ",
-    start_date: "2016-05-10",
-    end_date: "2017-06-20",
+    start_date: Time.now+5.day,
+    end_date: Time.now+90.day,
     funding: 10000,
     difficulty_level: 'medium')
 se.department = cs
 se.user = chandra
-se.teams << team3 << team2
+#se.contribution = contribution1
+#se.teams << team3 << team2 << team1 << team5 << team3
 se.save!
 
 track = Project.new(
     name: "Conference Tracking System",
     status: 'not_started',
     description: "Project on Conference tracking System",
-    start_date: "2016-06-10",
-    end_date: "2017-07-20",
+    start_date: Time.now+10.day,
+    end_date: Time.now+190.day,
     funding: 6000,
     difficulty_level: 'hard')
 track.department = math
 track.user = lasya
-track.teams << team4 << team3
+#track.contribution = contribution2
+track.teams << team1
 track.save!
 
 smoke = Project.new(
     name: "Smoke Abstinence",
     status: 'on_hold',
     description: "A project on Smoke Abstinence",
-    start_date: "2016-08-10",
-    end_date: "2017-09-20",
+    start_date: Time.now+10.day,
+    end_date: Time.now+100.day,
     funding: 5000,
     difficulty_level: 'easy')
 smoke.department = math
 smoke.user = lasya
-smoke.teams << team1
+#smoke.teams << team5
 smoke.save!
 
 authen = Project.new(
     name: "Authentication Framework",
     status: 'complete',
     description: "This is a project on Authentication Framework",
-    start_date: "2016-10-10",
-    end_date: "2017-11-20",
+    start_date: Time.now+4.day,
+    end_date: Time.now+80.day,
     funding: 6200,
     difficulty_level: 'hard')
+
+authen.teams << team5
 authen.department = biology
-authen.user = jobin
+authen.user = megha
 authen.save!
+
 
 genetic = Project.new(
     name: "Tsp problem",
     status: 'complete',
     description: "This is a project on TSP using genetic",
-    start_date: "2016-11-10",
-    end_date: "2017-09-20",
+    start_date: Time.now+20.day,
+    end_date: Time.now+90.day,
     funding: 6200,
     difficulty_level: 'hard')
-genetic.teams << team4 << team2
-genetic.contribution = contribution1
+genetic.teams << team4 << team3
 genetic.department = biology
-genetic.user = lasya
+genetic.user = chandra
 genetic.save!
+
+
+# Contribution seeds
+contribution1 = Contribution.new :score => 50, money_received: 5000
+contribution1.user = megha
+contribution1.project = smoke
+contribution1.save!
+
+contribution2 = Contribution.new :score => 100, money_received: 10000
+contribution2.user = jobin
+contribution2.project = authen
+contribution2.save!
+
+contribution3 = Contribution.new :score => -10, money_received: 0
+contribution3.user = scott
+contribution3.project = genetic
+contribution3.save!
+
+contribution4 = Contribution.new :score => -50, money_received: 0
+contribution4.user = lasya
+contribution4.project = authen
+contribution4.save!
+
+contribution5 = Contribution.new :score => -100, money_received: 0
+contribution5.user = scott
+contribution5.project = jar
+contribution5.save!

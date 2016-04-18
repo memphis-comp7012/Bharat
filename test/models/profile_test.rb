@@ -24,87 +24,87 @@ class ProfileTest < ActiveSupport::TestCase
   # end
 
   test "normal profile should be valid" do
-    rc = profiles(:rc)
-    assert rc.valid?
+    lasya = profiles(:lasya)
+    assert lasya.valid?
   end
 
   test "profile with nil first name should be invalid" do
-    rc = profiles(:rc)
-    rc.first_name = nil
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.first_name = nil
+    assert lasya.invalid?
   end
 
   test "profile with empty first name should be invalid" do
-    rc = profiles(:rc)
-    rc.first_name = ''
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.first_name = ''
+    assert lasya.invalid?
   end
 
   test "profile with whitespace first name should be invalid" do
-    rc = profiles(:rc)
-    rc.first_name = '              '
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.first_name = '              '
+    assert lasya.invalid?
   end
 
   test "profile with first name length greater than 225 should be invalid" do
-    rc = profiles(:rc)
-    rc.first_name = ''
+    lasya = profiles(:lasya)
+    lasya.first_name = ''
     for i in 1..230 do 
-      rc.first_name = rc.first_name+'a'
+      lasya.first_name = lasya.first_name+'a'
     end
-    assert rc.invalid?
+    assert lasya.invalid?
   end
 
   test "profile with nil last name should be invalid" do
-    rc = profiles(:rc)
-    rc.last_name = nil
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.last_name = nil
+    assert lasya.invalid?
   end
 
   test "profile with empty last name should be invalid" do
-    rc = profiles(:rc)
-    rc.last_name = ''
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.last_name = ''
+    assert lasya.invalid?
   end
 
 
   test "profile with whitespace last name should be invalid" do
-    rc = profiles(:rc)
-    rc.last_name = '               '
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.last_name = '               '
+    assert lasya.invalid?
   end
 
   test "profile with last name length greater than 225 should be invalid" do
-    rc = profiles(:rc)
-    rc.last_name = ''
+    lasya = profiles(:lasya)
+    lasya.last_name = ''
     for i in 1..230 do 
-      rc.last_name = rc.last_name+'a'
+      lasya.last_name = lasya.last_name+'a'
     end
-    assert rc.invalid?
+    assert lasya.invalid?
   end
 
   test "profile with empty phone number should be invalid" do
-    rc = profiles(:rc)
-    rc.phone_number = ''
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.phone_number = ''
+    assert lasya.invalid?
   end
 
   test "profile with 11 digit phone number should be invalid" do
-    rc = profiles(:rc)
-    rc.phone_number = 12345678900
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.phone_number = 12345678900
+    assert lasya.invalid?
   end
 
   test "profile with nil education level should be invalid" do
-    rc = profiles(:rc)
-    rc.education_level = nil
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.education_level = nil
+    assert lasya.invalid?
   end
 
   test "profile with empty education level should be invalid" do
-    rc = profiles(:rc)
-    rc.education_level = ''
-    assert rc.invalid?
+    lasya = profiles(:lasya)
+    lasya.education_level = ''
+    assert lasya.invalid?
   end
 
   test "profile education level enum should have right indices" do

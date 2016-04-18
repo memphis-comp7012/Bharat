@@ -82,7 +82,10 @@ class ProjectsController < ApplicationController
   def destroy
     authorize
 
+    project_id = params[:id]
     @project.destroy
+    Team.where("project_id == ?", project_id).destroy_all
+
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }

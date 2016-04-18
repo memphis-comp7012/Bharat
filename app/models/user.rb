@@ -21,6 +21,7 @@
 
 
 
+
 class User < ActiveRecord::Base
   # BE CAREFUL: Don't change the existing order, add before admin if you add new roles
   # last role must be admin always
@@ -32,25 +33,8 @@ class User < ActiveRecord::Base
          :registerable,
          :recoverable,
          :rememberable,
-         :trackable
-  #, :validatable  -> Commented out this default to allow custom validations
-
-
-  # Model validations
-  validates :email,
-            presence: true,
-            uniqueness: true,
-            format: {with: Devise.email_regexp},
-            if: :email_changed?
-
-  validates :password,
-            presence: true,
-            length: {in: Devise.password_length},
-            if: :password_required?
-
-  validates :password_confirmation,
-            presence: true,
-            if: :password_required?
+         :trackable,
+         :validatable
 
   validates :role,
             presence: true,
@@ -63,19 +47,6 @@ class User < ActiveRecord::Base
   belongs_to :profile
   has_many :teams
   has_many :contributions
-
-  protected
-
-  # Checks whether a password is needed or not. For validations only.
-  # Passwords are always required if it's a new record, or if the password
-  # or confirmation are being set somewhere.
-  def password_required?
-    !persisted? || !password.nil? || !password_confirmation.nil?
-  end
-
-  def email_required?
-    true
-  end
 
 end
 

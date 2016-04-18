@@ -27,14 +27,28 @@
 # below each fixture, per the syntax in the comments below
 #
 
-rc:
-  email: rc@memphis.edu
-  encrypted_password: topsecret
+chandra:
+  email: cchllpll@memphis.edu,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
   profile_id: 1
 
-
-jobin:
-  email: jobin@memphis.edu
-  encrypted_password: topsecret
+lasya: 
+  email: svllbhnn@memphis.edu,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
   role: student
+
+megha: 
+  email: mvshisht@memphis.edu,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
+  role: student
+
+jobin: 
+  email: jjsunny@memphis.edu,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
+  role: student
+
+scott:
+  email: Scott.Fleming@memphis.edu,
+  encrypted_password:  <%= Devise::Encryptor.digest(User, "topsecret") %>,
+  role: faculty

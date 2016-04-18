@@ -21,6 +21,8 @@
 
 
 
+
+
 class Project < ActiveRecord::Base
   include Filterable
 
@@ -42,10 +44,10 @@ class Project < ActiveRecord::Base
             presence: true,
             length: { maximum: 3000 }
   validates :start_date,
-            #date: { after_or_equal_to: Proc.new { Time.now - 1.day}},
+            date: { after_or_equal_to: Proc.new { Time.now-1.day }},
             presence: true
   validates :end_date,
-            #date: { after: :start_date},
+            date: { after: :start_date},
             presence: true
   validates :funding,
             numericality: { greater_than_or_equal_to: 0},

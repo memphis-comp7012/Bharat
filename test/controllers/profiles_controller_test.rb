@@ -2,10 +2,10 @@ require 'test_helper'
 
 class ProfilesControllerTest < ActionController::TestCase
   setup do
-  	@user = users(:rc)
-  	@user2 = users(:jobin)
-    @profile = profiles(:rc)
-    @profile2 = profiles(:jobin)
+  	@user = users(:chandra)
+  	@user2 = users(:lasya)
+    @profile = profiles(:chandra)
+    @profile2 = profiles(:lasya)
   end
 
   test "should get index" do
