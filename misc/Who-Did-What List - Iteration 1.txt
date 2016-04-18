@@ -1,0 +1,148 @@
+Video Link: https://youtu.be/nIUzqrDyW6U
+
+Who-Did-What List for Iteration 1:
+
+Feature # 1
+	Name of the Feature: Setup UI layouts
+	Username: cchllpll
+	Timestamp: 00:00
+	Feature Type: New
+
+Feature # 2
+	Name of the Feature: Register and Modify account
+	Username: cchllpll
+	Timestamp: 00:20
+	Feature Type: New
+
+Feature # 3
+	Name of the Feature: Login
+	Username: cchllpll
+	Timestamp: 02:06
+	Feature Type: New
+
+Feature # 4
+	Name of the Feature: logout
+	Username: cchllpll
+	Timestamp: 01:29
+	Feature Type: New
+	
+Feature # 5
+	Name of the Feature: Dashboard page
+	Username: cchllpll
+	Timestamp: 02:15
+	Feature Type: New
+
+Feature # 6
+	Name of the Feature: Forgot password
+	Username: cchllpll
+	Timestamp: 01:35
+	Feature Type: New
+	
+Feature # 7
+	Name of the Feature: Model Classes
+	Username: cchllpll
+	Timestamp: 06:39
+	Feature Type: New
+
+Feature # 8
+	Name of the Feature: Create project
+	Username: mvshisht
+	Timestamp: 03:40
+	Feature Type: New
+	
+Feature # 9
+	Name of the Feature: Update project
+	Username: mvshisht
+	Timestamp: 04:46
+	Feature Type: New
+	
+
+Feature # 10
+	Name of the Feature: View project / My Projects
+	Username: mvshisht
+	Timestamp: 03:00	
+	Feature Type: New
+	
+Feature # 11
+	Name of the Feature: Delete project
+	Username: mvshisht
+	Timestamp: 05:17
+	Feature Type: New
+	
+Feature # 12
+	Name of the Feature: Model Classes
+	Username: mvshisht
+	Timestamp: 06:39
+	Feature Type: New
+
+Feature # 13
+	Name of the Feature: View Profile	
+	Username: jjsunny
+	Timestamp: 00:53
+	Feature Type: New
+
+Feature # 14
+	Name of the Feature: New Profile
+	Username: jjsunny
+	Timestamp: 00:40
+	Feature Type: New
+
+Feature # 15
+	Name of the Feature: Update Profile
+	Username: jjsunny
+	Timestamp: 1:00
+	Feature Type: New
+
+Feature # 16
+	Name of the Feature: Add Profile Research Fields
+	Username: jjsunny
+	Timestamp: 1:08
+	Feature Type: New
+
+Feature # 17
+	Name of the Feature: Search Project
+	Username: jjsunny
+	Timestamp: 02:33
+	Feature Type: New
+	
+Feature # 18
+	Name of the Feature: Model Classes
+	Username: jjsunny
+	Timestamp: 06:39
+	Feature Type: New
+
+Feature # 19
+	Name of the Feature: Add Team Member
+	Username: svllbhnn
+	Timestamp: 04:48
+	Feature Type: New
+
+Feature # 20
+	Name of the Feature: Remove Team Member
+	Username: svllbhnn
+	Timestamp: 05:00
+	Feature Type: New
+
+Feature # 21
+	Name of the Feature: Complete Project
+	Username: svllbhnn
+	Timestamp: 05:27
+	Feature Type: New
+
+Feature # 22
+	Name of the Feature: Award Contribution / My contributions
+	Username: svllbhnn
+	Timestamp: 05:30
+	Feature Type: New
+	
+Feature # 23
+	Name of the Feature: My Contributions
+	Username: svllbhnn
+	Timestamp: 6:00
+	Feature Type: New
+	
+Feature # 24
+	Name of the Feature: Model CLasses
+	Username: svllbhnn
+	Timestamp: 06:39
+	Feature Type: New

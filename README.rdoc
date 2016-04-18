@@ -1,28 +1,20 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This provide necessary instructions to run iHunt App
 
-Things you may want to cover:
+Things you need to do before running rails server:
+* Get the latest from master branch
+* Run 'bundle install'
+* Run 'rake db:migrate:reset db:seed'
+* Run 'rails s -b 0.0.0.0'
 
-* Ruby version
+Sample seeds implemented to test application features:
+* username: cchllpll@memphis.edu, password: topsecret
+* username: mvshisht@memphis.edu, password: topsecret
+* username: jjsunny@memphis.edu, password: topsecret
+* username: svllbhnn@memphis.edu, password: topsecret
+* username: scott.fleming@memphis.edu, password: topsecret
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+Misc:
+* Iteration 1 Video Link: https://youtu.be/nIUzqrDyW6U
+* Who-Did-What List for iteration 1 is located in misc folder as Who-Did-What List - Iteration 1.txt
