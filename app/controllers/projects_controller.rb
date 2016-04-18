@@ -36,8 +36,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     authorize
-
+    @team = Team.new
     @departments = Department.all
+    @users = User.all
   end
 
   # POST /projects

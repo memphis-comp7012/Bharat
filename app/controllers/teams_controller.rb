@@ -1,6 +1,4 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
-
   # GET /teams
   # GET /teams.json
   def index
@@ -15,10 +13,16 @@ class TeamsController < ApplicationController
   # GET /teams/new
   def new
     @team = Team.new
-  end
 
-  # GET /teams/1/edit
-  def edit
+    @existing_team = Team.where('project_id == ?', params[:project_id]).pluck(:user_id)
+
+
+    if (@existing_team.length > 0)
+      @users = User.where('id NOT IN (?)', @existing_team)
+    else
+      @users = User.all
+    end
+
   end
 
   # POST /teams
@@ -26,9 +30,11 @@ class TeamsController < ApplicationController
   def create
     @team = Team.new(team_params)
 
+    @project = Project.where("project_id == ?", @team.project.id)
+
     respond_to do |format|
       if @team.save
-        format.html { redirect_to @team, notice: 'Team was successfully created.' }
+        format.html { redirect_to edit_project_path(@team.project.id), notice: 'Team was successfully added.' }
         format.json { render :show, status: :created, location: @team }
       else
         format.html { render :new }
@@ -37,38 +43,23 @@ class TeamsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /teams/1
-  # PATCH/PUT /teams/1.json
-  def update
-    respond_to do |format|
-      if @team.update(team_params)
-        format.html { redirect_to @team, notice: 'Team was successfully updated.' }
-        format.json { render :show, status: :ok, location: @team }
-      else
-        format.html { render :edit }
-        format.json { render json: @team.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /teams/1
   # DELETE /teams/1.json
   def destroy
-    @team.destroy
+    @project = Project.where("project_id == ?", params[:project_id])
+
+    Team.where('user_id == ? and project_id == ?',params[:user_id], params[:project_id]).destroy_all
     respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully destroyed.' }
+      format.html { redirect_to edit_project_path(params[:project_id]), notice: 'Team member was successfully removed.' }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_team
-      @team = Team.find(params[:id])
-    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.fetch(:team, {})
+      params.require(:team).permit(:user_id, :project_id)
     end
 end

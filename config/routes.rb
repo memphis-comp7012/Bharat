@@ -8,6 +8,9 @@ Rails.application.routes.draw do
     get 'contributions/add/project/:project_id/user/:user_id' => 'contributions#add', as: 'add_contribution_to_project'
     post 'contributions/add/project/:project_id/user/:user_id' => 'contributions#save', as: 'save_contribution_to_project'
     post '/profile_research_fields/add/:research_field', to: 'profile_research_fields#add', as: 'profile_research_fields_add'
+    get 'project/team/:project_id' => 'teams#new', as: 'add_user_to_project'
+    post 'team/project/:project_id/user/:user_id' => 'teams#create', as: 'add_user_team'
+    delete 'team/project/remove/:project_id/user/:user_id' => 'teams#destroy', as: 'remove_user_team'
 
     get 'search/projects/' => 'projects#search'
     post 'search/projects/' => 'projects#search', as: 'search_interesting_projects'

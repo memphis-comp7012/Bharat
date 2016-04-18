@@ -1,5 +1,32 @@
-<h1>New Team</h1>
+<h1>Add Team Member</h1>
+<%= form_for(@team) do |f| %>
+    <% if @team.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@team.errors.count, "error") %> prohibited this team from being saved:</h2>
 
-<%= render 'form' %>
+          <ul>
+            <% @team.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-<%= link_to 'Back', teams_path %>
+    <div class="form-group">
+      Member Name: <br>
+      <select name="team[user_id]" class="form-control custom">
+        <% @users.each do |user| %>
+            <% if user.profile %>
+                <option value="<%= user.id %>">
+                  <%= user.profile.first_name + ' ' + user.profile.last_name %></option>
+            <% end %>
+        <% end %>
+      </select>
+    </div>
+
+    <%= f.hidden_field :project_id, :value => params[:project_id] %>
+
+    <div class="actions">
+      <%= f.submit 'Add Team Member', class: 'btn btn-primary'%>
+    </div>
+<% end %>
