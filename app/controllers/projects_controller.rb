@@ -66,6 +66,7 @@ class ProjectsController < ApplicationController
     authorize
 
     @project.user_id =  current_user.id
+    @departments = Department.all
 
     respond_to do |format|
       if @project.update(project_params)

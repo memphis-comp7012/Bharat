@@ -1,6 +1,75 @@
 <h1>Editing Project</h1>
 
-<%= render 'form' %>
+<div class="authform">
+  <%= form_for(@project) do |f| %>
+      <%= display_error_messages(@project) %>
+      <fieldset>
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :department %><br>
+          <% departments = options_from_collection_for_select(@departments, 'id', 'name') %>
+          <%= f.select :department_id, departments, {:prompt => true}, {:class => 'form-control custom'} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :status %><br>
+          <%= f.select :status, Project.statuses.keys.map { |status| [status.titleize, status] }, {}, class: 'form-control custom' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description %><br>
+          <%= f.text_field :description, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :start_date %><br>
+          <%= f.date_select :start_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :end_date %><br>
+          <%= f.date_select :end_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :funding %><br>
+          <div class="input-group col-lg-5">
+            <span class="input-group-addon">$</span>
+            <%= f.number_field :funding, class: 'form-control' %>
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :difficulty_level %><br>
+          <%= f.select :difficulty_level,
+                       Project.difficulty_levels.keys.map { |level| [level.titleize, level] }, {}, {:class => "form-control custom"} %>
+        </div>
+        <% if (@project.name != nil) %>
+            <h1>Team Members
+              <%= link_to raw('<i class="fa fa-plus-circle"></i> &nbsp;&nbsp;Add'), add_user_to_project_path(@project), :method => :get, class: 'btn btn-success btn-sm' %>
+            </h1>
+
+            <table class="table table-striped col-lg-6">
+              <tbody>
+              <% @project.teams.each do |team_member| %>
+                  <tr>
+                    <% if team_member.user.profile.first_name %>
+                        <td><%= team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name %>
+                        <td>
+                          <%= link_to raw('<i class="fa fa-trash"></i> &nbsp;&nbsp;Remove'), remove_user_team_path(@project, :user_id => team_member.user.id), data: {confirm: 'Are you sure?'}, :method => :delete, class: 'btn btn-danger btn-sm' %>
+                        </td>
+                    <% end %>
+                  </tr>
+              <% end %>
+        <% end %>
+
+        </tbody>
+        </table>
+
+        <%= f.submit 'Submit', :class => 'btn btn-lg btn-primary' %>
+      </fieldset>
+
+  <% end %>
+</div>
 
 <nav>
   <ul class="pager">

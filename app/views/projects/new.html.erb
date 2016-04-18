@@ -1,6 +1,57 @@
 <h1>New Project</h1>
 
-<%= render 'form' %>
+<div class="authform">
+  <%= form_for(@project) do |f| %>
+      <%= display_error_messages(@project) %>
+      <fieldset>
+        <div class="form-group">
+          <%= f.label :name %><br>
+          <%= f.text_field :name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :department %><br>
+          <% departments = options_from_collection_for_select(@departments, 'id', 'name') %>
+          <%= f.select :department_id, departments, {:prompt => true}, {:class => 'form-control custom'} %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :status %><br>
+          <%= f.select :status, Project.statuses.keys.map { |status| [status.titleize, status] }, {}, class: 'form-control custom' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :description %><br>
+          <%= f.text_field :description, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :start_date %><br>
+          <%= f.date_select :start_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :end_date %><br>
+          <%= f.date_select :end_date, {}, {:class => "form-control custom"} %>
+        </div>
+        <div class="form-group">
+          <%= f.label :funding %><br>
+          <div class="input-group col-lg-5">
+            <span class="input-group-addon">$</span>
+            <%= f.number_field :funding, class: 'form-control' %>
+            <span class="input-group-addon">.00</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <%= f.label :difficulty_level %><br>
+          <%= f.select :difficulty_level,
+                       Project.difficulty_levels.keys.map { |level| [level.titleize, level] }, {}, {:class => "form-control custom"} %>
+        </div>
+
+        </tbody>
+        </table>
+
+        <%= f.submit 'Submit', :class => 'btn btn-lg btn-primary' %>
+      </fieldset>
+
+  <% end %>
+</div>
 
 <nav>
   <ul class="pager">
