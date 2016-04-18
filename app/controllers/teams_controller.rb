@@ -18,7 +18,7 @@ class TeamsController < ApplicationController
 
 
     if (@existing_team.length > 0)
-      @users = User.where('id NOT IN (?)', @existing_team)
+      @users = User.where('id NOT IN (?) and id != ?', @existing_team, current_user.id)
     else
       @users = User.all
     end
