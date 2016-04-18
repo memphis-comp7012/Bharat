@@ -96,7 +96,8 @@
       <%= @profile.department.name %>
     </div>
   </div>
-
+ 
+ <% if @profile.profile_research_fields %>
  <div class="row m-t-10">
     <div class="col-lg-4 col-sm-12 col-xs-12"> 
       <strong>Research Fields</strong>
@@ -105,12 +106,11 @@
       :
     </div>
     <div class="col-lg-7 col-sm-12 col-xs-12">
-      <% @profile.profile_research_fields.each do |profile_research_field| %>
-          <% if profile_research_field.profile == current_user.profile %>
-              <%= profile_research_field.research_field.category %><br>
-          <% end %>
+      <% @profile.profile_research_fields.each_with_index do |profile_research_field, index| %>
+        <%= profile_research_field.research_field.category %><% if index != @profile.profile_research_fields.length - 1 %>, <% end %>
       <% end %>
     </div>
   </div>
+  <% end %>
 </div>
 </div>
