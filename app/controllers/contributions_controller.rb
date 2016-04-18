@@ -18,7 +18,7 @@ class ContributionsController < ApplicationController
   end
 
   def complete
-    @contributions = Contribution.find(params[:project_id])
+    @contributions = Contribution.where('project_id == ?', params[:project_id])
     @project = Project.find(params[:project_id])
     @teams = Team.where('project_id == ?', params[:project_id])
   end

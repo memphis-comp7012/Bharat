@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1 class="col-lg-10">View Project
-  <% if @project.user.id == current_user.id %>
+  <% if @project.user.id == current_user.id && @project.status != 'complete' %>
       <%= link_to 'Mark Project as Complete', project_contributions_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
   <% end %>
 </h1>

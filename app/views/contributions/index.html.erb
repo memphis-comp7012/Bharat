@@ -50,4 +50,6 @@
 
     </div>
 <% end %>
-
+<% if @contributions.length == 0 %>
+<h3>No such contributions found!</h3>
+<% end %>
