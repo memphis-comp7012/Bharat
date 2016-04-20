@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409214140) do
+ActiveRecord::Schema.define(version: 20160420190218) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer  "score"
@@ -91,6 +91,19 @@ ActiveRecord::Schema.define(version: 20160409214140) do
   end
 
   add_index "research_fields", ["department_id"], name: "index_research_fields_on_department_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "status"
+    t.integer  "assigned_user"
+    t.date     "due_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "user_id"
+  end
+
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "teams", force: :cascade do |t|
     t.datetime "created_at", null: false

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :profile_research_fields
     resources :profiles
     resources :project_research_fields
+    resources :tasks
   end
 
   devise_for :users, controllers: { registrations: "registrations" }
