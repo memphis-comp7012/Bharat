@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160420190218) do
+ActiveRecord::Schema.define(version: 20160429194839) do
 
   create_table "contributions", force: :cascade do |t|
     t.integer  "score"
@@ -82,6 +82,18 @@ ActiveRecord::Schema.define(version: 20160420190218) do
 
   add_index "projects", ["department_id"], name: "index_projects_on_department_id"
   add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "type"
+    t.integer  "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "project_id"
+  end
+
+  add_index "requests", ["project_id"], name: "index_requests_on_project_id"
+  add_index "requests", ["user_id"], name: "index_requests_on_user_id"
 
   create_table "research_fields", force: :cascade do |t|
     t.string   "category"
