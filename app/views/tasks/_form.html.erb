@@ -1,37 +1,38 @@
-<%= form_for(@task) do |f| %>
-  <% if @task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div class="authform">
+  <%= form_for(@task) do |f| %>
+      <%= display_error_messages(@task) %>
 
-      <ul>
-      <% @task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :description %>
+        <%= f.text_field :description, class: 'form-control' %>
+      </div>
+      <div class="form-group">
+        <%= f.label :status %>
+        <%= f.select :status,
+                     Task.task_statuses.keys.map { |status| [status.titleize, status] }, {}, {:class => "form-control custom"} %>
+      </div>
+      <div class="form-group">
+        <%= f.label :assigned_user %><br>
+        <select name="task[assigned_user]" class="form-control custom">
+          <% @users = User.all %>
+          <% @users.each do |user| %>
+              <% if user.profile %>
+                  <option value="<%= user.id %>">
+                    <%= user.profile.first_name + ' ' + user.profile.last_name %></option>
+              <% end %>
+          <% end %>
+        </select>
+      </div>
+      <div class="form-group">
+        <%= f.label :due_date %><br>
+        <%= f.date_select :due_date, {}, {:class => "form-control custom"} %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Submit', :class => 'btn btn-lg btn-primary' %>
+      </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.number_field :status %>
-  </div>
-  <div class="field">
-    <%= f.label :assigned_user %><br>
-    <%= f.number_field :assigned_user %>
-  </div>
-  <div class="field">
-    <%= f.label :due_date %><br>
-    <%= f.date_select :due_date %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>

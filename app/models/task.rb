@@ -9,12 +9,12 @@ class Task < ActiveRecord::Base
             presence: true,
             length: {maximum: 3000}
 
-  validates :status,
-            presence: true,
-            inclusion: {
-                in: task_statuses.keys,
-                message: "must be either " + task_statuses.keys.join(" or ")
-            }
+  # validates :status,
+  #           presence: true,
+  #           inclusion: {
+  #               in: task_statuses.keys,
+  #               message: "must be either " + task_statuses.keys.join(" or ")
+  #           }
 
   validates :assigned_user,
             presence: true,
