@@ -1,29 +1,74 @@
 <p id="notice"><%= notice %></p>
+<h1 class="col-lg-10">View Task </h1>
 
-<p>
-  <strong>Name:</strong>
-  <%= @task.name %>
-</p>
+<div class="jumbotron box m-t-10 col-lg-9">
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.name %>
+    </div>
+  </div>
 
-<p>
-  <strong>Status:</strong>
-  <%= @task.status %>
-</p>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Description</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.description %>
+    </div>
+  </div>
 
-<p>
-  <strong>Assigned user:</strong>
-  <%= @task.assigned_user %>
-</p>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Status</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.status %>
+    </div>
+  </div>
 
-<p>
-  <strong>Due date:</strong>
-  <%= @task.due_date %>
-</p>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Assigned user</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.assigned_user %>
+    </div>
+  </div>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Due date:</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.due_date %>
+    </div>
+  </div>
+</div>
+  <div class="clearfix"></div>
+  <nav class="col-lg-9">
+    <ul class="pager">
+
+      <li></li><%= link_to 'Edit', edit_task_path(@task) %> </li>
+      <li> <%= link_to 'Back', tasks_path %> </li>
+    </ul>
+  </nav>
+</div>

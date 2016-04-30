@@ -28,4 +28,5 @@ class Task < ActiveRecord::Base
             presence: true
 
   belongs_to :user
+  belongs_to :iteration
 end
