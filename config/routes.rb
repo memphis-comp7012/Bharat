@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :iterations
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
