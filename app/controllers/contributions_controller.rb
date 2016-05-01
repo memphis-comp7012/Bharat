@@ -102,8 +102,9 @@ class ContributionsController < ApplicationController
 
   def contribute
     @project = Project.find(params[:project_id])
-    @project.status = 3
-    format.html { redirect_to @project, notice: 'Project was successfully completed.' }
+    @project.status = :complete
+    @project.save!
+    redirect_to @project, notice: 'Project was successfully completed.'
   end
 
 
