@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
+    get '/project_research_fields/project/:project_id', to: 'project_research_fields#index', as: 'project_research_fields_index'
+    post '/project_research_fields/add/:research_field/project/:project_id', to: 'project_research_fields#add', as: 'project_research_fields_add'
     get 'contributions/project/:project_id' => 'contributions#contribute', as: 'submit_completion'
     get 'dashboard' => 'dashboard#index'
     get 'contributions/:project_id' => 'contributions#complete', as: 'project_contributions'

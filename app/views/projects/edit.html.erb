@@ -43,6 +43,16 @@
           <%= f.select :difficulty_level,
                        Project.difficulty_levels.keys.map { |level| [level.titleize, level] }, {}, {:class => "form-control custom"} %>
         </div>
+        <div class="form-group">
+          <h1>
+            Research Fields
+            <%= link_to raw('<i class="fa fa-plus-circle"></i> &nbsp;&nbsp;Add'), project_research_fields_index_path(@project), :method => :get, class: 'btn btn-success btn-sm' %>
+          </h1>
+          <% @project.project_research_fields.each_with_index do |project_research_field, index| %>
+              <%= project_research_field.research_field.category %><% if index != @project.project_research_fields.length-1%>, <% end %>
+          <% end %>
+        </div>
+
         <% if (@project.name != nil) %>
             <h1>Team Members
               <%= link_to raw('<i class="fa fa-plus-circle"></i> &nbsp;&nbsp;Add'), add_user_to_project_path(@project), :method => :get, class: 'btn btn-success btn-sm' %>
