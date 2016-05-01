@@ -66,4 +66,5 @@ class Project < ActiveRecord::Base
   has_many :project_research_fields
   has_one :contribution
   has_many :teams
+  has_many :requests
 end

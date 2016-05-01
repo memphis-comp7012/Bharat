@@ -4,6 +4,9 @@
   <% if @project.user.id == current_user.id && @project.status != 'complete' %>
       <%= link_to 'Mark Project as Complete', project_contributions_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
   <% end %>
+  <% if @project.user.id != current_user.id %>
+      <%= link_to 'Join Project', requests_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
+  <% end %>
 </h1>
 <div class="jumbotron box m-t-10 col-lg-9">
 
