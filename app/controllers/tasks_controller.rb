@@ -9,9 +9,10 @@ class TasksController < ApplicationController
     else
       @tasks = Task.where("user_id = ?", current_user.id)
     end
-    @tasks = @tasks.sort_by(&:created_at).reverse!
-    @tasks = @tasks.paginate(:page => params[:page], :per_page => 4)
     @total_tasks_count = @tasks.length
+
+    @tasks = @tasks.sort_by(&:created_at).reverse!
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 3)
   end
 
   # GET /tasks/1

@@ -198,6 +198,12 @@ iteration1 = Iteration.create!(name: "JARVIS Iteration One")
 iteration2 = Iteration.create!(name: "JARVIS Iteration Two")
 jar.iterations << iteration1 << iteration2
 
+creation_task1 = Task.create!(name: "Creation Task", description: "Create a Robot", status: 'in_progress', assigned_user: 5, due_date: Time.now+9.day, user_id: 1)
+authentication_task2 = Task.create!(name: "Authentication Task ", description: "Friends only should enter the House", status: 'in_progress', assigned_user: 5, due_date: Time.now+9.day, user_id: 1)
+security_task3 = Task.create!(name: "Security Task", description: "Keep the House secure", status: 'in_progress', assigned_user: 5, due_date: Time.now+10.day, user_id: 1)
+iteration1.tasks << creation_task1 << authentication_task2
+iteration2.tasks << security_task3
+
 jar.save!
 
 se = Project.new(
@@ -216,6 +222,14 @@ se.user = chandra
 iteration3 = Iteration.create!(name: "Information Foraging Iteration One")
 iteration4 = Iteration.create!(name: "Information Foraging Iteration Two")
 se.iterations << iteration3 << iteration4
+
+refactoring_task1 = Task.create!(name: "Refactoring", description: "Refactor the code to remove code smells", status: 'complete', assigned_user: 2, due_date: Time.now+3.day, user_id: 2)
+removeduplicate_task2 = Task.create!(name: "Remove Duplications", description: "For better functionality remove the duplications", status: 'in_progress', assigned_user: 2, due_date: Time.now+4.day, user_id: 2)
+testing_task3 = Task.create!(name: "Testing", description: "Test the code after development is done", status: 'not_started', assigned_user: 2, due_date: Time.now+6.day, user_id: 2)
+tasksetup_task4 = Task.create!(name: "Task Setup Environment", description: "Setup the environment for checking the duplications", status: 'on_hold', assigned_user: 2, due_date: Time.now+9.day, user_id: 2)
+iteration3.tasks << refactoring_task1 << tasksetup_task4
+iteration4.tasks << removeduplicate_task2 << testing_task3
+
 
 se.save!
 

@@ -12,34 +12,104 @@
     <% end %>
   </ul>
 </div>
-<table class="table table-striped m-t-25">
-  <thead>
-    <tr>
-      <th>Task Name</th>
-      <th>Iteration</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th>Assigned user</th>
-      <th>Due date</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
+<h3><%= @total_tasks_count != 0 ? ('Showing ' + pluralize(@total_tasks_count, 'task') + ' found:') : 'No Tasks found!' %> </h3>
 
-    <% @tasks.each do |task| %>
-      <tr>
-        <td><%= task.name %></td>
+<% @tasks.each do |task| %>
+    <div class="jumbotron box m-t-10 col-lg-12">
 
-        <td><%= task.description %></td>
-        <td><%= task.status %></td>
-        <td><%= task.assigned_user %></td>
-        <td><%= task.due_date %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Name</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Project Name</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.iteration.project.name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Iteration Name</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.iteration.name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Description</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.description %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Status</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.status.titleize %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Assigned user</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= User.find(task.assigned_user).profile.first_name + ' ' + User.find(task.assigned_user).profile.last_name %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Due date</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= task.due_date.to_formatted_s(:long_ordinal) %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+          <strong>Actions</strong>
+        </div>
+        <div class="col-lg-1 hidden-xs">
+          :
+        </div>
+        <div class="col-lg-7 col-sm-12 col-xs-12">
+          <%= link_to 'Show', task %>
+          <%= link_to 'Edit', edit_task_path(task) %>
+          <%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'} %>
+        </div>
+      </div>
+
+    </div>
+<% end %>
+
 <%= will_paginate @tasks, renderer: BootstrapPagination::Rails %>
