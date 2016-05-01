@@ -24,6 +24,7 @@
 
 
 
+
 class Project < ActiveRecord::Base
   include Filterable
 
@@ -67,4 +68,5 @@ class Project < ActiveRecord::Base
   has_one :contribution
   has_many :teams
   has_many :requests
+  has_many :iterations
 end
