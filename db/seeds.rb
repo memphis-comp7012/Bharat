@@ -193,6 +193,11 @@ jar = Project.new(
 jar.department = cs
 jar.user = chandra
 jar.teams << team2
+
+iteration1 = Iteration.create!(name: "JARVIS Iteration One")
+iteration2 = Iteration.create!(name: "JARVIS Iteration Two")
+jar.iterations << iteration1 << iteration2
+
 jar.save!
 
 se = Project.new(
@@ -207,6 +212,11 @@ se.department = cs
 se.user = chandra
 #se.contribution = contribution1
 #se.teams << team3 << team2 << team1 << team5 << team3
+
+iteration3 = Iteration.create!(name: "Information Foraging Iteration One")
+iteration4 = Iteration.create!(name: "Information Foraging Iteration Two")
+se.iterations << iteration3 << iteration4
+
 se.save!
 
 track = Project.new(
@@ -221,6 +231,11 @@ track.department = math
 track.user = lasya
 #track.contribution = contribution2
 track.teams << team1
+
+iteration5 = Iteration.create!(name: "Conference Tracking Iteration One")
+iteration6 = Iteration.create!(name: "Conference Tracking Iteration Two")
+track.iterations << iteration5 << iteration6
+
 track.save!
 
 smoke = Project.new(
@@ -234,6 +249,11 @@ smoke = Project.new(
 smoke.department = math
 smoke.user = lasya
 #smoke.teams << team5
+
+iteration7 = Iteration.create!(name: "Smoke Abstinence Iteration One")
+iteration8 = Iteration.create!(name: "Smoke Abstinence Iteration Two")
+smoke.iterations << iteration7 << iteration8
+
 smoke.save!
 
 authen = Project.new(
@@ -248,6 +268,11 @@ authen = Project.new(
 authen.teams << team5
 authen.department = biology
 authen.user = megha
+
+iteration9 = Iteration.create!(name: "Authentication Iteration One")
+iteration10 = Iteration.create!(name: "Authentication Iteration Two")
+authen.iterations << iteration9 << iteration10
+
 authen.save!
 
 
@@ -262,6 +287,11 @@ genetic = Project.new(
 genetic.teams << team4 << team3
 genetic.department = biology
 genetic.user = chandra
+
+iteration11 = Iteration.create!(name: "TSP Iteration One")
+iteration12 = Iteration.create!(name: "TSP Iteration Two")
+genetic.iterations << iteration11 << iteration12
+
 genetic.save!
 
 
