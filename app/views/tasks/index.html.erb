@@ -1,11 +1,22 @@
-<p id="notice"><%= notice %></p>
-
 <h1>My Tasks</h1>
+<div class="m-t-25">
+  <div class="pull-right">
+    <%= link_to 'Create New Task', new_task_path, class: 'btn btn-success btn-lg' %>
+  </div>
 
-<table class="table table-striped">
+  <ul class="nav nav-pills">
+    <li role="presentation" class="<%= (params[:status] == nil) ? '' : 'active' %>active"><a href="?">All</a></li>
+    <% Task.statuses.keys.map do |status| %>
+        <li role="presentation" class="<%= (params[:status] == status) ? 'active' : '' %>">
+          <a href="?status=<%= status %>"><%= status.titleize %></a></li>
+    <% end %>
+  </ul>
+</div>
+<table class="table table-striped m-t-25">
   <thead>
     <tr>
-      <th>Name</th>
+      <th>Task Name</th>
+      <th>Iteration</th>
       <th>Description</th>
       <th>Status</th>
       <th>Assigned user</th>
@@ -15,9 +26,11 @@
   </thead>
 
   <tbody>
+
     <% @tasks.each do |task| %>
       <tr>
         <td><%= task.name %></td>
+
         <td><%= task.description %></td>
         <td><%= task.status %></td>
         <td><%= task.assigned_user %></td>
@@ -29,7 +42,4 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Task', new_task_path %>
+<%= will_paginate @tasks, renderer: BootstrapPagination::Rails %>

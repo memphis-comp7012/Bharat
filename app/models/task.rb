@@ -1,5 +1,5 @@
 class Task < ActiveRecord::Base
-  enum task_status: [:not_started, :in_progress, :on_hold, :complete]
+  enum status: [:not_started, :in_progress, :on_hold, :complete]
 
   validates :name,
             length: {maximum: 225},
