@@ -100,6 +100,13 @@ class ContributionsController < ApplicationController
     end
   end
 
+  def contribute
+    @project = Project.find(params[:project_id])
+    @project.status = 3
+    format.html { redirect_to @project, notice: 'Project was successfully completed.' }
+  end
+
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_contribution

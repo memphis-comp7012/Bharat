@@ -108,6 +108,19 @@
       <%= @project.difficulty_level.titleize %>
     </div>
   </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Research field:</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+          :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <% @project.project_research_fields.each_with_index do |project_research_field, index| %>
+      <%= project_research_field.research_field.category %><% if index != @project.project_research_fields.length - 1 %>, <% end %>
+      <% end %>
+    </div>
+  </div>
   <% if @project.teams.count > 0 %>
       <div class="row m-t-10">
         <div class="col-lg-4 col-sm-12 col-xs-12">
@@ -116,16 +129,16 @@
         <div class="col-lg-1 hidden-xs">
           :
         </div>
-        <div class="col-lg-7 col-sm-12 col-xs-12">
-          <% @project.teams.each_with_index do |team_member, index| %>
-              <% if team_member.user.profile && team_member.user.profile != current_user.profile %>
-                  <%= link_to team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name, profile_path(team_member.user.profile) %>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+        <% @project.teams.each_with_index do |team_member, index| %>
+            <% if team_member.user.profile && team_member.user.profile != current_user.profile %>
+                <%= link_to team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name, profile_path(team_member.user.profile) %>
                   <% if index != @project.teams.length - 1 %>,
-                  <% end %>
-              <% end %>
-          <% end %>
-        </div>
+                <% end %>
+            <% end %>
+        <% end %>
       </div>
+    </div>
   <% end %>
 </div>
 
