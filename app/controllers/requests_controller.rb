@@ -4,7 +4,15 @@ class RequestsController < ApplicationController
   # GET /requests
   # GET /requests.json
   def index
-    @requests = Request.all
+    if params[:type]
+      @requests = Request.where("user_id = ? and type = ?", current_user.id, Request.request_types[params[:type]])
+    else
+      @requests = Request.where("user_id = ?", current_user.id)
+    end
+    @requests = @requests.sort_by(&:created_at).reverse!
+    @requests = @requests.paginate(:page => params[:page], :per_page => 5)
+
+    @total_requests_count = @requests.length
   end
 
   # GET /requests/1
@@ -45,8 +53,10 @@ class RequestsController < ApplicationController
     @request.type = Request.request_types[:join]
     @request.status = Request.request_statuses[:unapproved]
     @project = Project.find(params[:project_id])
+    # current user's join requests for this project
+    @current_user_requests = Request.where('user_id = ? and project_id = ? and type = ?', current_user.id, @project.id, 0)
 
-    if current_user.id == @project.user.id || current_user.requests.count > 0 #Don't allow founding member or other users make more than one at any cost
+    if current_user.id == @project.user.id || @current_user_requests.length > 0 #Don't allow founding member or other users make more join for the same project than one at any cost
       render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     else
       respond_to do |format|

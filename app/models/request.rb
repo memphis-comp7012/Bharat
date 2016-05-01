@@ -14,4 +14,10 @@ class Request < ActiveRecord::Base
                 in: Request.request_statuses.values,
                 message: "must be either " + request_statuses.keys.join(" or ")
             }
+
+  private
+  # to avoid the default ruby issue with type
+  def self.inheritance_column
+    nil
+  end
 end
