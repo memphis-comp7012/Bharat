@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     resources :project_research_fields
     resources :tasks
     resources :requests
+    post 'requests/project/:project_id/join' => 'requests#join', as: 'join_project'
+
   end
 
   devise_for :users, controllers: { registrations: "registrations" }

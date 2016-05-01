@@ -1,11 +1,13 @@
-<p id="notice"><%= notice %></p>
-
-<h1 class="col-lg-10">View Project
+<h1 class="col-lg-9">View Project
   <% if @project.user.id == current_user.id && @project.status != 'complete' %>
       <%= link_to 'Mark Project as Complete', project_contributions_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
   <% end %>
-  <% if @project.user.id != current_user.id %>
-      <%= link_to 'Join Project', requests_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
+  <% if @project.user.id != current_user.id && @project.status != 'complete' # If is only not a founding member and not a completed project of course %>
+      <% if current_user.requests.count > 0 # Did user already make a request to join?  %>
+          <%= link_to 'Join Request Sent', '#', class: 'btn btn-primary btn-sm pull-right', :disabled => true %>
+      <% else %>
+          <%= link_to 'Join Project', join_project_path(@project), :method => :post, class: 'btn btn-primary btn-sm pull-right' %>
+      <% end %>
   <% end %>
 </h1>
 <div class="jumbotron box m-t-10 col-lg-9">

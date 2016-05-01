@@ -37,6 +37,30 @@ class RequestsController < ApplicationController
     end
   end
 
+  # POST /requests/project/:id/join
+  def join
+    @request = Request.new
+    @request.user_id = current_user.id
+    @request.project_id = params[:project_id]
+    @request.type = Request.request_types[:join]
+    @request.status = Request.request_statuses[:unapproved]
+    @project = Project.find(params[:project_id])
+
+    if current_user.id == @project.user.id || current_user.requests.count > 0 #Don't allow founding member or other users make more than one at any cost
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    else
+      respond_to do |format|
+        if @request.save
+          format.html { redirect_to @project, notice: 'Request was made to the founding member. You will be able to access the project when your request is approved.' }
+          format.json { render :show, status: :created, location: @project }
+        else
+          format.html { redirect_to @project }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
+
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
@@ -62,13 +86,13 @@ class RequestsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_request
-      @request = Request.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_request
+    @request = Request.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def request_params
-      params.require(:request).permit(:type, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def request_params
+    params.require(:request).permit(:type, :status, :project_id, :user_id)
+  end
 end
