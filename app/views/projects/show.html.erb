@@ -1,11 +1,14 @@
-<p id="notice"><%= notice %></p>
-
-<h1 class="col-lg-10">View Project
+<h1 class="col-lg-9">View Project
   <% if @project.user.id == current_user.id && @project.status != 'complete' %>
       <%= link_to 'Mark Project as Complete', project_contributions_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
   <% end %>
-  <% if @project.user.id != current_user.id %>
-      <%= link_to 'Join Project', requests_path(@project), class: 'btn btn-primary btn-sm pull-right' %>
+  <% if @project.user.id != current_user.id && @project.status != 'complete' # If is only not a founding member and not a completed project of course %>
+      <% @current_requests = Request.where('user_id = ? and project_id = ?', current_user.id, @project.id) %>
+      <% if @current_requests.length > 0 # Did user already make a request to join?  %>
+          <%= link_to 'Join Request Sent', '#', class: 'btn btn-primary btn-sm pull-right', :disabled => true %>
+      <% else %>
+          <%= link_to 'Join Project', join_project_path(@project), :method => :post, class: 'btn btn-primary btn-sm pull-right' %>
+      <% end %>
   <% end %>
 </h1>
 <div class="jumbotron box m-t-10 col-lg-9">
@@ -111,6 +114,19 @@
       <%= @project.difficulty_level.titleize %>
     </div>
   </div>
+  <div class="row m-t-10">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Research field:</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+          :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <% @project.project_research_fields.each_with_index do |project_research_field, index| %>
+      <%= project_research_field.research_field.category %><% if index != @project.project_research_fields.length - 1 %>, <% end %>
+      <% end %>
+    </div>
+  </div>
   <% if @project.teams.count > 0 %>
       <div class="row m-t-10">
         <div class="col-lg-4 col-sm-12 col-xs-12">
@@ -119,16 +135,16 @@
         <div class="col-lg-1 hidden-xs">
           :
         </div>
-        <div class="col-lg-7 col-sm-12 col-xs-12">
-          <% @project.teams.each_with_index do |team_member, index| %>
-              <% if team_member.user.profile && team_member.user.profile != current_user.profile %>
-                  <%= link_to team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name, profile_path(team_member.user.profile) %>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+        <% @project.teams.each_with_index do |team_member, index| %>
+            <% if team_member.user.profile && team_member.user.profile != current_user.profile %>
+                <%= link_to team_member.user.profile.first_name + ' ' + team_member.user.profile.last_name, profile_path(team_member.user.profile) %>
                   <% if index != @project.teams.length - 1 %>,
-                  <% end %>
-              <% end %>
-          <% end %>
-        </div>
+                <% end %>
+            <% end %>
+        <% end %>
       </div>
+    </div>
   <% end %>
 </div>
 

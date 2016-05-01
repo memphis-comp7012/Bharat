@@ -14,7 +14,7 @@
       <%= link_to raw('<span class="fa fa-tasks"></span> My Tasks'), tasks_path, :class => current_class?(tasks_path)  %>
     </li>
     <li>
-      <a href="#"><span class="fa fa-bullseye"></span> My Requests</a>
+      <%= link_to raw('<span class="fa fa-bell"></span> My Requests'), requests_path, :class => current_class?(requests_path)  %>
     </li>
     <li>
       <%= link_to raw('<span class="fa fa-money"></span> My Contributions'), contributions_path, :class => current_class?(contributions_path) %>

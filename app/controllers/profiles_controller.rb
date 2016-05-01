@@ -17,7 +17,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     if !current_user.profile.blank?
-      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     end
     @profile = Profile.new
 
@@ -26,7 +26,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
     if current_user.profile != @profile
-      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     end
   end
 
@@ -79,7 +79,7 @@ class ProfilesController < ApplicationController
     else
       ## redirect_to login_path, :notice => 'if you want to add a notice'
       ## if you want render 404 page
-      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     end
   end
 

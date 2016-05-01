@@ -1,29 +1,88 @@
-<p id="notice"><%= notice %></p>
+<h1>My Requests</h1>
 
-<h1>Listing Requests</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @requests.each do |request| %>
-      <tr>
-        <td><%= request.type %></td>
-        <td><%= request.status %></td>
-        <td><%= link_to 'Show', request %></td>
-        <td><%= link_to 'Edit', edit_request_path(request) %></td>
-        <td><%= link_to 'Destroy', request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<div class="m-t-25">
+  <ul class="nav nav-pills">
+    <li role="presentation" class="<%= (params[:type] == nil) ? '' : 'active' %>active"><a href="?">All</a></li>
+    <% Request.request_types.keys.map do |type| %>
+        <li role="presentation" class="<%= (params[:type] == type) ? 'active' : '' %>">
+          <a href="?type=<%= type %>"><%= type.titleize %></a></li>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Request', new_request_path %>
+  </ul>
+</div>
+<h3><%= @total_requests_count != 0 ? ('Showing ' + pluralize(@total_requests_count, 'request') + ' found:') : 'No Requests found!' %> </h3>
+<% @requests.each do |request| %>
+    <div class="jumbotron box m-t-25">
+      <div class="row">
+        <div class="col-lg-2">
+          <strong>Project Name</strong>
+        </div>
+        <div class="col-lg-1">
+          <strong>:</strong>
+        </div>
+        <div class="col-lg-3">
+          <div><%= Project.find(request.project_id).name %></div>
+        </div>
+        <div class="col-lg-6">
+          <br>
+        </div>
+      </div>
+      <% if request.user_id != current_user.id %>
+          <div class="row">
+            <div class="col-lg-2">
+              <strong>Requested by</strong>
+            </div>
+            <div class="col-lg-1">
+              <strong>:</strong>
+            </div>
+            <div class="col-lg-3">
+              <div><%= User.find(request.user_id).profile.first_name + ' ' + User.find(request.user_id).profile.last_name %></div>
+            </div>
+            <div class="col-lg-6">
+              <br>
+            </div>
+          </div>
+      <% end %>
+      <div class="row">
+        <div class="col-lg-2">
+          <strong>Request Type</strong>
+        </div>
+        <div class="col-lg-1">
+          <strong>:</strong>
+        </div>
+        <div class="col-lg-3">
+          <div><%= Request.request_types.keys[request.type].titleize %></div>
+        </div>
+        <div class="col-lg-1 text-right">
+          &nbsp;
+        </div>
+        <div class="col-lg-2 text-right">
+          <% if request.user_id != current_user.id %>
+              <%= link_to 'ACCEPT', '#', :method => :post, class: 'btn btn-danger btn-sm text-inline' %>
+          <% end %>
+        </div>
+        <div class="col-lg-2">
+          <% if request.user_id != current_user.id %>
+              <%= link_to 'REJECT', '#', :method => :post, class: 'btn btn-success btn-sm text-inline' %>
+          <% end %>
+        </div>
+        <div class="col-lg-1">
+          &nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-2">
+          <strong>Current Status</strong>
+        </div>
+        <div class="col-lg-1">
+          <strong>:</strong>
+        </div>
+        <div class="col-lg-3">
+          <div><%= Request.request_statuses.keys[request.status].titleize %></div>
+        </div>
+        <div class="col-lg-6">
+          <br>
+        </div>
+      </div>
+    </div>
+<% end %>
+<%= will_paginate @requests, renderer: BootstrapPagination::Rails %>

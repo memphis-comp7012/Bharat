@@ -125,7 +125,7 @@ class ProjectsController < ApplicationController
 
   def authorize
     if current_user != @project.user
-      render :file => File.join(Rails.root, 'public/404'), :formats => [:html], :status => 404, :layout => false
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     end
   end
 end
