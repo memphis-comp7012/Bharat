@@ -1,9 +1,12 @@
-<p id="notice"><%= notice %></p>
-<h1 class="col-lg-10">View Task </h1>
-
-<div class="jumbotron box m-t-10 col-lg-9">
-
-  <div class="row m-t-10">
+<h1 class="text-inline">View Task</h1>
+<div class="pull-right text-inline">
+  <% if @task.user_id == current_user.id %>
+      <%= link_to 'Edit', edit_task_path(@task), class: 'btn btn-default' %>
+      <%= link_to 'Delete', @task, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default' %>
+  <% end %>
+</div>
+<div class="jumbotron box m-t-10 col-lg-12">
+  <div class="row clearfix">
     <div class="col-lg-4 col-sm-12 col-xs-12">
       <strong>Name</strong>
     </div>
@@ -14,8 +17,29 @@
       <%= @task.name %>
     </div>
   </div>
-
-  <div class="row m-t-10">
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Project Name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.iteration.project.name %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+      <strong>Iteration Name</strong>
+    </div>
+    <div class="col-lg-1 hidden-xs">
+      :
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+      <%= @task.iteration.name %>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-lg-4 col-sm-12 col-xs-12">
       <strong>Description</strong>
     </div>
@@ -26,8 +50,7 @@
       <%= @task.description %>
     </div>
   </div>
-
-  <div class="row m-t-10">
+  <div class="row">
     <div class="col-lg-4 col-sm-12 col-xs-12">
       <strong>Status</strong>
     </div>
@@ -35,11 +58,10 @@
       :
     </div>
     <div class="col-lg-7 col-sm-12 col-xs-12">
-      <%= @task.status %>
+      <%= @task.status.titleize %>
     </div>
   </div>
-
-  <div class="row m-t-10">
+  <div class="row">
     <div class="col-lg-4 col-sm-12 col-xs-12">
       <strong>Assigned user</strong>
     </div>
@@ -47,27 +69,34 @@
       :
     </div>
     <div class="col-lg-7 col-sm-12 col-xs-12">
-      <%= @task.assigned_user %>
+      <%= User.find(@task.assigned_user).profile.first_name + ' ' + User.find(@task.assigned_user).profile.last_name %>
     </div>
   </div>
-
-  <div class="row m-t-10">
+  <div class="row">
     <div class="col-lg-4 col-sm-12 col-xs-12">
-      <strong>Due date:</strong>
+      <strong>Due date</strong>
     </div>
     <div class="col-lg-1 hidden-xs">
       :
     </div>
     <div class="col-lg-7 col-sm-12 col-xs-12">
-      <%= @task.due_date %>
+      <%= @task.due_date.to_formatted_s(:long_ordinal) %>
     </div>
   </div>
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 col-xs-12">
+    </div>
+    <div class="col-lg-1 hidden-xs">
+
+    </div>
+    <div class="col-lg-7 col-sm-12 col-xs-12">
+    </div>
+  </div>
+
 </div>
   <div class="clearfix"></div>
   <nav class="col-lg-9">
     <ul class="pager">
-
-      <li></li><%= link_to 'Edit', edit_task_path(@task) %> </li>
       <li> <%= link_to 'Back', tasks_path %> </li>
     </ul>
   </nav>
