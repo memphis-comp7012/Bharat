@@ -13,7 +13,7 @@
 <% @requests.each do |request| %>
     <div class="jumbotron box m-t-25">
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
           <strong>Project Name</strong>
         </div>
         <div class="col-lg-1">
@@ -22,13 +22,30 @@
         <div class="col-lg-3">
           <div><%= Project.find(request.project_id).name %></div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
           <br>
         </div>
       </div>
+      <% if request.user_id == current_user.id %>
+          <div class="row">
+            <div class="col-lg-3">
+              <strong>Founding Member:</strong>
+            </div>
+            <div class="col-lg-1">
+              <strong>:</strong>
+            </div>
+            <div class="col-lg-3">
+              <div><%= Project.find(request.project_id).user.profile.first_name + ' ' + Project.find(request.project_id).user.profile.last_name %></div>
+            </div>
+            <div class="col-lg-5">
+              <br>
+            </div>
+          </div>
+      <% end %>
+
       <% if request.user_id != current_user.id %>
           <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <strong>Requested by</strong>
             </div>
             <div class="col-lg-1">
@@ -37,13 +54,13 @@
             <div class="col-lg-3">
               <div><%= User.find(request.user_id).profile.first_name + ' ' + User.find(request.user_id).profile.last_name %></div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
               <br>
             </div>
           </div>
       <% end %>
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
           <strong>Request Type</strong>
         </div>
         <div class="col-lg-1">
@@ -70,7 +87,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-3">
           <strong>Current Status</strong>
         </div>
         <div class="col-lg-1">
@@ -79,7 +96,7 @@
         <div class="col-lg-3">
           <div><%= Request.request_statuses.keys[request.status].titleize %></div>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-5">
           <br>
         </div>
       </div>
