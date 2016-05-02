@@ -29,6 +29,7 @@
           <%= task.name %>
         </div>
       </div>
+      <% if (task.iteration) %>
       <div class="row">
         <div class="col-lg-4 col-sm-12 col-xs-12">
           <strong>Project Name</strong>
@@ -51,6 +52,7 @@
           <%= task.iteration.name %>
         </div>
       </div>
+      <% end %>
       <div class="row">
         <div class="col-lg-4 col-sm-12 col-xs-12">
           <strong>Description</strong>

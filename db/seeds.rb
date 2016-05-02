@@ -223,10 +223,10 @@ iteration3 = Iteration.create!(name: "Information Foraging Iteration One")
 iteration4 = Iteration.create!(name: "Information Foraging Iteration Two")
 se.iterations << iteration3 << iteration4
 
-refactoring_task1 = Task.create!(name: "Refactoring", description: "Refactor the code to remove code smells", status: 'complete', assigned_user: 2, due_date: Time.now+3.day, user_id: 2)
-removeduplicate_task2 = Task.create!(name: "Remove Duplications", description: "For better functionality remove the duplications", status: 'in_progress', assigned_user: 2, due_date: Time.now+4.day, user_id: 2)
-testing_task3 = Task.create!(name: "Testing", description: "Test the code after development is done", status: 'not_started', assigned_user: 2, due_date: Time.now+6.day, user_id: 2)
-tasksetup_task4 = Task.create!(name: "Task Setup Environment", description: "Setup the environment for checking the duplications", status: 'on_hold', assigned_user: 2, due_date: Time.now+9.day, user_id: 2)
+refactoring_task1 = Task.create!(name: "Refactoring", description: "Refactor the code to remove code smells", status: 'complete', assigned_user: 1, due_date: Time.now+3.day, user_id: 1)
+removeduplicate_task2 = Task.create!(name: "Remove Duplications", description: "For better functionality remove the duplications", status: 'in_progress', assigned_user: 1, due_date: Time.now+4.day, user_id: 1)
+testing_task3 = Task.create!(name: "Testing", description: "Test the code after development is done", status: 'not_started', assigned_user: 1, due_date: Time.now+6.day, user_id: 1)
+tasksetup_task4 = Task.create!(name: "Task Setup Environment", description: "Setup the environment for checking the duplications", status: 'on_hold', assigned_user: 1, due_date: Time.now+9.day, user_id: 1)
 iteration3.tasks << refactoring_task1 << tasksetup_task4
 iteration4.tasks << removeduplicate_task2 << testing_task3
 
@@ -249,6 +249,11 @@ track.teams << team1
 iteration5 = Iteration.create!(name: "Conference Tracking Iteration One")
 iteration6 = Iteration.create!(name: "Conference Tracking Iteration Two")
 track.iterations << iteration5 << iteration6
+registration_task1 = Task.create!(name: "Registration", description: "Register to the conference before being a user to Tracking sysyem", status: 'complete', assigned_user: 5, due_date: Time.now+3.day, user_id: 2)
+complete_task2 = Task.create!(name: "Complete Code Academy", description: "Complete course in code academy to know about tracking system", status: 'in_progress', assigned_user: 2, due_date: Time.now+1.day, user_id: 2)
+writeexam_task3 = Task.create!(name: "Write Exam", description: "Complete exams for practice and show credits", status: 'not_started', assigned_user: 5, due_date: Time.now+2.day, user_id: 2)
+iteration5.tasks << registration_task1
+iteration6.tasks << complete_task2 << writeexam_task3
 
 track.save!
 
