@@ -85,8 +85,16 @@ class ProjectsController < ApplicationController
     authorize
 
     project_id = params[:id]
+    @iteration_ids = Iteration.where("project_id == ?", project_id).pluck(:id)
+    @iterations_tasks = Task.where('iteration_id IN (?)', @iteration_ids)
+
     @project.destroy
     Team.where("project_id == ?", project_id).destroy_all
+    Iteration.where("project_id == ?", project_id).destroy_all
+
+    if @iteration_ids.length > 0 && @iterations_tasks.length > 0
+      Task.where('iteration_id IN (?)', @iteration_ids).destroy_all
+    end
 
     respond_to do |format|
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
