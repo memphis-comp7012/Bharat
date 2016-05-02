@@ -1,5 +1,20 @@
+# == Schema Information
+#
+# Table name: tasks
+#
+#  id            :integer          not null, primary key
+#  name          :string
+#  description   :string
+#  status        :integer
+#  assigned_user :integer
+#  due_date      :date
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  user_id       :integer
+#
+
 class Task < ActiveRecord::Base
-  enum task_status: [:not_started, :in_progress, :on_hold, :complete]
+  enum status: [:not_started, :in_progress, :on_hold, :complete]
 
   validates :name,
             length: {maximum: 225},
@@ -28,4 +43,5 @@ class Task < ActiveRecord::Base
             presence: true
 
   belongs_to :user
+  belongs_to :iteration
 end

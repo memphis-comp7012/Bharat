@@ -4,7 +4,15 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    if params[:status]
+      @tasks = Task.where("user_id = ? and status = ?", current_user.id, Task.statuses[params[:status]])
+    else
+      @tasks = Task.where("user_id = ?", current_user.id)
+    end
+    @total_tasks_count = @tasks.length
+
+    @tasks = @tasks.sort_by(&:created_at).reverse!
+    @tasks = @tasks.paginate(:page => params[:page], :per_page => 3)
   end
 
   # GET /tasks/1
@@ -26,6 +34,7 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
+    @task.user_id = current_user.id
 
     respond_to do |format|
       if @task.save
@@ -70,6 +79,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:name, :description, :status, :assigned_user, :due_date)
+      params.require(:task).permit(:name, :description, :status, :assigned_user, :due_date, :user_id)
     end
 end
