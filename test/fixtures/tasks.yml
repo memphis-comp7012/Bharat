@@ -15,16 +15,10 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  description: MyString
-  status: 1
+task_one:
+  name: Develop UI
+  description: Prepare the mockups for the designs
+  status: 0
   assigned_user: 1
-  due_date: 2016-04-20 18:44:33
+  due_date: <%= Time.now+30.day %>
 
-two:
-  name: MyString
-  description: MyString
-  status: 1
-  assigned_user: 1
-  due_date: 2016-04-20 18:44:33

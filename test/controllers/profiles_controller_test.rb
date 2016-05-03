@@ -17,7 +17,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   test "index should be 404'd for user not signed in" do
     get :index
-    assert_response :missing
+    assert_response(403)
   end
 
   test "new user without profile should get new" do
@@ -29,12 +29,12 @@ class ProfilesControllerTest < ActionController::TestCase
   test "user with profile should not get new" do
   	sign_in :user, @user
     get :new
-    assert_response :missing
+    assert_response(403)
   end
 
   test "new should be 404'd for user not signed in" do
     get :new
-    assert_response :missing
+    assert_response(403)
   end
 
   test "signed in user should create profile" do
@@ -60,7 +60,7 @@ class ProfilesControllerTest < ActionController::TestCase
 
   test "show should be 404'd for user not signed in" do
     get :show, id: @profile
-    assert_response :missing
+    assert_response(403)
   end
 
   test "signed in user should get edit for his/her profile" do
@@ -72,12 +72,12 @@ class ProfilesControllerTest < ActionController::TestCase
   test "signed in user should not get edit for another user" do
   	sign_in :user, @user
     get :edit, id: @profile2
-    assert_response :missing
+    assert_response(403)
   end
 
   test "edit should be 404'd for user not signed in" do
     get :edit, id: @profile
-    assert_response :missing
+    assert_response(403)
   end
 
   test "should update profile" do

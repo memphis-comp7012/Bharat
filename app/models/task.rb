@@ -24,12 +24,12 @@ class Task < ActiveRecord::Base
             presence: true,
             length: {maximum: 3000}
 
-  # validates :status,
-  #           presence: true,
-  #           inclusion: {
-  #               in: task_statuses.keys,
-  #               message: "must be either " + task_statuses.keys.join(" or ")
-  #           }
+  validates :status,
+            presence: true,
+            inclusion: {
+                in: Task.statuses.values,
+                message: "must be either " + statuses.keys.join(" or ")
+            }
 
   validates :assigned_user,
             presence: true,
@@ -39,8 +39,9 @@ class Task < ActiveRecord::Base
             }
 
   validates :due_date,
-            date: {after_or_equal_to: Proc.new { Time.now-1.day }},
-            presence: true
+            presence: true,
+            date: {after_or_equal_to: Proc.new { Time.now-1.day }}
+
 
   belongs_to :user
   belongs_to :iteration
