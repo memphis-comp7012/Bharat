@@ -349,3 +349,15 @@ request3 = Request.new :project_id => 6, :user_id => 3, :type => 0, :status => 1
 request3.save!
 request4 = Request.new :project_id => 6, :user_id => 3, :type => 1, :status => 2
 request4.save!
+
+# Project research fields
+project_research_field1 = ProjectResearchField.new :project_id => 1, :research_field_id => 1
+project_research_field1.save!
+project_research_field2 = ProjectResearchField.new :project_id => 2, :research_field_id => 2
+project_research_field2.save!
+project_research_field3 = ProjectResearchField.new :project_id => 3, :research_field_id => 3
+project_research_field3.save!
+project_research_field4 = ProjectResearchField.new :project_id => 4, :research_field_id => 4
+project_research_field4.save!
+project_research_field5 = ProjectResearchField.new :project_id => 5, :research_field_id => 5
+project_research_field5.save!
