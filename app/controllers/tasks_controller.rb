@@ -18,6 +18,13 @@ class TasksController < ApplicationController
   # GET /tasks/1
   # GET /tasks/1.json
   def show
+    project_id = Iteration.find(@task.iteration_id).project_id
+    team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+    founding_member_id = Project.find(project_id).user_id
+
+    if ((current_user.id != founding_member_id) && (team.length <= 0))
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    end
   end
 
   # GET /tasks/new
@@ -58,23 +65,20 @@ class TasksController < ApplicationController
     @task.user_id = current_user.id
 
     # you cannot create a new tasks for project you don't belong to
-    if @task.iteration_id
-      project_id = Iteration.find(@task.iteration_id).project_id
-      team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
-      founding_member_id = Project.find(project_id).user_id
+    project_id = Iteration.find(@task.iteration_id).project_id
+    team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+    founding_member_id = Project.find(project_id).user_id
 
-      if (current_user.id != founding_member_id) && team.length <= 0
-        render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
-      end
-    else
-      respond_to do |format|
-        if @task.save
-          format.html { redirect_to @task, notice: 'Task was successfully created.' }
-          format.json { render :show, status: :created, location: @task }
-        else
-          format.html { render :new }
-          format.json { render json: @task.errors, status: :unprocessable_entity }
-        end
+    if ((current_user.id != founding_member_id) && (team.length <= 0))
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    end
+    respond_to do |format|
+      if @task.save
+        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.json { render :action => :show, status: :created, location: @task }
+      else
+        format.html { render :action => :new }
+        format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -82,7 +86,14 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
-    # you cannot create a new tasks for project you don't belong to
+    # you cannot update a  tasks for project you don't belong to
+    project_id = Iteration.find(@task.iteration_id).project_id
+    team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+    founding_member_id = Project.find(project_id).user_id
+
+    if ((current_user.id != founding_member_id) && (team.length <= 0))
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    end
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
