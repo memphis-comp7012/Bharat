@@ -25,6 +25,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    # @iterations = Iteration.all
     @iterations = Iteration.where('project_id = ?', @project.id)
   end
 

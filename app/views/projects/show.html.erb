@@ -147,16 +147,28 @@
     </div>
   <% end %>
 </div>
+<br>
 
 <div class="clearfix"></div>
-<% if (@iterations.length > 0 && @project.user.id != current_user.id) || (@iterations.length > 0 && Team.where('project_id = ? and user_id = ?', current_user.id, @project.id).length > 0) %>
-<h2>Project Iterations</h2>
+
+<% if @project.user == current_user %>
+  <div class="m-t-25">
+    <h2 class="text-inline">Project Iterations</h2>
+    <div class="text-inline pull-right">
+      <%= link_to 'Create New Iteration', new_project_iteration_path(@project, @iteration), class: 'btn btn-success btn-lg' %>
+    </div>
+  </div>
+<% else %>
+  <div class="m-t-25">
+    <h2 class="text-inline">Project Iterations</h2>
+  </div>
+<% end %>
 
 <table class="table table-striped col-lg-9">
   <thead>
     <tr>
       <th>ID</th>
-      <th>Name</th>
+      <th>Iteration Name</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -169,11 +181,11 @@
         <td><%= iteration.name %></td>
         <td>
           <% if @project.user_id == current_user.id %>
-              <%= link_to 'View', iteration, class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Edit', edit_iteration_path(iteration), class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Delete', iteration, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+              <%= link_to 'View', project_iteration_path(@project, iteration), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit', edit_project_iteration_path(@project, iteration), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Delete', project_iteration_path(@project, iteration), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
           <% else %>
-              <%= link_to 'View', iteration, class: 'btn btn-default btn-xs' %>
+              <%= link_to 'View', project_iteration_path(@project, iteration), class: 'btn btn-default btn-xs' %>
           <% end %>
         </td>
       </tr>
@@ -181,7 +193,6 @@
     <% end %>
   </tbody>
 </table>
-<% end %>
 
 <div class="clearfix"></div>
 <nav class="col-lg-9">

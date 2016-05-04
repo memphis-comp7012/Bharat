@@ -1,9 +1,66 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Project Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Iteration Name:</strong>
   <%= @iteration.name %>
 </p>
 
-<%= link_to 'Edit', edit_iteration_path(@iteration) %> |
-<%= link_to 'Back', iterations_path %>
+
+<div class="m-t-25">
+  <h2 class="text-inline">Iteration Tasks</h2>
+  <div class="text-inline pull-right">
+    <%= link_to 'Create New Task', new_project_iteration_path(@project, @iteration), class: 'btn btn-success btn-lg' %>
+  </div>
+</div>
+
+<table class="table table-striped col-lg-9">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Task Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Due Date</th>
+      <th>Assigned To</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @counter = 1 %>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= @counter %></td>
+        <td><%= task.name %></td>
+        <td><%= task.description %></td>
+        <td><%= task.status %></td>
+        <td><%= task.due_date %></td>
+        <td><%= task.assigned_user %></td>
+        <td>
+          <% if task.user_id == current_user.id || task.assigned_user == current_user %>
+              <%= link_to 'View', project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit', edit_project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Delete', project_iteration_path(@project, @iteration), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+          <% else %>
+              <%= link_to 'View', project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
+          <% end %>
+        </td>
+      </tr>
+      <% @counter = @counter + 1 %>
+    <% end %>
+  </tbody>
+</table>
+
+
+<div class="clearfix"></div>
+<nav class="col-lg-9">
+  <ul class="pager">
+    <li><%= link_to 'Edit', edit_project_iteration_path(@project, @iteration) %></li>
+    <li><%= link_to 'Back', project_path(@project) %></li>
+  </ul>
+</nav>
