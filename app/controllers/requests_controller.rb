@@ -1,5 +1,5 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy, :action]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :action, :leave, :approve_leave]
 
   # GET /requests
   # GET /requests.json
@@ -66,7 +66,7 @@ class RequestsController < ApplicationController
     else
       respond_to do |format|
         if @request.save
-          format.html { redirect_to @project, notice: 'Request was made to the founding member. You will be able to access the project when your request is approved.' }
+          format.html { redirect_to @project, notice: 'Request was made to the founding member. Your projects will reflect this action when your request is approved.' }
           format.json { render :show, status: :created, location: @project }
         else
           format.html { redirect_to @project }
@@ -76,34 +76,68 @@ class RequestsController < ApplicationController
     end
   end
 
+  def leave
+  end
+
+  def approve_leave
+    points = params[:points]
+    @contribution = Contribution.new
+    @contribution.user_id = @request.user_id
+    @contribution.project_id = @request.project_id
+    @contribution.money_received = 0
+    @contribution.score = points == 0 ? 0 : ('-' + points).to_i
+    @request = Request.find(params[:id])
+
+    respond_to do |format|
+
+      if @contribution.save
+        Team.where('user_id = ? and project_id = ?', @request.user_id, @request.project_id).destroy_all
+        @request.status = Request.request_statuses[:approved]
+        if @request.save
+          format.html { redirect_to requests_path, notice: 'Leave request was successfully complete. Team member removed from project and points were deducted successfully.' }
+        end
+      end
+    end
+
+  end
+
   # GET /requests/:id/:type
   def action
     @request = Request.find(params[:id])
-    respond_to do |format|
-      action = params[:type]
+    action = params[:type]
 
-      if action == "approve"
-        @request.status = Request.request_statuses[:approved]
-        sentence = 'd'
-        if @request.type == Request.request_types[:join]
-          @team = Team.new
-          @team.project_id = @request.project_id
-          @team.user_id = @request.user_id
-          @team.save
-        elsif @request.type == Request.request_types[:leave]
-          Team.where('user_id = ? and project_id = ?', @request.user_id, @request.project_id).destroy_all
+    if action == "approve"
+      @request.status = Request.request_statuses[:approved]
+      sentence = 'd'
+      if @request.type == Request.request_types[:join]
+        @team = Team.new
+        @team.project_id = @request.project_id
+        @team.user_id = @request.user_id
+        @team.save
+
+        respond_to do |format|
+          if @request.save
+            format.html { redirect_to requests_path, notice: 'Request was ' + action + sentence + ' successfully.' }
+            format.json { render :index, status: :ok, location: @request }
+          else
+            format.html { render :index }
+            format.json { render json: @request.errors, status: :unprocessable_entity }
+          end
         end
-      else
-        @request.status = Request.request_statuses[:rejected]
-        sentence = 'ed'
+      elsif @request.type == Request.request_types[:leave]
+        redirect_to leave_request_remove_points_path(@request)
       end
-
-      if @request.save
-        format.html { redirect_to requests_path, notice: 'Request was ' + action + sentence + ' successfully.' }
-        format.json { render :index, status: :ok, location: @request }
-      else
-        format.html { render :index }
-        format.json { render json: @request.errors, status: :unprocessable_entity }
+    else
+      @request.status = Request.request_statuses[:rejected]
+      sentence = 'ed'
+      respond_to do |format|
+        if @request.save
+          format.html { redirect_to requests_path, notice: 'Request was ' + action + sentence + ' successfully.' }
+          format.json { render :index, status: :ok, location: @request }
+        else
+          format.html { render :index }
+          format.json { render json: @request.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -140,6 +174,6 @@ class RequestsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def request_params
-    params.require(:request).permit(:type, :status, :project_id, :user_id)
+    params.require(:request).permit(:type, :status, :project_id, :user_id, :points)
   end
 end

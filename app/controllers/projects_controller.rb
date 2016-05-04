@@ -28,6 +28,12 @@ class ProjectsController < ApplicationController
     # @iterations = Iteration.all
     @iterations = Iteration.where('project_id = ?', @project.id)
     @team_members_ids = Team.where('project_id = ?', @project.id).pluck('user_id')
+
+    @approved_join_requests = Request.where('user_id = ? and project_id = ? and type = ? and status = ?', current_user.id, @project.id, Request.request_types[:join], Request.request_statuses[:approved])
+    @unapproved_join_requests = Request.where('user_id = ? and project_id = ? and type = ? and status = ?', current_user.id, @project.id, Request.request_types[:join], Request.request_statuses[:unapproved])
+    @unapproved_leave_request = Request.where('user_id = ? and project_id = ? and type = ? and status = ?', current_user.id, @project.id, Request.request_types[:leave], Request.request_statuses[:unapproved])
+    @approved_leave_request = Request.where('user_id = ? and project_id = ? and type = ? and status = ?', current_user.id, @project.id, Request.request_types[:leave], Request.request_statuses[:approved])
+
   end
 
   # GET /projects/new

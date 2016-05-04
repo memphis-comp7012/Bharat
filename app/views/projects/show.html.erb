@@ -166,6 +166,7 @@
 
 <div class="clearfix"></div>
 
+<% if @project.user.id == current_user.id || @approved_join_requests.length > 0 && @approved_leave_request.length == 0 %>
 <% if @project.user == current_user %>
     <div class="m-t-25">
       <h2 class="text-inline">Project Iterations</h2>
@@ -208,6 +209,7 @@
   <% end %>
   </tbody>
 </table>
+<% end %>
 
 <div class="clearfix"></div>
 <nav class="col-lg-9">
