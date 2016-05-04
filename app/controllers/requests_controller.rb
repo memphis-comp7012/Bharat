@@ -51,17 +51,16 @@ class RequestsController < ApplicationController
     end
   end
 
-  # POST /requests/project/:id/join
-  def join
+  # POST /requests/project/:id/:type
+  def make
     @request = Request.new
     @request.user_id = current_user.id
     @request.project_id = params[:project_id]
-    @request.type = Request.request_types[:join]
+    @request.type = params[:request_type]
     @request.status = Request.request_statuses[:unapproved]
     @project = Project.find(params[:project_id])
     # current user's join requests for this project
-    @current_user_requests = Request.where('user_id = ? and project_id = ? and type = ?', current_user.id, @project.id, 0)
-
+    @current_user_requests = Request.where('user_id = ? and project_id = ? and type = ? and status = ?', current_user.id, @project.id, params[:request_type], Request.request_statuses[:unapproved])
     if current_user.id == @project.user.id || @current_user_requests.length > 0 #Don't allow founding member or other users make more join for the same project than one at any cost
       render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
     else
@@ -86,6 +85,14 @@ class RequestsController < ApplicationController
       if action == "approve"
         @request.status = Request.request_statuses[:approved]
         sentence = 'd'
+        if @request.type == Request.request_types[:join]
+          @team = Team.new
+          @team.project_id = @request.project_id
+          @team.user_id = @request.user_id
+          @team.save
+        elsif @request.type == Request.request_types[:leave]
+          Team.where('user_id = ? and project_id = ?', @request.user_id, @request.project_id).destroy_all
+        end
       else
         @request.status = Request.request_statuses[:rejected]
         sentence = 'ed'

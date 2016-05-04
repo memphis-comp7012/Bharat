@@ -27,6 +27,7 @@ class ProjectsController < ApplicationController
   def show
     # @iterations = Iteration.all
     @iterations = Iteration.where('project_id = ?', @project.id)
+    @team_members_ids = Team.where('project_id = ?', @project.id).pluck('user_id')
   end
 
   # GET /projects/new
