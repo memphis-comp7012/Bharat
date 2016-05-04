@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
     resources :requests
     post 'requests/project/:project_id/join' => 'requests#join', as: 'join_project'
+    post 'requests/:id/:type' => 'requests#action', as: 'take_request_action'
 
   end
 

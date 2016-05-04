@@ -19,11 +19,8 @@
         <div class="col-lg-1">
           <strong>:</strong>
         </div>
-        <div class="col-lg-3">
+        <div class="col-lg-6">
           <div><%= Project.find(request.project_id).name %></div>
-        </div>
-        <div class="col-lg-5">
-          <br>
         </div>
       </div>
       <% if request.user_id == current_user.id %>
@@ -54,8 +51,19 @@
             <div class="col-lg-3">
               <div><%= User.find(request.user_id).profile.first_name + ' ' + User.find(request.user_id).profile.last_name %></div>
             </div>
-            <div class="col-lg-5">
-              <br>
+            <div class="col-lg-1 text-right">
+            </div>
+            <div class="col-lg-2 text-right">
+              <% if request.user_id != current_user.id && request.status != Request.request_statuses[:approved] && request.status != Request.request_statuses[:rejected]%>
+                  <%= link_to 'APPROVE', take_request_action_path(request, "approve"), data: {confirm: 'Are you sure?'}, :method => :post, class: 'btn btn-danger btn-sm text-inline' %>
+              <% end %>
+            </div>
+            <div class="col-lg-2">
+              <% if request.user_id != current_user.id && request.status != Request.request_statuses[:approved] && request.status != Request.request_statuses[:rejected] %>
+                  <%= link_to 'REJECT', take_request_action_path(request, "reject"), data: {confirm: 'Are you sure?'}, :method => :post, class: 'btn btn-success btn-sm text-inline' %>
+              <% end %>
+            </div>
+            <div class="col-lg-1">
             </div>
           </div>
       <% end %>
@@ -69,21 +77,8 @@
         <div class="col-lg-3">
           <div><%= Request.request_types.keys[request.type].titleize %></div>
         </div>
-        <div class="col-lg-1 text-right">
-          &nbsp;
-        </div>
-        <div class="col-lg-2 text-right">
-          <% if request.user_id != current_user.id %>
-              <%= link_to 'ACCEPT', '#', :method => :post, class: 'btn btn-danger btn-sm text-inline' %>
-          <% end %>
-        </div>
-        <div class="col-lg-2">
-          <% if request.user_id != current_user.id %>
-              <%= link_to 'REJECT', '#', :method => :post, class: 'btn btn-success btn-sm text-inline' %>
-          <% end %>
-        </div>
-        <div class="col-lg-1">
-          &nbsp;
+        <div class="col-lg-5">
+          <br>
         </div>
       </div>
       <div class="row">
@@ -100,6 +95,25 @@
           <br>
         </div>
       </div>
+      <% if request.status == Request.request_statuses[:approved] || request.status == Request.request_statuses[:rejected] %>
+          <div class="row">
+            <div class="col-lg-3">
+              <strong><%= Request.request_statuses.keys[request.status].titleize %> about</strong>
+            </div>
+            <div class="col-lg-1">
+              <strong>:</strong>
+            </div>
+            <div class="col-lg-3">
+              <div>
+                <%= time_ago_in_words(request.updated_at).humanize %> ago
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <br>
+            </div>
+      </div>
+      <% end %>
+
     </div>
 <% end %>
 <%= will_paginate @requests, renderer: BootstrapPagination::Rails %>

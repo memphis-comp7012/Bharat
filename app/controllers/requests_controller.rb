@@ -1,15 +1,21 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_request, only: [:show, :edit, :update, :destroy, :action]
 
   # GET /requests
   # GET /requests.json
   def index
     if params[:type]
-      @requests = Request.where("user_id = ? and type = ?", current_user.id, Request.request_types[params[:type]])
+      @my_requests = Request.where("user_id = ? and type = ?", current_user.id, Request.request_types[params[:type]])
+      @founding_member_projects = Project.where('user_id = ?', current_user.id).pluck('id')
+      @founding_member_requests = Request.where("project_id in (?) and user_id != ? and type = ?", @founding_member_projects, current_user.id, Request.request_types[params[:type]])
+      @requests = @my_requests + @founding_member_requests
     else
-      @requests = Request.where("user_id = ?", current_user.id)
+      @my_requests = Request.where("user_id = ?", current_user.id)
+      @founding_member_projects = Project.where('user_id = ?', current_user.id).pluck('id')
+      @founding_member_requests = Request.where("project_id in (?) and user_id != ?", @founding_member_projects, current_user.id)
+      @requests = @my_requests + @founding_member_requests
     end
-    @requests = @requests.sort_by(&:created_at).reverse!
+    @requests = @requests.sort_by(&:created_at).uniq.reverse!
     @requests = @requests.paginate(:page => params[:page], :per_page => 5)
 
     @total_requests_count = @requests.length
@@ -71,15 +77,39 @@ class RequestsController < ApplicationController
     end
   end
 
+  # GET /requests/:id/:type
+  def action
+    @request = Request.find(params[:id])
+    respond_to do |format|
+      action = params[:type]
+
+      if action == "approve"
+        @request.status = Request.request_statuses[:approved]
+        sentence = 'd'
+      else
+        @request.status = Request.request_statuses[:rejected]
+        sentence = 'ed'
+      end
+
+      if @request.save
+        format.html { redirect_to requests_path, notice: 'Request was ' + action + sentence + ' successfully.' }
+        format.json { render :index, status: :ok, location: @request }
+      else
+        format.html { render :index }
+        format.json { render json: @request.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   # PATCH/PUT /requests/1
   # PATCH/PUT /requests/1.json
   def update
     respond_to do |format|
       if @request.update(request_params)
-        format.html { redirect_to @request, notice: 'Request was successfully updated.' }
-        format.json { render :show, status: :ok, location: @request }
+        format.html { redirect_to requests_path, notice: 'Request was successfully updated.' }
+        format.json { render :index, status: :ok, location: @request }
       else
-        format.html { render :edit }
+        format.html { render :index }
         format.json { render json: @request.errors, status: :unprocessable_entity }
       end
     end
