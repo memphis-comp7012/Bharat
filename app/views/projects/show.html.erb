@@ -167,7 +167,7 @@
 <div class="clearfix"></div>
 
 <% if @project.user.id == current_user.id || @approved_join_requests.length > 0 && @approved_leave_request.length == 0 %>
-<% if @project.user == current_user %>
+<% if @project.user == current_user && @project.status != "complete" %>
     <div class="m-t-25">
       <h2 class="text-inline">Project Iterations</h2>
       <div class="text-inline pull-right">
@@ -196,7 +196,7 @@
         <td><%= @counter %></td>
         <td><%= iteration.name %></td>
         <td>
-          <% if @project.user_id == current_user.id %>
+          <% if @project.user_id == current_user.id && @project.status != "complete" %>
               <%= link_to 'View', project_iteration_path(@project, iteration), class: 'btn btn-default btn-xs' %>
               <%= link_to 'Edit', edit_project_iteration_path(@project, iteration), class: 'btn btn-default btn-xs' %>
               <%= link_to 'Delete', project_iteration_path(@project, iteration), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>

@@ -26,30 +26,14 @@
   <div class="col-lg-5 jumbotron box">
     <h3><i class="fa fa-tasks"></i> My Tasks</h3>
     <hr>
-    <div class="row">
-      <div class="col-lg-2 m-t-10 col-xs-2">
-        <strong>4</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">Not Started</div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2  m-t-10 col-xs-2">
-        <strong>10</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">In Progress</div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2 m-t-10 col-xs-2">
-        <strong>2</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">On Hold</div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2 m-t-10 col-xs-2">
-        <strong>2</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">Completed</div>
-    </div>
+    <% Task.statuses.keys.map do |status| %>
+        <div class="row">
+          <div class="col-lg-2 m-t-10 col-xs-2">
+            <strong><%= get_counts_of_tasks(status) %></strong>
+          </div>
+          <div class="col-lg-10 m-t-10 col-xs-10"><%= status.titleize %></div>
+        </div>
+    <% end %>
   </div>
   <!-- \My Tasks widget -->
 </div>
@@ -59,24 +43,14 @@
   <div class="col-lg-5 jumbotron box">
     <h3><i class="fa fa-bullseye"></i> My Requests</h3>
     <hr>
-    <div class="row">
-      <div class="col-lg-2 m-t-10 col-xs-2">
-        <strong>4</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">Accepted</div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2  m-t-10 col-xs-2">
-        <strong>10</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">Rejected</div>
-    </div>
-    <div class="row">
-      <div class="col-lg-2 m-t-10 col-xs-2">
-        <strong>2</strong>
-      </div>
-      <div class="col-lg-10 m-t-10 col-xs-10">Pending Approval</div>
-    </div>
+    <% Request.request_statuses.keys.map do |status| %>
+        <div class="row">
+          <div class="col-lg-2 m-t-10 col-xs-2">
+            <strong><%= get_counts_of_requests(status) %></strong>
+          </div>
+          <div class="col-lg-10 m-t-10 col-xs-10"><%= status.titleize %></div>
+        </div>
+    <% end %>
   </div>
   <!-- \ContributionsMy Requests widget -->
 

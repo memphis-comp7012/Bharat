@@ -13,45 +13,49 @@
 
 <div class="m-t-25">
   <h2 class="text-inline">Iteration Tasks</h2>
-  <div class="pull-right text-inline">
-    <%= link_to 'Create New Task', new_iteration_tasks_path(@iteration), class: 'btn btn-success btn-lg' %>
-  </div>
+  <% if @iteration.project.status != "complete" %>
+      <div class="pull-right text-inline">
+        <%= link_to 'Create New Task', new_iteration_tasks_path(@iteration), class: 'btn btn-success btn-lg' %>
+      </div>
+  <% end %>
 </div>
 
 <table class="table table-striped col-lg-9">
   <thead>
-    <tr>
-      <th>ID</th>
-      <th>Task Name</th>
-      <th>Status</th>
-      <th>Due Date</th>
-      <th>Assigned To</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>ID</th>
+    <th>Task Name</th>
+    <th>Status</th>
+    <th>Due Date</th>
+    <th>Assigned To</th>
+    <th colspan="3"></th>
+  </tr>
   </thead>
 
   <tbody>
-    <% @counter = 1 %>
-    <% @tasks.each do |task| %>
+  <% @counter = 1 %>
+  <% @tasks.each do |task| %>
       <tr>
         <td><%= @counter %></td>
         <td><%= task.name %></td>
-        <td><%= task.status %></td>
-        <td><%= task.due_date %></td>
+        <td><%= task.status.titleize %></td>
+        <td><%= task.due_date.to_formatted_s(:long_ordinal) %></td>
         <% @assigned_user_profile = User.find(task.assigned_user) %>
         <td><%= @assigned_user_profile.profile.first_name %></td>
         <td>
           <% if task.user_id == current_user.id || task.assigned_user == current_user %>
-              <%= link_to 'View', task_path(task), class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Delete', task_path(task), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+              <% if @iteration.project.status != "complete" %>
+                  <%= link_to 'View', task_path(task), class: 'btn btn-default btn-xs' %>
+                  <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default btn-xs' %>
+                  <%= link_to 'Delete', task_path(task), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+              <% end %>
           <% else %>
               <%= link_to 'View', task_path(task), class: 'btn btn-default btn-xs' %>
           <% end %>
         </td>
       </tr>
       <% @counter = @counter + 1 %>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
