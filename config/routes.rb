@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :iterations
   # This is centralized place for all routes that need auth check
   # This allows us no longer need any code in controller to handle this logic
   authenticate :user do
@@ -20,7 +19,9 @@ Rails.application.routes.draw do
     post 'search/projects/' => 'projects#search', as: 'search_interesting_projects'
     resources :teams
     resources :contributions
-    resources :projects
+    resources :projects do
+      resources :iterations
+    end
     resources :profile_research_fields
     resources :profiles
     resources :project_research_fields

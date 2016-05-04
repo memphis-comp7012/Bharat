@@ -1,21 +1,24 @@
-<%= form_for(@iteration) do |f| %>
-  <% if @iteration.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@iteration.errors.count, "error") %> prohibited this iteration from being saved:</h2>
+<%= form_for(@iteration, url: project_iteration_path(@project, @iteration)) do |f| %>
+    <% if @iteration.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@iteration.errors.count, "error") %> prohibited this iteration from being saved:</h2>
 
-      <ul>
-      <% @iteration.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @iteration.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= f.hidden_field :project_id, :value => @project.id %>
+
+    <div class="actions">
+      <%= f.submit 'Submit', class: 'btn btn-primary'%>
+    </div>
 <% end %>
