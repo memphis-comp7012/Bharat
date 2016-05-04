@@ -23,7 +23,6 @@
     <tr>
       <th>ID</th>
       <th>Task Name</th>
-      <th>Description</th>
       <th>Status</th>
       <th>Due Date</th>
       <th>Assigned To</th>
@@ -37,17 +36,17 @@
       <tr>
         <td><%= @counter %></td>
         <td><%= task.name %></td>
-        <td><%= task.description %></td>
         <td><%= task.status %></td>
         <td><%= task.due_date %></td>
-        <td><%= task.assigned_user %></td>
+        <% @assigned_user_profile = User.find(task.assigned_user) %>
+        <td><%= @assigned_user_profile.profile.first_name %></td>
         <td>
           <% if task.user_id == current_user.id || task.assigned_user == current_user %>
-              <%= link_to 'View', project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Edit', edit_project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
-              <%= link_to 'Delete', project_iteration_path(@project, @iteration), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
+              <%= link_to 'View', task_path(task), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Edit', edit_task_path(task), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'Delete', task_path(task), method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-default btn-xs' %>
           <% else %>
-              <%= link_to 'View', project_iteration_path(@project, @iteration), class: 'btn btn-default btn-xs' %>
+              <%= link_to 'View', task_path(task), class: 'btn btn-default btn-xs' %>
           <% end %>
         </td>
       </tr>
