@@ -339,3 +339,13 @@ contribution5 = Contribution.new :score => -100, money_received: 0
 contribution5.user = scott
 contribution5.project = jar
 contribution5.save!
+
+#requests seeds
+request1 = Request.new :project_id => 6, :user_id => 2, :type => 0, :status => 1
+request1.save!
+request2 = Request.new :project_id => 6, :user_id => 2, :type => 1, :status => 0
+request2.save!
+request3 = Request.new :project_id => 6, :user_id => 3, :type => 0, :status => 1
+request3.save!
+request4 = Request.new :project_id => 6, :user_id => 3, :type => 1, :status => 2
+request4.save!
