@@ -24,10 +24,31 @@ class TasksController < ApplicationController
   def new
     @task = Task.new
     @users = User.all
+
+    # you cannot create a new tasks for project you don't belong to
+    if params[:iteration_id]
+      project_id = Iteration.find(params[:iteration_id]).project_id
+      team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+
+      founding_member_id = Project.find(project_id).user_id
+      if (current_user.id != founding_member_id) && team.length <= 0
+        render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+      end
+    end
+
   end
 
   # GET /tasks/1/edit
   def edit
+    project_id = Iteration.find(@task.iteration_id).project_id
+    team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+
+    # You cannot delete the tasks you don't belong to and not created by you
+    founding_member_id = Project.find(project_id).user_id
+
+    if (current_user.id != founding_member_id) && (@task.user_id != current_user.id) && team.length <= 0
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    end
   end
 
   # POST /tasks
@@ -36,13 +57,24 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     @task.user_id = current_user.id
 
-    respond_to do |format|
-      if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
-        format.json { render :show, status: :created, location: @task }
-      else
-        format.html { render :new }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+    # you cannot create a new tasks for project you don't belong to
+    if @task.iteration_id
+      project_id = Iteration.find(@task.iteration_id).project_id
+      team = Team.where('project_id = ? and user_id = ?', project_id, current_user.id)
+      founding_member_id = Project.find(project_id).user_id
+
+      if (current_user.id != founding_member_id) && team.length <= 0
+        render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+      end
+    else
+      respond_to do |format|
+        if @task.save
+          format.html { redirect_to @task, notice: 'Task was successfully created.' }
+          format.json { render :show, status: :created, location: @task }
+        else
+          format.html { render :new }
+          format.json { render json: @task.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -50,12 +82,13 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1
   # PATCH/PUT /tasks/1.json
   def update
+    # you cannot create a new tasks for project you don't belong to
     respond_to do |format|
       if @task.update(task_params)
         format.html { redirect_to @task, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
-        format.html { render :edit }
+        format.html { render :index }
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
     end
@@ -64,21 +97,29 @@ class TasksController < ApplicationController
   # DELETE /tasks/1
   # DELETE /tasks/1.json
   def destroy
-    @task.destroy
-    respond_to do |format|
-      format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
-      format.json { head :no_content }
+    # user cannot delete tasks other than he created
+    iteration = Iteration.find(@task.iteration_id)
+    founding_member_id = iteration.project.user_id
+
+    if (iteration.project.user_id != current_user.id) && (@task.user_id != current_user.id)
+      render :file => File.join(Rails.root, 'public/403'), :formats => [:html], :status => 403, :layout => false
+    else
+      @task.destroy
+      respond_to do |format|
+        format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_task
-      @task = Task.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_task
+    @task = Task.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def task_params
-      params.require(:task).permit(:name, :description, :status, :assigned_user, :due_date, :user_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def task_params
+    params.require(:task).permit(:name, :description, :status, :assigned_user, :due_date, :user_id, :iteration_id)
+  end
 end

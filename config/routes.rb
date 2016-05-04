@@ -26,6 +26,11 @@ Rails.application.routes.draw do
     resources :profiles
     resources :project_research_fields
     resources :tasks
+    get 'iteration/:iteration_id/tasks/new' => 'tasks#new', as: 'new_iteration_tasks'
+    post 'iteration/:iteration_id/tasks/new' => 'tasks#create'
+    get 'iteration/:iteration_id/task/:id/edit' => 'tasks#edit', as: 'edit_iteration_task'
+    post 'iteration/:iteration_id/task/:id/edit' => 'tasks#edit'
+
     resources :requests
     post 'requests/project/:project_id/join' => 'requests#join', as: 'join_project'
 

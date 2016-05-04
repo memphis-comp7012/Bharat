@@ -1,9 +1,5 @@
 <h1>My Tasks</h1>
 <div class="m-t-25">
-  <div class="pull-right">
-    <%= link_to 'Create New Task', new_task_path, class: 'btn btn-success btn-lg' %>
-  </div>
-
   <ul class="nav nav-pills">
     <li role="presentation" class="<%= (params[:status] == nil) ? '' : 'active' %>active"><a href="?">All</a></li>
     <% Task.statuses.keys.map do |status| %>
@@ -106,7 +102,7 @@
         </div>
         <div class="col-lg-7 col-sm-12 col-xs-12">
           <%= link_to 'Show', task %>
-          <%= link_to 'Edit', edit_task_path(task) %>
+          <%= link_to 'Edit', edit_iteration_task_path(task.iteration_id, task) %>
           <%= link_to 'Destroy', task, method: :delete, data: {confirm: 'Are you sure?'} %>
         </div>
       </div>

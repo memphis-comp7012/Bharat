@@ -2,6 +2,7 @@
   <%= form_for(@task) do |f| %>
       <%= display_error_messages(@task) %>
 
+
       <div class="form-group">
         <%= f.label :name %>
         <%= f.text_field :name, class: 'form-control' %>
@@ -15,6 +16,7 @@
         <%= f.select :status,
                      Task.statuses.keys.map { |status| [status.titleize, status] }, {}, {:class => "form-control custom"} %>
       </div>
+      <%= f.hidden_field :iteration_id, value: params[:iteration_id] %>
       <div class="form-group">
         <%= f.label :assigned_user %><br>
         <select name="task[assigned_user]" class="form-control custom">

@@ -27,8 +27,8 @@ class Task < ActiveRecord::Base
   validates :status,
             presence: true,
             inclusion: {
-                in: Task.statuses.values,
-                message: "must be either " + statuses.keys.join(" or ")
+                in: Task.statuses.keys,
+                message: "must be either " + Task.statuses.keys.join(" or ")
             }
 
   validates :assigned_user,
