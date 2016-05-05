@@ -32,7 +32,10 @@ Rails.application.routes.draw do
     post 'iteration/:iteration_id/task/:id/edit' => 'tasks#edit'
 
     resources :requests
-    post 'requests/project/:project_id/join' => 'requests#join', as: 'join_project'
+    post 'requests/project/:project_id/:request_type' => 'requests#make', as: 'make_request'
+    post 'requests/:id/:type' => 'requests#action', as: 'take_request_action'
+    get 'requests/:id/remove/points' => 'requests#leave', as: 'leave_request_remove_points'
+    patch 'requests/:id/remove/points' => 'requests#approve_leave'
 
   end
 

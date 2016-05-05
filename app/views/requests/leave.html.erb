@@ -1,0 +1,81 @@
+<h1>Leave Request Approval</h1>
+
+<%= form_for(@request, url: leave_request_remove_points_path(@request)) do |f| %>
+<div class="jumbotron box m-t-25">
+  <div class="row">
+    <div class="col-lg-3">
+      <strong>Project Name</strong>
+    </div>
+    <div class="col-lg-1">
+      <strong>:</strong>
+    </div>
+    <div class="col-lg-6">
+      <div><%= Project.find(@request.project_id).name %></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <strong>Founding Member:</strong>
+    </div>
+    <div class="col-lg-1">
+      <strong>:</strong>
+    </div>
+    <div class="col-lg-3">
+      <div><%= Project.find(@request.project_id).user.profile.first_name + ' ' + Project.find(@request.project_id).user.profile.last_name %></div>
+    </div>
+    <div class="col-lg-5">
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-3">
+      <strong>Requested by</strong>
+    </div>
+    <div class="col-lg-1">
+      <strong>:</strong>
+    </div>
+    <div class="col-lg-3">
+      <div><%= User.find(@request.user_id).profile.first_name + ' ' + User.find(@request.user_id).profile.last_name %></div>
+    </div>
+    <div class="col-lg-3">
+      <div></div>
+    </div>
+    <div class="col-lg-5">
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+      <strong>Deduct Points</strong>
+    </div>
+    <div class="col-lg-1">
+      <strong>:</strong>
+    </div>
+    <div class="col-lg-3">
+      <div>
+            - <input type="number" name="points">
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <br>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3">
+    </div>
+    <div class="col-lg-1">
+      <strong></strong>
+    </div>
+    <div class="col-lg-3">
+      <div>
+        <br />
+        <%= f.submit 'Approve Leave', :class => 'btn btn-lg btn-primary' %>
+      </div>
+    </div>
+    <div class="col-lg-5">
+      <br>
+    </div>
+  </div>
+</div>
+<% end %>
