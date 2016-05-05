@@ -1,0 +1,246 @@
+Video Link: https://youtu.be/nel7A0Rb3oQ
+
+Who-Did-What List for Iterations 1 and 2:
+
+Feature # 1
+	Name of the Feature: Setup UI layouts
+	Username: cchllpll
+	Timestamp: 08:15
+	Feature Type: Old
+
+Feature # 2
+	Name of the Feature: Register account
+	Username: cchllpll
+	Timestamp: 00:14
+	Feature Type: Old
+
+Feature # 3
+	Name of the Feature: Complete Profile
+	Username: cchllpll
+	Timestamp: 00:35
+	Feature Type: Old
+
+Feature # 4
+	Name of the Feature: Modify account
+	Username: cchllpll
+	Timestamp: 01:10
+	Feature Type: Old
+
+Feature # 5
+	Name of the Feature: Login
+	Username: cchllpll
+	Timestamp: 01:54
+	Feature Type: Old
+
+Feature # 6
+	Name of the Feature: logout
+	Username: cchllpll
+	Timestamp: 01:26
+	Feature Type: Old
+	
+Feature # 7
+	Name of the Feature: Dashboard page
+	Username: cchllpll
+	Timestamp: 08:44
+	Feature Type: Old
+
+Feature # 8
+	Name of the Feature: Forgot password
+	Username: cchllpll
+	Timestamp: 01:37
+	Feature Type: Old
+	
+Feature # 9
+	Name of the Feature: Model Classes
+	Username: cchllpll, mvshisht, jjsunny, svllbhnn
+	Timestamp: 10:35
+	Feature Type: Old
+	Reason: One of common tasks for all team members was to create model classes and create validations along with unit tests. This task covers that for all.
+
+Feature # 10
+	Name of the Feature: Create project
+	Username: mvshisht
+	Timestamp: 03:12
+	Feature Type: Old
+
+Feature # 11
+	Name of the Feature: View projects
+	Username: mvshisht
+	Timestamp: 02:10
+	Feature Type: Old
+
+Feature # 12
+	Name of the Feature: My projects
+	Username: mvshisht
+	Timestamp: 02:37
+	Feature Type: Old
+
+Feature # 13
+	Name of the Feature: Join Project Request
+	Username: cchllpll
+	Timestamp: 02:13
+	Feature Type: New
+	
+Feature # 14
+	Name of the Feature: Update project
+	Username: mvshisht
+	Timestamp: 03:31
+	Feature Type: Old
+
+Feature # 15
+	Name of the Feature: Leave Project Request
+	Username: cchllpll
+	Timestamp: 07:46
+	Feature Type: New
+
+Feature # 16
+	Name of the Feature: My Requests
+	Username: cchllpll
+	Timestamp: 05:10
+	Feature Type: New
+
+Feature # 17
+	Name of the Feature: Revise Summary for Tasks and Requests on Dashboard page
+	Username: cchllpll
+	Timestamp: 08:43
+	Feature Type: New
+
+Feature # 18
+	Name of the Feature: Project Research Fields
+	Username: mvshisht
+	Timestamp: 03:35	
+	Feature Type: New
+
+Feature # 19
+	Name of the Feature: Complete Project Workflow
+	Username: mvshisht
+	Timestamp: 03:00	
+	Feature Type: New
+
+Feature # 20
+	Name of the Feature: Project Overview
+	Username: mvshisht
+	Timestamp: 03:00	
+	Feature Type: Old
+	
+Feature # 21?
+	Name of the Feature: Delete project workflow
+	Username: mvshisht
+	Timestamp: 06:52
+	Feature Type: New
+
+Feature # 22
+	Name of the Feature: View Iterations	
+	Username: jjsunny
+	Timestamp: 04: 15
+	Feature Type: New
+
+Feature # 23
+	Name of the Feature: Add Iteration	
+	Username: jjsunny
+	Timestamp: 03:55
+	Feature Type: New
+
+Feature # 24
+	Name of the Feature: Edit Iteration	
+	Username: jjsunny
+	Timestamp: 04:01
+	Feature Type: New
+
+
+Feature # 25
+	Name of the Feature: Delete Iteration	
+	Username: jjsunny
+	Timestamp: 04: 05
+	Feature Type: New
+
+Feature # 26
+	Name of the Feature: View Profile	
+	Username: jjsunny
+	Timestamp: 00:53
+	Feature Type: Old
+
+Feature # 27
+	Name of the Feature: New Profile
+	Username: jjsunny
+	Timestamp: 00:40
+	Feature Type: Old
+
+Feature # 28
+	Name of the Feature: Update Profile
+	Username: jjsunny
+	Timestamp: 1:00
+	Feature Type: New
+
+Feature # 29
+	Name of the Feature: Add Profile Research Fields
+	Username: jjsunny
+	Timestamp: 1:08
+	Feature Type: New
+
+Feature # 30
+	Name of the Feature: Search Project
+	Username: jjsunny
+	Timestamp: 01:50
+	Feature Type: Old
+
+Feature # 31
+	Name of the Feature: View Task
+	Username: svllbhnn
+	Timestamp: 04:17
+	Feature Type: New
+
+
+Feature # 32
+	Name of the Feature: Add Task
+	Username: svllbhnn
+	Timestamp: 04:24
+	Feature Type: New
+
+Feature # 33
+	Name of the Feature: Edit Task
+	Username: svllbhnn
+	Timestamp: 04:41
+	Feature Type: New
+
+Feature # 34
+	Name of the Feature: Delete Task
+	Username: svllbhnn
+	Timestamp: 04:52
+	Feature Type: New
+
+Feature # 35
+	Name of the Feature: My Tasks
+	Username: svllbhnn
+	Timestamp: 04:56
+	Feature Type: New
+
+Feature # 36
+	Name of the Feature: Add Team Member
+	Username: svllbhnn
+	Timestamp: 03:42
+	Feature Type: Old
+
+Feature # 37
+	Name of the Feature: Remove Team Member
+	Username: svllbhnn
+	Timestamp: 03:47
+	Feature Type: Old
+
+Feature # 38
+	Name of the Feature: Complete Project
+	Username: svllbhnn
+	Timestamp: 07:05
+	Feature Type: Old
+
+Feature # 39
+	Name of the Feature: Award Contribution
+	Username: svllbhnn
+	Timestamp: 07:16
+	Feature Type: Old
+	
+Feature # 40
+	Name of the Feature: My Contributions
+	Username: svllbhnn
+	Timestamp: 06:26
+	Feature Type: Old
