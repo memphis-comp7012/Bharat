@@ -16,5 +16,7 @@ Sample seeds implemented to test application features:
 * username: scott.fleming@memphis.edu, password: topsecret
 
 Misc:
-* Iteration 1 Video Link: https://youtu.be/nIUzqrDyW6U
-* Who-Did-What List for iteration 1 is located in misc folder as Who-Did-What List - Iteration 1.txt
+
+* Iteration 1 Video Link: https://youtu.be/nel7A0Rb3oQ
+* Iteration 1 only old Video Link: https://youtu.be/nIUzqrDyW6U
+* Who-Did-What List for iterations 1 and 2 are located in misc folder as Who-Did-What List.txt
